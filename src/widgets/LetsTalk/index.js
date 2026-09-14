@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FaCheck } from "react-icons/fa";
@@ -7,11 +7,8 @@ import { FaCheck } from "react-icons/fa";
 import PhoneNumberInput from "@/components/PhoneNumber";
 import Modal from "@/components/Modal";
 import DatePicker from "@/components/DatePicker";
-import { services as staticServices } from "@/app/staticData/home";
 import ImageURL from "@/components/ImageUrl";
 import { clients } from "@/app/staticData/data";
-import { Popup } from "../IntroDesign";
-import { useEffect } from "react";
 import api from "@/config/api";
 import axios from "axios";
 
@@ -21,6 +18,8 @@ const LetsTalk = ({ isOpen, onClose }) => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isSubmit, setIsSubmit] = useState(false);
     const [isWarning, setIsWarning] = useState(false);
+    const [submitError, setSubmitError] = useState("");
+    const successTimerRef = useRef(null);
 
     useEffect(() => {
         const fetchServices = async () => {
@@ -41,6 +40,10 @@ const LetsTalk = ({ isOpen, onClose }) => {
         fetchServices();
     }, []);
 
+    useEffect(() => {
+        return () => clearTimeout(successTimerRef.current);
+    }, []);
+
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -55,11 +58,16 @@ const LetsTalk = ({ isOpen, onClose }) => {
         validationSchema: Yup.object({
             name: Yup.string().min(4, "Must be 4 characters or more").required("The field is required."),
             number: Yup.string()
-                .matches(/^[0-9]{13}$/, "Phone number must be exactly 10 digits")
+                .test("valid-phone-number", "Enter a valid phone number", (value) => {
+                    const digits = (value || "").replace(/\D/g, "");
+                    return digits.length >= 10 && digits.length <= 15;
+                })
                 .required("Phone number is required"),
             email: Yup.string().email("Invalid email address").required("The field is required."),
         }),
         onSubmit: async (values, { resetForm }) => {
+            setSubmitError("");
+
             try {
                 let formattedDate = "";
                 let formattedTime = "";
@@ -102,25 +110,36 @@ const LetsTalk = ({ isOpen, onClose }) => {
 
                 if (response.data.status === 200 || response.data.status === 201) {
                     setIsSubmit(true);
-                    setTimeout(() => {
+                    successTimerRef.current = setTimeout(() => {
                         setIsSuccess(true);
                     }, 200);
                     resetForm();
                     setTab([]);
-                    console.log("Form submitted successfully");
+                } else {
+                    setSubmitError(response.data.message || "Unable to submit your request. Please try again.");
                 }
             } catch (error) {
                 console.error("Failed to submit contact form:", error);
+                setSubmitError("Unable to submit your request. Please try again.");
             }
         },
     });
 
-    // sweet modal
-    const handleClose = () => {
+    const resetFormState = () => {
+        clearTimeout(successTimerRef.current);
         setIsSubmit(false);
         setIsSuccess(false);
-        setTab("");
+        setIsWarning(false);
+        setSubmitError("");
+        setTab([]);
+        formik.resetForm();
     };
+
+    const handleModalClose = () => {
+        resetFormState();
+        onClose();
+    };
+
     const handleToggle = (id) => {
         setIsWarning(false);
         if (tab.includes(id)) {
@@ -138,7 +157,7 @@ const LetsTalk = ({ isOpen, onClose }) => {
 
     return (
         <>
-            <Modal width={1234} isOpen={isOpen} onClose={onClose} title={"Ready to Start the Journey with WiztecBD?\nHow can we help you?"}>
+            <Modal width={1234} isOpen={isOpen} onClose={handleModalClose} title={"Ready to Start the Journey with WiztecBD?\nHow can we help you?"}>
                 <div className=" grid md:grid-cols-2 grid-cols-1 md:space-x-4">
                     <div className=" col-span-1 mb-6 md:mb-0">
                         <h6 className=" text-H6 text-center my-6 font-bold">Trusted by</h6>
@@ -215,7 +234,7 @@ const LetsTalk = ({ isOpen, onClose }) => {
                                             placeholder="Your Email Address"
                                             className={` ${tab.length !== 0 ? "focus:ring-1 focus:ring-success_main hover:ring-success_main hover:shadow-input focus:shadow-input" : "focus:ring-none focus:ring-none"} px-4 py-2 bg-transparent rounded-lg focus:outline-none ring-1 ring-success_main  focus:border-transparent`}
                                         />
-                                        {formik.touched.email && formik.errors.name ? <div className=" text-subtitle2 mt-1 text-error_main">{formik.errors.email}</div> : null}
+                                        {formik.touched.email && formik.errors.email ? <div className=" text-subtitle2 mt-1 text-error_main">{formik.errors.email}</div> : null}
                                     </div>
                                     <div className=" col-span-1 flex flex-col justify-between ">
                                         <PhoneNumberInput
@@ -226,7 +245,7 @@ const LetsTalk = ({ isOpen, onClose }) => {
                                             onChange={(number) => formik.setFieldValue("number", number)}
                                             inputClass={` ${tab.length !== 0 ? "focus:ring-1 focus:ring-success_main hover:ring-success_main hover:shadow-input focus:shadow-input" : "focus:ring-none focus:ring-none"} px-4 py-[5px] bg-transparent rounded-lg focus:outline-none ring-1 ring-success_main  focus:border-transparent`}
                                         />
-                                        {formik.touched.number && formik.errors.name ? <div className=" text-subtitle2 mt-1 text-error_main">{formik.errors.number}</div> : null}
+                                        {formik.touched.number && formik.errors.number ? <div className=" text-subtitle2 mt-1 text-error_main">{formik.errors.number}</div> : null}
                                     </div>
                                     <div className=" col-span-1 flex flex-col ">
                                         <label htmlFor="company" className="font-semibold mb-2">
@@ -259,7 +278,7 @@ const LetsTalk = ({ isOpen, onClose }) => {
 
                                     <div className=" col-span-2 ">
                                         <DatePicker
-                                            isDisabled={tab <= 0}
+                                            isDisabled={tab.length === 0}
                                             label={"Date and Time"}
                                             onChange={(value) => formik.setFieldValue("dateTime", value)}
                                             value={formik.values.dateTime}
@@ -285,8 +304,9 @@ const LetsTalk = ({ isOpen, onClose }) => {
                                         {formik.touched.descrition && formik.errors.descrition ? <div className=" text-subtitle2 mt-1 text-error_main">{formik.errors.descrition}</div> : null}
                                     </div>
                                 </div>
-                                <button type="submit" disabled={tab.length !== 0 ? false : true} className={`${tab.length !== 0 && " hover-bg-left-to-right hover:text-primary"} capitalize bg-primary text-white cursor-pointer md:px-6 md:py-10px px-6 py-2 transition-all duration-500`}>
-                                    <span>Submit & Schedule a Metting</span>
+                                {submitError && <p className="mb-3 text-sm text-error_main" role="alert">{submitError}</p>}
+                                <button type="submit" disabled={tab.length === 0 || formik.isSubmitting} className={`${tab.length !== 0 && " hover-bg-left-to-right hover:text-primary"} capitalize bg-primary text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 md:px-6 md:py-10px px-6 py-2 transition-all duration-500`}>
+                                    <span>{formik.isSubmitting ? "Sending..." : "Submit & Schedule a Meeting"}</span>
                                 </button>
                             </form>
                         </div>
@@ -305,8 +325,8 @@ const LetsTalk = ({ isOpen, onClose }) => {
                                         <p className="text-center text-subtitle2 font-semibold">We will email you a quotation.</p>
                                     </div>
                                     <div className=" flex items-center justify-center">
-                                        <button onClick={handleClose} className=" px-6 py-2 bg-primary text-white text-subtitle2 leading-4">
-                                            <span> Ok !</span>
+                                        <button type="button" onClick={resetFormState} className=" px-6 py-2 bg-primary text-white text-subtitle2 leading-4">
+                                            <span>Send another request</span>
                                         </button>
                                     </div>
                                 </div>
