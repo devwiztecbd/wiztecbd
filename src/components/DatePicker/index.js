@@ -76,7 +76,7 @@ const CustomTimeInput = ({ date, onChange }) => {
     );
 };
 
-const DatePicker = ({ inputClass, isDisabled, label, onChange, value, currentWork, placeholder, onChangeCheckBox, checked, checkName, checkId }) => {
+const DatePicker = ({ inputClass, isDisabled, label, onChange, value, currentWork, placeholder, onChangeCheckBox, checked, checkName, checkId, disablePast = false }) => {
     // Determine the value to pass to react-datepicker
     // It expects a Date object
     let selectedDate = null;
@@ -90,6 +90,18 @@ const DatePicker = ({ inputClass, isDisabled, label, onChange, value, currentWor
             selectedDate = date;
         }
     }
+
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    const handleChange = (nextDate) => {
+        if (disablePast && nextDate instanceof Date && nextDate < new Date()) {
+            onChange(new Date());
+            return;
+        }
+
+        onChange(nextDate);
+    };
 
     return (
         <div className="datepicker-wrapper">
@@ -115,7 +127,8 @@ const DatePicker = ({ inputClass, isDisabled, label, onChange, value, currentWor
             </div>
             <ReactDatePicker
                 selected={selectedDate}
-                onChange={onChange}
+                onChange={handleChange}
+                minDate={disablePast ? today : undefined}
                 showTimeInput
                 customTimeInput={<CustomTimeInput />}
                 timeInputLabel="Select Time:"

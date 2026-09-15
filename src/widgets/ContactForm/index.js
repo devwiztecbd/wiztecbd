@@ -141,7 +141,7 @@ const ContactForm = () => {
                         {formik.touched.number && formik.errors.number ? <div className=" text-subtitle2 mt-1 text-error_main">{formik.errors.number}</div> : null}
                     </div>
                     <div className="mb-10">
-                        <DatePicker onChange={(value) => formik.setFieldValue("dateTime", value)} value={formik.values.dateTime} placeholder={"Date and Time"} inputClass={`custom-input-contact w-full !bg-transparent pb-1 px-4 text-gray500 border-0 border-b border-divider rounded-none border-black focus:border-black focus:outline-none hover:border-black `} />
+                        <DatePicker disablePast onChange={(value) => formik.setFieldValue("dateTime", value)} value={formik.values.dateTime} placeholder={"Date and Time"} inputClass={`custom-input-contact w-full !bg-transparent pb-1 px-4 text-gray500 border-0 border-b border-divider rounded-none border-black focus:border-black focus:outline-none hover:border-black `} />
                     </div>
                     <div className="mb-10">
                         <textarea name="message" placeholder="How can we help you?" className="w-full px-4 h-16 bg-transparent rounded-none text-gray500 border-0 border-b border-divider border-black focus:border-black focus:outline-none hover:border-black hover:bg-transparent" value={formik.values.message} onChange={formik.handleChange} onBlur={formik.handleBlur} />

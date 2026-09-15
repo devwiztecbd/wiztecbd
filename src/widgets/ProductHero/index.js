@@ -5,11 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiBarChart2, FiCheckCircle, FiExternalLink, FiLink } from "react-icons/fi";
 
+import Select from "@/components/Select";
 import Slider from "@/components/Slider";
 
 const productSlides = [
     {
         eyebrow: "Featured solution",
+        category: "Enterprise solution",
         title: "Insurance Management",
         subtitle: "A complete digital insurance ecosystem",
         description: "Bring policy sales, claims, customer service and reporting together in one secure platform built for modern insurers.",
@@ -20,7 +22,6 @@ const productSlides = [
         badge: "Secure & scalable",
         portfolioId: 1,
         liveUrl: "/portfolio/1",
-        liveLabel: "wiztecbd.com/portfolio/1",
         stats: [
             { value: "18+", label: "Hours saved weekly" },
             { value: "$40K", label: "Annual savings" },
@@ -29,6 +30,7 @@ const productSlides = [
     },
     {
         eyebrow: "Commerce platform",
+        category: "E-commerce",
         title: "Perfecto Commerce",
         subtitle: "Connected retail across every screen",
         description: "Manage products, orders, payments and customer experiences through an integrated commerce platform designed to grow with your business.",
@@ -39,7 +41,6 @@ const productSlides = [
         badge: "Cloud powered",
         portfolioId: 2,
         liveUrl: "/portfolio/2",
-        liveLabel: "wiztecbd.com/portfolio/2",
         stats: [
             { value: "30%", label: "Online sales growth" },
             { value: "40%", label: "Admin efficiency" },
@@ -48,6 +49,7 @@ const productSlides = [
     },
     {
         eyebrow: "Learning platform",
+        category: "EdTech",
         title: "Exam Preparation",
         subtitle: "A smarter learning and assessment experience",
         description: "Give learners an intuitive place to study, practice and track progress while administrators manage content and performance from one dashboard.",
@@ -58,7 +60,6 @@ const productSlides = [
         badge: "Built for growth",
         portfolioId: 4,
         liveUrl: "/portfolio/4",
-        liveLabel: "wiztecbd.com/portfolio/4",
         stats: [
             { value: "90%", label: "Less moderation time" },
             { value: "40%", label: "Revenue increase" },
@@ -67,9 +68,29 @@ const productSlides = [
     },
 ];
 
+const createFilterOptions = (values, allLabel) => [
+    { label: allLabel, value: "" },
+    ...[...new Set(values)].map((value) => ({ label: value, value })),
+];
+
+const technologyOptions = createFilterOptions(productSlides.flatMap((product) => product.technologies), "All tech stacks");
+const industryOptions = createFilterOptions(productSlides.flatMap((product) => product.industries), "All industries");
+const categoryOptions = createFilterOptions(productSlides.map((product) => product.category), "All categories");
+
 const ProductHero = () => {
     const [activeProduct, setActiveProduct] = useState(0);
+    const [technologyFilter, setTechnologyFilter] = useState("");
+    const [industryFilter, setIndustryFilter] = useState("");
+    const [categoryFilter, setCategoryFilter] = useState("");
     const heroRef = useRef(null);
+
+    const filteredProducts = productSlides.filter((product) => {
+        const matchesTechnology = !technologyFilter || product.technologies.includes(technologyFilter);
+        const matchesIndustry = !industryFilter || product.industries.includes(industryFilter);
+        const matchesCategory = !categoryFilter || product.category === categoryFilter;
+
+        return matchesTechnology && matchesIndustry && matchesCategory;
+    });
 
     const handleProductSelect = (index) => {
         setActiveProduct(index);
@@ -142,12 +163,10 @@ const ProductHero = () => {
                                 </div>
 
                                 <div className="mt-5">
-                                    <p className="mb-2.5 flex items-center gap-2 font-bold text-secondary">
-                                        <FiLink className="text-success_main" /> Live link
-                                    </p>
-                                    <Link href={product.liveUrl} className="inline-flex min-w-0 items-center gap-2 rounded-full bg-success_light px-4 py-2 text-sm font-medium text-success_deep transition hover:bg-success_main hover:text-white">
-                                        <span className="truncate">{product.liveLabel}</span>
-                                        <FiExternalLink className="shrink-0" />
+                                    <Link href={product.liveUrl} className="group/link inline-flex items-center gap-1.5 text-sm font-semibold text-success_deep underline-offset-4 transition hover:text-success_main hover:underline">
+                                        <FiLink className="text-success_main" />
+                                        Live link
+                                        <FiExternalLink className="transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                                     </Link>
                                 </div>
 
@@ -194,28 +213,65 @@ const ProductHero = () => {
                         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-success_deep">Our products</p>
                         <h2 className="text-2xl font-bold text-primary md:text-3xl">Choose a product to explore</h2>
                     </div>
-                    <div className="grid gap-4 md:grid-cols-3">
-                        {productSlides.map((product, index) => (
-                            <button
-                                key={product.title}
-                                type="button"
-                                onClick={() => handleProductSelect(index)}
-                                aria-pressed={activeProduct === index}
-                                className={`group overflow-hidden rounded-xl bg-white text-left shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-md ${activeProduct === index ? "ring-2 ring-success_main" : "ring-1 ring-black/5"}`}
-                            >
-                                <div className="relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-success_light via-white to-success_main/10">
-                                    <Image src={product.image} alt={product.imageAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-contain p-4 transition-transform duration-300 group-hover:scale-105" />
-                                </div>
-                                <div className="min-w-0 p-5">
-                                    <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-success_deep">{product.eyebrow}</p>
-                                    <h3 className="text-sm font-bold leading-snug text-primary md:text-base">{product.title}</h3>
-                                    <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-success_deep">
-                                        View product <FiArrowRight className="transition-transform group-hover:translate-x-1" />
-                                    </span>
-                                </div>
-                            </button>
-                        ))}
+
+                    <div className="mb-7 grid gap-4 rounded-xl bg-white/80 p-4 shadow-lg md:grid-cols-3 md:p-5">
+                        <div>
+                            <label className="mb-2 block text-xs font-semibold text-secondary">Tech stack</label>
+                            <Select
+                                value={technologyFilter}
+                                multipleValu={false}
+                                onChange={setTechnologyFilter}
+                                options={technologyOptions}
+                                placeholder="Filter by tech stack"
+                                inputClass="flex h-11 w-full cursor-pointer items-center rounded-lg border border-divider bg-white px-4 transition hover:border-success_main focus:border-success_main focus:outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="mb-2 block text-xs font-semibold text-secondary">Industry</label>
+                            <Select
+                                value={industryFilter}
+                                multipleValu={false}
+                                onChange={setIndustryFilter}
+                                options={industryOptions}
+                                placeholder="Filter by industry"
+                                inputClass="flex h-11 w-full cursor-pointer items-center rounded-lg border border-divider bg-white px-4 transition hover:border-success_main focus:border-success_main focus:outline-none"
+                            />
+                        </div>
+                        <div>
+                            <label className="mb-2 block text-xs font-semibold text-secondary">Product category</label>
+                            <Select
+                                value={categoryFilter}
+                                multipleValu={false}
+                                onChange={setCategoryFilter}
+                                options={categoryOptions}
+                                placeholder="Filter by product category"
+                                inputClass="flex h-11 w-full cursor-pointer items-center rounded-lg border border-divider bg-white px-4 transition hover:border-success_main focus:border-success_main focus:outline-none"
+                            />
+                        </div>
                     </div>
+
+                    <div className="grid gap-4 md:grid-cols-3">
+                        {filteredProducts.map((product) => {
+                            const productIndex = productSlides.findIndex((item) => item.portfolioId === product.portfolioId);
+
+                            return (
+                                <article key={product.title} className="group relative overflow-hidden rounded-xl bg-white text-left shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-md">
+                                    <button type="button" onClick={() => handleProductSelect(productIndex)} aria-pressed={activeProduct === productIndex} aria-label={`Show ${product.title} in the featured slider`} className="absolute inset-0 z-10 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-success_main" />
+                                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-success_light via-white to-success_main/10">
+                                        <Image src={product.image} alt={product.imageAlt} fill sizes="(min-width: 768px) 33vw, 100vw" className="object-contain p-4 transition-transform duration-300 group-hover:scale-105" />
+                                    </div>
+                                    <div className="min-w-0 p-5">
+                                        <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-success_deep">{product.eyebrow}</p>
+                                        <h3 className="text-sm font-bold leading-snug text-primary md:text-base">{product.title}</h3>
+                                        <Link href={`/portfolio/${product.portfolioId}`} className="relative z-20 mt-2 inline-flex items-center gap-1 text-xs font-semibold text-success_deep underline-offset-4 transition hover:text-success_main hover:underline">
+                                            View product <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+                                        </Link>
+                                    </div>
+                                </article>
+                            );
+                        })}
+                    </div>
+                    {filteredProducts.length === 0 && <p className="py-10 text-center text-sm text-gray500">No products match the selected filters.</p>}
                 </div>
             </div>
         </section>

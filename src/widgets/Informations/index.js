@@ -32,7 +32,7 @@ const Informations = () => {
                     email={office.email}
                 />
             ))}
-            <Information parentClassName="bg-custom-gradient" country="Careers." address={"Recruiting"} addReume="wiztecuk@gmail.com" />
+            <Information parentClassName="bg-custom-gradient" country="Careers." address={"Recruiting"} addReume="hrwiztecbd@gmail.com" />
         </div>
     );
 };

@@ -24,7 +24,7 @@ const AmoutMenu = ({ onMouseEnter, onMouseLeave, onClose }) => {
                         <div className=" bg-white py-8 pl-4 flex flex-col justify-between">
                             <div>
                                 <p className="text-subtitle1 font-semibold text-center capitalize mb-6">About Us</p>
-                                <p className=" text-center">Unlock limitless possibilities with our comprehensive IT solutions designed to address all your digital challenges under one roof.</p>
+                                <p className=" text-center">Get to know who we are, what we do, and how we help businesses grow with technology. Discover our journey and explore what we can build for you.</p>
                             </div>
                             <div className=" flex items-center justify-center">
                                 <Link onClick={onClose} href="/about">
@@ -38,7 +38,7 @@ const AmoutMenu = ({ onMouseEnter, onMouseLeave, onClose }) => {
                         <div className=" bg-white py-8 pl-4 flex flex-col justify-between">
                             <div>
                                 <p className="text-subtitle1 font-semibold text-center capitalize mb-6">Our team</p>
-                                <p className=" text-center">Unlock limitless possibilities with our comprehensive IT solutions designed to address all your digital challenges under one roof.</p>
+                                <p className=" text-center">Meet the talented people behind our innovative software and digital solutions. Get to know our experts and the passion driving every project we deliver.</p>
                             </div>
                             <div className=" flex items-center justify-center">
                                 <Link onClick={onClose} href={"/team"}>

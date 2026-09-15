@@ -279,6 +279,7 @@ const LetsTalk = ({ isOpen, onClose }) => {
                                     <div className=" col-span-2 ">
                                         <DatePicker
                                             isDisabled={tab.length === 0}
+                                            disablePast
                                             label={"Date and Time"}
                                             onChange={(value) => formik.setFieldValue("dateTime", value)}
                                             value={formik.values.dateTime}

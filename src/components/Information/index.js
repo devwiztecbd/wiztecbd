@@ -18,7 +18,7 @@ const Information = ({ country, address, phone, email, addReume, parentClassName
             {email && (
                 <p className="font-medium ">
                     Email:
-                    <Link href={"mailto:wiztecuk@gmail.com"} className=" font-normal text-success_main pl-1">
+                    <Link href={`mailto:${email}`} className=" font-normal text-success_main pl-1">
                         {email}
                     </Link>
                 </p>
@@ -27,7 +27,7 @@ const Information = ({ country, address, phone, email, addReume, parentClassName
             {addReume && (
                 <p className="font-medium ">
                     Send resume:
-                    <Link href={"mailto:wiztecuk@gmail.com"} className=" font-normal text-success_main pl-1">
+                    <Link href={`mailto:${addReume}`} className=" font-normal text-success_main pl-1">
                         {addReume}
                     </Link>
                 </p>
