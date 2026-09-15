@@ -15,60 +15,64 @@ import ContactForm from "@/widgets/ContactForm";
 import ContactInfo from "@/widgets/ContactForm/ContactInfo";
 import { homeMetaData } from "../staticData/data";
 const { benifits } = require("../staticData/course");
-import products from "/public/Json/products.json";
 import Products from "@/widgets/Products";
 
 export const metadata = homeMetaData;
 
+const HOME_BACKGROUNDS = {
+    green: "#8BC240",
+    dark: "#55594C",
+};
+
 const Home = () => {
     return (
-        <RootSection>
-            <Section>
+        <RootSection defaultColor={HOME_BACKGROUNDS.green} transitionDuration={1800}>
+            <Section bgColor={HOME_BACKGROUNDS.green}>
                 <HerroBanner />
             </Section>
-            <Section id="overview" bgColor="rgba(139, 196, 63, .1)" className={"md:hidden"}>
+            <Section id="overview" bgColor={HOME_BACKGROUNDS.green} className={"md:hidden"}>
                 <div className="md:py-100 py-12 ">
                     <OverViews />
                 </div>
             </Section>
-            <Section id="serveClient">
+            <Section id="serveClient" bgColor={HOME_BACKGROUNDS.green}>
                 <div className="md:pt-100 md:pb-0 py-12 !-z-50">
                     <ServedClients title={"Delightly Served Clients"} />
                 </div>
             </Section>
-            <Section id="Services" bgColor="#ff8b22">
+            <Section id="Services" bgColor={HOME_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12">
                     <OurServices />
                 </div>
             </Section>
-            <Section id="choose" bgColor="#007aff">
+            <Section id="choose" bgColor={HOME_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12 text-white">
                     <Benefits benifits={benifits} title={"Why Choose Us?"} />
                 </div>
             </Section>
-            <Section id="findBest-home" bgColor={"#17afb0"}>
+            <Section id="findBest-home" bgColor={HOME_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-2xl md:pt-100 md:pb-0 py-12">
                     <OurProcess />
                 </div>
             </Section>
-            <Section id="testmonials" bgColor="#000">
+            <Section id="testmonials" bgColor={HOME_BACKGROUNDS.dark}>
                 <div className="md:pt-100 md:pb-0 py-12 text-white">
                     <ClientsTestMonials />
                 </div>
             </Section>
-            <Section id="golobalClient">
+            <Section id="golobalClient" bgColor={HOME_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12">
                     <GlobalClients />
                 </div>
             </Section>
-            <Section id="techPowerhome" bgColor="#8BC43F">
+            <Section id="techPowerhome" bgColor={HOME_BACKGROUNDS.green}>
                 <div className=" md:pt-100 md:pb-0 py-12">
                     {/* for tech */}
                     <TechPower />
                 </div>
             </Section>
-            <Section id="industries" bgColor="#cd89e8">
-                <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12">
+            <Section id="industries" bgColor={HOME_BACKGROUNDS.dark}>
+                <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12 text-white">
                     <Industries />
                 </div>
             </Section>
@@ -77,14 +81,14 @@ const Home = () => {
                     <h2 className=" text-center text-H1  font-bold mb-2 text-white">Our Feature Projects</h2>
                 </div>
             </ScrollAnimatedSection>
-            <Products />
-            <Section id="ourCaseStudies" bgColor="#17a2b8">
+            <Products backgroundColors={[HOME_BACKGROUNDS.green, HOME_BACKGROUNDS.dark]} />
+            <Section id="ourCaseStudies" bgColor={HOME_BACKGROUNDS.dark}>
                 <div className=" text-white container mx-auto px-4 max-w-xl  md:pt-100 md:pb-0 py-12">
                     <OurCaseStudies />
                 </div>
             </Section>
 
-            <Section id="contactform">
+            <Section id="contactform" bgColor="#F8F9FB">
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-50 py-12 grid md:grid-cols-2 grid-cols-1 gap-16">
                     <ContactForm />
                     <ContactInfo />

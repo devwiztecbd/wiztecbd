@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export const useScrollBackground = (defaultColor = "#fffff") => {
+export const useScrollBackground = (defaultColor = "#ffffff") => {
     const [bgColor, setBgColor] = useState(defaultColor);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export const useScrollBackground = (defaultColor = "#fffff") => {
                 const rect = section.getBoundingClientRect();
                 const isInMiddle = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
                 if (isInMiddle) {
-                    currentSection = section.getAttribute("data-bg");
+                    currentSection = section.getAttribute("data-bg") || currentSection;
                 }
             });
             if (currentSection !== bgColor) {

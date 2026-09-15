@@ -172,9 +172,9 @@ const HerroBanner = () => {
     ];
 
     return (
-        <div className="relative min-h-[calc(100vh-100px)] overflow-hidden bg-white">
+        <div className="relative min-h-[calc(100vh-100px)] overflow-hidden bg-[#F8F9FB]">
             <div ref={containerRef} className="absolute inset-0 z-0" aria-hidden="true" />
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-br from-white/95 via-white/80 to-success_light/70" />
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-br from-[#F8F9FB]/95 via-[#F8F9FB]/80 to-success_light/70" />
             <div className="pointer-events-none absolute -left-32 bottom-0 z-[1] h-96 w-96 rounded-full bg-success_light blur-3xl" />
             <div className="pointer-events-none absolute -right-40 top-0 z-[1] h-[32rem] w-[32rem] rounded-full bg-success_light blur-3xl" />
 

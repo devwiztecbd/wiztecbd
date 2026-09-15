@@ -6,7 +6,7 @@ import { Section } from "@/components/Section";
 import { fetchCaseStudies } from "@/utilities/api";
 import { transformCaseStudiesToProducts } from "@/utilities/dataTransform";
 
-const Products = () => {
+const Products = ({ backgroundColors = [] }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -39,8 +39,10 @@ const Products = () => {
     return (
         <>
             {products.map((product, index) => {
+                const backgroundColor = backgroundColors.length > 0 ? backgroundColors[index % backgroundColors.length] : product.color;
+
                 return (
-                    <Section key={index} id={`product-${index}`} bgColor={product.color}>
+                    <Section key={index} id={`product-${index}`} bgColor={backgroundColor}>
                         <div className="container mx-auto px-4 text-white max-w-xl">
                             <OurFeatureProjects reverse={product.id % 2 == 0} ourFeatureProjectsData={product} />
                         </div>
