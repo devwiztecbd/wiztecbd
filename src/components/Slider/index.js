@@ -18,6 +18,7 @@ const Slider = ({
     pauseOnHover = false,
     showNavigation = true,
     showPagination = true,
+    transitionMode = "slide",
 }) => {
     const [internalIndex, setInternalIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
@@ -65,19 +66,41 @@ const Slider = ({
     return (
         <div className={`relative ${className}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             <div className={`relative overflow-hidden w-full ${viewportClassName}`}>
-                <div className="flex relative transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                    {slides.map((slide, index) => (
-                        <div key={index} className={`flex-shrink-0 w-full ${slideClassName}`} aria-hidden={index !== currentIndex}>
-                            {contentSlides.length > 0 ? (
-                                slide
-                            ) : (
-                                <div className="flex h-300 items-center justify-center overflow-hidden md:justify-end">
-                                    <ImageURL height={300} width={480} alt="banner" image={slide} />
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
+                {transitionMode === "fade" ? (
+                    <div className="relative grid">
+                        {slides.map((slide, index) => (
+                            <div
+                                key={index}
+                                className={`hero-fade-slide col-start-1 row-start-1 min-w-0 w-full transition-[opacity,transform,filter] duration-700 ease-out ${
+                                    index === currentIndex ? "relative z-[1] translate-y-0 scale-100 opacity-100 blur-0" : "pointer-events-none z-0 translate-y-2 opacity-0 md:translate-y-0 md:scale-[0.985] md:blur-[2px]"
+                                } ${slideClassName}`}
+                                aria-hidden={index !== currentIndex}
+                            >
+                                {contentSlides.length > 0 ? (
+                                    slide
+                                ) : (
+                                    <div className="flex h-300 items-center justify-center overflow-hidden md:justify-end">
+                                        <ImageURL height={300} width={480} alt="banner" image={slide} />
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="flex relative transition-transform duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+                        {slides.map((slide, index) => (
+                            <div key={index} className={`flex-shrink-0 w-full ${slideClassName}`} aria-hidden={index !== currentIndex}>
+                                {contentSlides.length > 0 ? (
+                                    slide
+                                ) : (
+                                    <div className="flex h-300 items-center justify-center overflow-hidden md:justify-end">
+                                        <ImageURL height={300} width={480} alt="banner" image={slide} />
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
                 {slideCount > 1 && showNavigation && (
                     <>
                         <button type="button" onClick={handlePrev} aria-label="Previous slide" className={`absolute left-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer ${navigationClassName}`}>

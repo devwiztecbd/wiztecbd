@@ -5,16 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import {
     FiArrowRight,
-    FiAward,
     FiBookOpen,
     FiCalendar,
     FiGlobe,
     FiLayers,
-    FiSettings,
     FiSmartphone,
     FiTrendingUp,
     FiUsers,
-    FiZap,
 } from "react-icons/fi";
 
 import Slider from "@/components/Slider";
@@ -35,9 +32,42 @@ const trainingStats = [
     { value: "Up to 90%", label: "Reported Job Placement", icon: FiTrendingUp },
 ];
 
-const featureIcons = {
-    digital: [FiZap, FiSettings, FiTrendingUp],
-    training: [FiBookOpen, FiAward, FiTrendingUp],
+const AnimatedStatValue = ({ value, isActive }) => {
+    const numberMatch = value.match(/[\d,]+/);
+    const target = Number(numberMatch?.[0].replaceAll(",", "") || 0);
+    const prefix = numberMatch ? value.slice(0, numberMatch.index) : "";
+    const suffix = numberMatch ? value.slice(numberMatch.index + numberMatch[0].length) : "";
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        if (!isActive) {
+            setCount(0);
+            return undefined;
+        }
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reduceMotion) {
+            setCount(target);
+            return undefined;
+        }
+
+        let animationFrame;
+        const duration = 1400;
+        const startedAt = performance.now();
+
+        const updateCount = (timestamp) => {
+            const progress = Math.min((timestamp - startedAt) / duration, 1);
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.round(target * easedProgress));
+
+            if (progress < 1) animationFrame = requestAnimationFrame(updateCount);
+        };
+
+        animationFrame = requestAnimationFrame(updateCount);
+        return () => cancelAnimationFrame(animationFrame);
+    }, [isActive, target]);
+
+    return `${prefix}${count.toLocaleString("en-US")}${suffix}`;
 };
 
 const HerroBanner = () => {
@@ -67,7 +97,7 @@ const HerroBanner = () => {
 
         let animationFrame;
         let particles = [];
-        const density = 1500;
+        const particleCount = isMobile ? 28 : 110;
         const proximity = isMobile ? 60 : 110;
 
         const resizeCanvas = () => {
@@ -76,7 +106,7 @@ const HerroBanner = () => {
         };
 
         const createParticles = () => {
-            particles = Array.from({ length: density / 10 }, () => ({
+            particles = Array.from({ length: particleCount }, () => ({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 radius: 3,
@@ -140,11 +170,6 @@ const HerroBanner = () => {
             description: "From custom software and enterprise platforms to mobile applications, web solutions and business automation, WiztecBD helps organizations transform ideas and operational challenges into scalable digital solutions.",
             primaryAction: { label: "Start Your Digital Transformation", href: "/contact" },
             secondaryAction: { label: "Explore Our Solutions", href: "/services" },
-            features: [
-                { title: "Innovate", text: "Turn ideas into impact" },
-                { title: "Automate", text: "Streamline operations" },
-                { title: "Grow", text: "Build a smarter tomorrow" },
-            ],
             image: "/assets/images/banners/Business Auto Banner.webp",
             imageAlt: "Business automation software dashboard",
             stats: digitalStats,
@@ -160,11 +185,6 @@ const HerroBanner = () => {
             description: "Industry-aligned IT and technical training programs designed for individuals, institutions, government initiatives and workforce-development projects—from software development and data analytics to AI, 4IR technologies and digital skills.",
             primaryAction: { label: "Explore Training Programs", href: "/courses" },
             secondaryAction: { label: "Partner With Us for Training", href: "/contact" },
-            features: [
-                { title: "Learn", text: "Industry-relevant technical skills" },
-                { title: "Upskill", text: "Practical and future-ready knowledge" },
-                { title: "Grow", text: "Build careers and workforce capacity" },
-            ],
             image: "/assets/images/portfolio/Casec Study 4/Banner lx.webp",
             imageAlt: "Digital learning platform displayed on laptop and tablet",
             stats: trainingStats,
@@ -179,11 +199,20 @@ const HerroBanner = () => {
             <div className="pointer-events-none absolute -right-40 top-0 z-[1] h-[32rem] w-[32rem] rounded-full bg-success_light blur-3xl" />
 
             <div className="relative z-10 mx-auto max-w-2xl px-4 py-5 md:py-8">
-                <Slider activeIndex={activeSlide} onSlideChange={setActiveSlide} autoplayDelay={12000} pauseOnHover showNavigation={false} showPagination={false} viewportClassName="bg-transparent">
-                    {slides.map((slide) => (
-                        <article key={slide.id} className="flex min-h-[calc(100vh-156px)] flex-col justify-center pb-24">
+                <Slider
+                    activeIndex={activeSlide}
+                    onSlideChange={setActiveSlide}
+                    autoplayDelay={5000}
+                    showNavigation={false}
+                    showPagination
+                    paginationClassName="bottom-4 max-w-[calc(100%-2rem)] flex-wrap gap-2"
+                    transitionMode="fade"
+                    viewportClassName="bg-transparent"
+                >
+                    {slides.map((slide, slideIndex) => (
+                        <article key={slide.id} className="flex min-h-[calc(100vh-156px)] flex-col justify-center pb-16">
                             <div className="grid items-center gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-10">
-                                <div>
+                                <div className="hero-slide-copy">
                                     <div className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-gray500 md:text-sm">
                                         {slide.eyebrow}
                                         <span className="h-0.5 w-8 bg-success_main" />
@@ -200,25 +229,9 @@ const HerroBanner = () => {
                                         </Link>
                                     </div>
 
-                                    <div className="mt-7 grid gap-4 sm:grid-cols-3">
-                                        {slide.features.map((feature, index) => {
-                                            const Icon = featureIcons[slide.id][index];
-                                            return (
-                                                <div key={feature.title} className="flex items-center gap-3">
-                                                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-success_light text-success_deep">
-                                                        <Icon size={21} />
-                                                    </span>
-                                                    <span>
-                                                        <strong className="block text-sm text-primary">{feature.title}</strong>
-                                                        <span className="block text-xs leading-5 text-gray500">{feature.text}</span>
-                                                    </span>
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
                                 </div>
 
-                                <div className="relative flex min-h-[300px] items-center justify-center sm:min-h-[400px] lg:min-h-[520px]">
+                                <div className="hero-slide-media relative flex min-h-[300px] items-center justify-center sm:min-h-[400px] lg:min-h-[520px]">
                                     <div className="absolute h-4/5 w-4/5 rounded-full bg-success_light blur-2xl" />
                                     <div className="relative h-[280px] w-full sm:h-[390px] lg:h-[500px]">
                                         <Image src={slide.image} alt={slide.imageAlt} fill priority={slide.id === "digital"} sizes="(min-width: 1024px) 52vw, 96vw" className="object-contain drop-shadow-2xl" />
@@ -235,7 +248,9 @@ const HerroBanner = () => {
                                                 <Icon size={21} />
                                             </span>
                                             <span>
-                                                <strong className="block text-xl font-bold text-success_deep md:text-2xl">{stat.value}</strong>
+                                                <strong className="block text-xl font-bold text-success_deep md:text-2xl">
+                                                    <AnimatedStatValue value={stat.value} isActive={activeSlide === slideIndex} />
+                                                </strong>
                                                 <span className="block text-[11px] leading-4 text-gray500 md:text-xs">{stat.label}</span>
                                             </span>
                                         </div>
@@ -245,16 +260,6 @@ const HerroBanner = () => {
                         </article>
                     ))}
                 </Slider>
-
-                <div className="absolute bottom-7 left-1/2 z-20 flex w-[calc(100%-2rem)] max-w-md -translate-x-1/2 rounded-xl bg-white/95 p-1.5 shadow-xl backdrop-blur-md">
-                    {slides.map((slide, index) => (
-                        <button key={slide.id} type="button" onClick={() => setActiveSlide(index)} aria-pressed={activeSlide === index} className={`relative flex-1 rounded-lg px-3 py-2.5 text-left transition ${activeSlide === index ? "bg-success_light text-success_deep" : "text-gray500 hover:bg-secondary_bg"}`}>
-                            <span className="block text-[10px] font-bold uppercase tracking-wider">0{index + 1}</span>
-                            <span className="block truncate text-xs font-semibold sm:text-sm">{slide.id === "digital" ? "Digital Solutions" : "Technical Training"}</span>
-                            <span className={`absolute inset-x-3 bottom-0 h-0.5 origin-left bg-success_main transition-transform duration-500 ${activeSlide === index ? "scale-x-100" : "scale-x-0"}`} />
-                        </button>
-                    ))}
-                </div>
             </div>
         </div>
     );
