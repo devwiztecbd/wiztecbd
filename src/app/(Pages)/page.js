@@ -35,7 +35,7 @@ const Home = () => {
                     <OverViews />
                 </div>
             </Section>
-            <Section id="serveClient" bgColor={HOME_BACKGROUNDS.dark}>
+            <Section id="serveClient" bgColor={HOME_BACKGROUNDS.dark} className="relative isolate overflow-hidden">
                 <div className="py-14 md:py-20">
                     <ServedClients title="Our Delighted Clients" />
                 </div>
@@ -65,9 +65,8 @@ const Home = () => {
                     <GlobalClients />
                 </div>
             </Section>
-            <Section id="techPowerhome" bgColor={HOME_BACKGROUNDS.green}>
-                <div className=" md:pt-100 md:pb-0 py-12">
-                    {/* for tech */}
+            <Section id="techPowerhome" bgColor={HOME_BACKGROUNDS.green} className="relative isolate overflow-hidden">
+                <div className="py-14 md:py-20">
                     <TechPower />
                 </div>
             </Section>

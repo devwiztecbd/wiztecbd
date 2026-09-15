@@ -18,41 +18,43 @@ const ServedClients = ({ title = "Our Clients" }) => {
                 </div>
             </ScrollAnimatedSection>
 
-            <ScrollAnimatedSection delay={200}>
-                <div
-                    className="min-w-0 space-y-1 overflow-hidden"
-                    style={{
-                        maskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
-                        WebkitMaskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
-                    }}
-                >
-                    {clientRows.map((clients, rowIndex) => (
-                        <Marquee
-                            key={rowIndex}
-                            autoFill
-                            direction={rowIndex === 1 ? "right" : "left"}
-                            speed={rowIndex === 1 ? 24 : 28}
-                            pauseOnHover
-                            pauseOnClick
-                        >
-                            {clients.map((client) => (
-                                <div
-                                    key={client.id}
-                                    className="group mx-0.5 flex h-20 w-36 items-center justify-center bg-white px-5 md:h-24 md:w-40 lg:w-44"
-                                >
-                                    <Image
-                                        src={client.image}
-                                        alt={`Client ${client.id}`}
-                                        height={64}
-                                        width={150}
-                                        className="max-h-12 w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-105 md:max-h-14"
-                                    />
-                                </div>
-                            ))}
-                        </Marquee>
-                    ))}
-                </div>
-            </ScrollAnimatedSection>
+            <div className="min-w-0 overflow-hidden">
+                <ScrollAnimatedSection delay={200}>
+                    <div
+                        className="min-w-0 space-y-1 overflow-hidden"
+                        style={{
+                            maskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+                            WebkitMaskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+                        }}
+                    >
+                        {clientRows.map((clients, rowIndex) => (
+                            <Marquee
+                                key={rowIndex}
+                                autoFill
+                                direction={rowIndex === 1 ? "right" : "left"}
+                                speed={rowIndex === 1 ? 24 : 28}
+                                pauseOnHover
+                                pauseOnClick
+                            >
+                                {clients.map((client) => (
+                                    <div
+                                        key={client.id}
+                                        className="group mx-0.5 flex h-20 w-36 items-center justify-center bg-white px-5 md:h-24 md:w-40 lg:w-44"
+                                    >
+                                        <Image
+                                            src={client.image}
+                                            alt={`Client ${client.id}`}
+                                            height={64}
+                                            width={150}
+                                            className="max-h-12 w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-105 md:max-h-14"
+                                        />
+                                    </div>
+                                ))}
+                            </Marquee>
+                        ))}
+                    </div>
+                </ScrollAnimatedSection>
+            </div>
         </div>
     );
 };
