@@ -16,6 +16,8 @@ const Slider = ({
     activeIndex,
     onSlideChange,
     pauseOnHover = false,
+    showNavigation = true,
+    showPagination = true,
 }) => {
     const [internalIndex, setInternalIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
@@ -76,7 +78,7 @@ const Slider = ({
                         </div>
                     ))}
                 </div>
-                {slideCount > 1 && (
+                {slideCount > 1 && showNavigation && (
                     <>
                         <button type="button" onClick={handlePrev} aria-label="Previous slide" className={`absolute left-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer ${navigationClassName}`}>
                             <SlArrowLeft size={24} />
@@ -84,14 +86,16 @@ const Slider = ({
                         <button type="button" onClick={handleNext} aria-label="Next slide" className={`absolute right-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer ${navigationClassName}`}>
                             <SlArrowRight size={24} />
                         </button>
-                        <div className={`absolute left-1/2 z-10 flex -translate-x-1/2 justify-center space-x-1 ${paginationClassName}`}>
-                            {slides.map((_, index) => (
-                                <button key={index} type="button" onClick={() => handleDotClick(index)} aria-label={`Go to slide ${index + 1}`} className={`rounded-full border p-0.5 ${index === currentIndex ? "border-success_main" : "border-transparent"}`}>
-                                    <span className={`block h-2 w-2 rounded-full ${index === currentIndex ? "bg-success_main" : "bg-gray600"}`} />
-                                </button>
-                            ))}
-                        </div>
                     </>
+                )}
+                {slideCount > 1 && showPagination && (
+                    <div className={`absolute left-1/2 z-10 flex -translate-x-1/2 justify-center space-x-1 ${paginationClassName}`}>
+                        {slides.map((_, index) => (
+                            <button key={index} type="button" onClick={() => handleDotClick(index)} aria-label={`Go to slide ${index + 1}`} className={`rounded-full border p-0.5 ${index === currentIndex ? "border-success_main" : "border-transparent"}`}>
+                                <span className={`block h-2 w-2 rounded-full ${index === currentIndex ? "bg-success_main" : "bg-gray600"}`} />
+                            </button>
+                        ))}
+                    </div>
                 )}
             </div>
         </div>
