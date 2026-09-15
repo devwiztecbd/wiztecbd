@@ -41,11 +41,6 @@ const Home = () => {
                     <ServedClients title="Our Delighted Clients" />
                 </div>
             </Section>
-            <Section id="membershipCertification" bgColor={HOME_BACKGROUNDS.green}>
-                <div className="py-14 md:py-20">
-                    <MembershipCertification />
-                </div>
-            </Section>
             <Section id="Services" bgColor={HOME_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12">
                     <OurServices />
@@ -79,6 +74,11 @@ const Home = () => {
             <Section id="industries" bgColor={HOME_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12 text-white">
                     <Industries />
+                </div>
+            </Section>
+            <Section id="membershipCertification" bgColor={HOME_BACKGROUNDS.green}>
+                <div className="py-14 md:py-20">
+                    <MembershipCertification />
                 </div>
             </Section>
             <ScrollAnimatedSection delay={200}>
