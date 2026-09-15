@@ -35,9 +35,9 @@ const Home = () => {
                     <OverViews />
                 </div>
             </Section>
-            <Section id="serveClient" bgColor={HOME_BACKGROUNDS.green}>
-                <div className="md:pt-100 md:pb-0 py-12 !-z-50">
-                    <ServedClients title={"Delightly Served Clients"} />
+            <Section id="serveClient" bgColor={HOME_BACKGROUNDS.dark}>
+                <div className="py-14 md:py-20">
+                    <ServedClients title="Our Delighted Clients" />
                 </div>
             </Section>
             <Section id="Services" bgColor={HOME_BACKGROUNDS.green}>

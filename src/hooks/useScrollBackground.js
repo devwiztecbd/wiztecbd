@@ -7,22 +7,27 @@ export const useScrollBackground = (defaultColor = "#ffffff") => {
     useEffect(() => {
         const handleScroll = () => {
             const sections = document.querySelectorAll("section");
-            let currentSection = defaultColor;
+            let currentSectionColor = null;
 
             sections.forEach((section) => {
                 const rect = section.getBoundingClientRect();
                 const isInMiddle = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
                 if (isInMiddle) {
-                    currentSection = section.getAttribute("data-bg") || currentSection;
+                    currentSectionColor = section.getAttribute("data-bg") || currentSectionColor;
                 }
             });
-            if (currentSection !== bgColor) {
-                setBgColor(currentSection);
+
+            // Keep the final section color while the footer is in view instead of
+            // resetting the page to its initial color when no section crosses the midpoint.
+            if (currentSectionColor) {
+                setBgColor((currentColor) => (currentColor === currentSectionColor ? currentColor : currentSectionColor));
             }
         };
+
+        handleScroll();
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [bgColor, defaultColor]);
+    }, []);
 
     return bgColor;
 };
