@@ -675,6 +675,24 @@ export const servedClient = [
     },
 ];
 
+export const membershipCredentials = [
+    {
+        id: "basis",
+        name: "BASIS",
+        image: "/assets/images/basis.png",
+    },
+    {
+        id: "iso-9001-2015",
+        name: "ISO 9001:2015",
+        image: "/assets/images/iso-logo.png",
+    },
+    {
+        id: "nsda",
+        name: "NSDA",
+        image: "/assets/images/nsda-logo.png",
+    },
+];
+
 export const techPower = [
     {
         id: 1,

@@ -4,6 +4,7 @@ import { RootSection, Section } from "@/components/Section";
 import OurProcess from "@/widgets/OurProcess";
 import OverViews from "@/widgets/OverViews";
 import ServedClients from "@/widgets/ServedClients";
+import MembershipCertification from "@/widgets/MembershipCertification";
 import OurServices from "@/widgets/OurServices";
 import Benefits from "@/widgets/Benefits";
 import ClientsTestMonials from "@/widgets/ClientsTestmonials";
@@ -38,6 +39,11 @@ const Home = () => {
             <Section id="serveClient" bgColor={HOME_BACKGROUNDS.dark} className="relative isolate overflow-hidden">
                 <div className="py-14 md:py-20">
                     <ServedClients title="Our Delighted Clients" />
+                </div>
+            </Section>
+            <Section id="membershipCertification" bgColor={HOME_BACKGROUNDS.green}>
+                <div className="py-14 md:py-20">
+                    <MembershipCertification />
                 </div>
             </Section>
             <Section id="Services" bgColor={HOME_BACKGROUNDS.green}>

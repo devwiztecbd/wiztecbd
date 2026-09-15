@@ -8,6 +8,7 @@ import { FaYoutube } from "react-icons/fa";
 import { MdArrowRightAlt } from "react-icons/md";
 import Link from "next/link";
 import api from "@/config/api";
+import { membershipCredentials } from "@/app/staticData/home";
 
 const Footer = () => {
     const [offices, setOffices] = useState([]);
@@ -55,16 +56,18 @@ const Footer = () => {
                             </div>
                             <div className=" flex flex-col xs:justify-start justify-center items-center xs:items-start mt-4 md:mt-0">
                                 <h6 className=" font-medium text-H6 mb-4 ">Proud Member of</h6>
-                                <div className=" flex items-center gap-6">
-                                    <Link target="_blank" href="#">
-                                        <Image src={`/assets/images/basis.png`} alt="logo" height={50} width={90} className=" h-auto w-auto" />
-                                    </Link>
-                                    <Link target="_blank" href="#">
-                                        <Image src={`/assets/images/bcs.png`} alt="logo" height={50} width={50} />
-                                    </Link>
-                                    <Link target="_blank" href="#">
-                                        <Image src={`/assets/images/pngegg.png`} alt="logo" height={50} width={50} />
-                                    </Link>
+                                <div className="grid w-full max-w-[260px] grid-cols-3 items-center gap-4">
+                                    {membershipCredentials.map((credential) => (
+                                        <div key={credential.id} className="flex h-14 min-w-0 items-center justify-center" title={credential.name}>
+                                            <Image
+                                                src={credential.image}
+                                                alt={`${credential.name} logo`}
+                                                height={56}
+                                                width={80}
+                                                className="max-h-full w-auto max-w-full object-contain"
+                                            />
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
