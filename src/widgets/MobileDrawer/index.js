@@ -1,112 +1,133 @@
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import dynamic from "next/dynamic";
-import { IoMdMenu } from "react-icons/io";
-const Drawer = dynamic(() => import("react-modern-drawer"), { ssr: false });
-import { IoIosArrowDown, IoMdClose } from "react-icons/io";
+import Image from "next/image";
+import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
+import { IoIosArrowDown, IoMdClose, IoMdMenu } from "react-icons/io";
 
 import Button from "@/components/Button";
-import { services } from "@/app/staticData/home";
+import { aboutNavigation, otherNavigation, serviceNavigation, trainingNavigation } from "@/app/staticData/navigation";
 import "react-modern-drawer/dist/index.css";
+
+const Drawer = dynamic(() => import("react-modern-drawer"), { ssr: false });
 
 const MobileDrawer = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [openCol, setOpenCol] = useState(null);
-    const [openPanel, setOpenPanel] = useState(null);
+    const [openGroup, setOpenGroup] = useState(null);
+    const [openCategory, setOpenCategory] = useState(null);
 
-    const togglePanel = (id) => {
-        setOpenPanel((prevOpenPanel) => (prevOpenPanel === id ? null : id));
+    const closeDrawer = () => setIsOpen(false);
+    const toggleGroup = (group) => setOpenGroup((current) => (current === group ? null : group));
+    const toggleCategory = (category) => setOpenCategory((current) => (current === category ? null : category));
+
+    const directLinkClass = "flex items-center justify-between border-b border-black/5 px-5 py-4 font-medium text-secondary transition hover:bg-success_light hover:text-success_deep";
+
+    const renderSimpleGroup = (groupId, title, items) => {
+        const isExpanded = openGroup === groupId;
+
+        return (
+            <div>
+                <button type="button" onClick={() => toggleGroup(groupId)} className={`flex w-full items-center justify-between border-b border-black/5 px-5 py-4 text-left font-semibold transition ${isExpanded ? "bg-success_light text-success_deep" : "text-secondary"}`}>
+                    {title}
+                    <IoIosArrowDown className={`transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`} />
+                </button>
+                <div className={`grid overflow-hidden bg-[#F8F9FB] transition-[grid-template-rows] duration-300 ${isExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                    <div className="min-h-0">
+                        {items.map((item) => (
+                            <Link key={item.title} href={item.href} onClick={closeDrawer} className="flex items-center justify-between border-b border-black/5 py-3 pl-8 pr-5 text-sm font-medium text-gray500 hover:text-success_deep">
+                                {item.title}
+                                <BsArrowRight className="shrink-0 text-success_main" />
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
     };
 
-    const toggleCollaps = () => {
-        setOpenCol((prev) => !prev);
-    };
     return (
         <>
-            <button onClick={() => setIsOpen(!isOpen)} type="button" className={`transform transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
+            <button onClick={() => setIsOpen(true)} type="button" aria-label="Open navigation menu">
                 <IoMdMenu size={32} />
             </button>
-            <Drawer open={isOpen} onClose={() => setIsOpen(false)} direction="left" className="!w-full">
-                <div className=" py-7 overflow-y-auto z-50 h-screen">
-                    <div className=" flex items-center justify-between px-5 pb-5">
-                        <div className="text-2xl font-bold flex items-center justify-center">
-                            <Link onClick={() => setIsOpen(false)} href="/" className="flex items-center w-full  justify-center flex-shrink-0 h-8">
-                                <Image src={`/assets/images/Logos/logo.png`} alt="logo" height={48} width={150} className="w-auto max-w-full max-h-full h-auto object-cover" />
-                            </Link>
-                        </div>
-                        <IoMdClose onClick={() => setIsOpen(false)} size={32} className={`transform transition-transform duration-300 ${isOpen ? " rotate-180" : ""}`} />
+            <Drawer open={isOpen} onClose={closeDrawer} direction="left" className="!w-full">
+                <div className="h-screen overflow-y-auto bg-white pb-8 pt-7">
+                    <div className="flex items-center justify-between border-b border-black/5 px-5 pb-5">
+                        <Link onClick={closeDrawer} href="/" className="flex h-8 items-center">
+                            <Image src="/assets/images/Logos/logo.png" alt="WiztecBD" height={48} width={150} className="h-auto max-h-full w-auto max-w-full object-contain" />
+                        </Link>
+                        <button type="button" onClick={closeDrawer} aria-label="Close navigation menu">
+                            <IoMdClose size={32} />
+                        </button>
                     </div>
 
-                    <nav className=" flex flex-col">
-                        <Link onClick={() => setIsOpen(false)} href="/" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            Home
-                            <BsArrowRight size={18} />
+                    <nav>
+                        <Link onClick={closeDrawer} href="/" className={directLinkClass}>
+                            Home <BsArrowRight />
                         </Link>
-                        <div onClick={toggleCollaps} className={` ${openCol ? " text-success_main bg-success_light" : "text-secondary "}  flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider`}>
-                            Services
-                            <span className={`transition-transform duration-700 transform ${openCol ? "rotate-180" : "rotate-0"}`}>
-                                <IoIosArrowDown size={18} />
-                            </span>
-                        </div>
-                        <div className={` ${openCol ? "max-h-screen" : "max-h-0"} overflow-hidden transition-max-height ease-in-out duration-700`}>
-                            {services.map((data, index) => (
-                                <div key={data.id}>
-                                    <span onClick={() => togglePanel(index)} className={`${openPanel == index ? " text-success_main" : "text-secondary"}   flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider`}>
-                                        {data.label}
-                                        {/* E-commerce Platform */}
-                                        <IoIosArrowDown size={18} className={`transition-transform duration-500 transform ${openPanel === index ? "rotate-180" : "rotate-0"}`} />
-                                    </span>
 
-                                    <div className={` ${openPanel === index ? "max-h-screen" : "max-h-0"} overflow-hidden transition-max-height ease-in-out duration-500`}>
-                                        {data.subMenu.map((sub) => (
-                                            <Link onClick={() => setIsOpen(false)} key={sub.id} href={`${sub.url}`} className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4">
-                                                {sub.title}
-                                                <BsArrowRight size={18} />
+                        <div>
+                            <button type="button" onClick={() => toggleGroup("services")} className={`flex w-full items-center justify-between border-b border-black/5 px-5 py-4 text-left font-semibold ${openGroup === "services" ? "bg-success_light text-success_deep" : "text-secondary"}`}>
+                                Services
+                                <IoIosArrowDown className={`transition-transform duration-300 ${openGroup === "services" ? "rotate-180" : ""}`} />
+                            </button>
+                            <div className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ${openGroup === "services" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                                <div className="min-h-0 bg-[#F8F9FB]">
+                                    {serviceNavigation.map((category) =>
+                                        category.sections.length > 0 ? (
+                                            <div key={category.id}>
+                                                <button type="button" onClick={() => toggleCategory(category.id)} className="flex w-full items-center justify-between border-b border-black/5 py-3 pl-7 pr-5 text-left text-sm font-semibold text-secondary">
+                                                    {category.title}
+                                                    <IoIosArrowDown className={`transition-transform ${openCategory === category.id ? "rotate-180" : ""}`} />
+                                                </button>
+                                                <div className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ${openCategory === category.id ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+                                                    <div className="min-h-0 bg-white/80">
+                                                        {category.sections.map((section) => (
+                                                            <Link key={section.id} href={section.href} onClick={closeDrawer} className="block border-b border-black/5 py-3 pl-10 pr-5 transition hover:bg-success_light">
+                                                                <span className="flex items-center justify-between text-xs font-semibold text-secondary">
+                                                                    {section.title} <BsArrowRight className="shrink-0 text-success_main" />
+                                                                </span>
+                                                                {section.items.length > 0 && (
+                                                                    <span className="mt-2 block space-y-1.5">
+                                                                        {section.items.map((item) => (
+                                                                            <span key={item.title} className="flex items-start gap-2 text-[10px] leading-4 text-gray500">
+                                                                                <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-success_main" />
+                                                                                {item.title}
+                                                                            </span>
+                                                                        ))}
+                                                                    </span>
+                                                                )}
+                                                            </Link>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <Link key={category.id} href={category.href} onClick={closeDrawer} className="flex items-center justify-between border-b border-black/5 py-3 pl-7 pr-5 text-sm font-semibold text-secondary hover:text-success_deep">
+                                                {category.title} <BsArrowRight className="text-success_main" />
                                             </Link>
-                                        ))}
-                                    </div>
+                                        ),
+                                    )}
                                 </div>
-                            ))}
+                            </div>
                         </div>
 
-                        <Link onClick={() => setIsOpen(false)} href="/portfolio" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            Portfolio
-                            <BsArrowRight size={18} />
+                        <Link onClick={closeDrawer} href="/product" className={directLinkClass}>
+                            Product <BsArrowRight />
                         </Link>
-                        <Link onClick={() => setIsOpen(false)} href="/portfolio" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            Product
-                            <BsArrowRight size={18} />
+                        <Link onClick={closeDrawer} href="/portfolio" className={directLinkClass}>
+                            Portfolio <BsArrowRight />
                         </Link>
-                        <Link onClick={() => setIsOpen(false)} href="/blog" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            Blog
-                            <BsArrowRight size={18} />
-                        </Link>
-                        <Link onClick={() => setIsOpen(false)} href="/career" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            Career
-                            <BsArrowRight size={18} />
-                        </Link>
-                        <Link onClick={() => setIsOpen(false)} href="/about" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            About
-                            <BsArrowRight size={18} />
-                        </Link>
-                        <Link onClick={() => setIsOpen(false)} href="/team" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            Our Team
-                            <BsArrowRight size={18} />
-                        </Link>
-                        <Link onClick={() => setIsOpen(false)} href="/courses" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            Our Courses
-                            <BsArrowRight size={18} />
-                        </Link>
-                        <Link onClick={() => setIsOpen(false)} href="/developers" className=" text-secondary flex items-center gap-2 flex-row justify-between px-5 py-4 border-b border-divider">
-                            Hire Developers
-                            <BsArrowRight size={18} />
-                        </Link>
-                        <div className=" flex items-center justify-center mt-7 px-5">
-                            <Button onClick={() => setIsOpen(false)} fullWidth size="small">
-                                Contact Us
-                            </Button>
+                        {renderSimpleGroup("training", "Training", trainingNavigation)}
+                        {renderSimpleGroup("about", "About", aboutNavigation)}
+                        {renderSimpleGroup("others", "Others", otherNavigation)}
+
+                        <div className="px-5 pt-7">
+                            <Link href="/contact" onClick={closeDrawer}>
+                                <Button fullWidth size="small">
+                                    Contact Us
+                                </Button>
+                            </Link>
                         </div>
                     </nav>
                 </div>

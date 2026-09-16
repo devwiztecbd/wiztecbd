@@ -4,29 +4,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { RiArrowRightSLine } from "react-icons/ri";
 
-import { services } from "@/app/staticData/home";
+import { aboutNavigation, otherNavigation, serviceNavigation, trainingNavigation } from "@/app/staticData/navigation";
 import LetsTalk from "../LetsTalk";
 import MobileDrawer from "../MobileDrawer";
 import Button from "@/components/Button";
 import ServiceMegaMenu from "@/components/MegaMenu";
-import AmoutMenu from "../AboutMenu";
-import OtherMenu from "../OtherMenu";
+import LinkMegaMenu from "@/components/LinkMegaMenu";
 import useModal from "@/hooks/useModal";
-import useCourses from "@/hooks/useCourses";
-import useCareers from "@/hooks/useCareers";
 
 const Header = () => {
-    const { courses, loading: coursesLoading } = useCourses();
-    const { careers, loading: careersLoading } = useCareers();
-    // const [isOpen, setIsOpen] = useState(false);
-    const [isOpenMega, setIsOpenMega] = useState(false);
-    const [isAbout, setIsAbout] = useState(false);
-    const [isOther, setIsOther] = useState(false);
+    const [activeMenu, setActiveMenu] = useState(null);
     const { isOpen, openModal, closeModal } = useModal();
+    const openMenu = (menu) => setActiveMenu(menu);
+    const closeMenu = () => setActiveMenu(null);
 
     return (
         <>
-            <nav className={` backdrop-blur-md text-secondary sticky top-0 z-30 shadow-lg ${isOpenMega || isAbout || isOther ? " bg-white" : "bg-white/60"}`}>
+            <nav className={` backdrop-blur-md text-secondary sticky top-0 z-30 shadow-lg ${activeMenu ? " bg-white" : "bg-white/60"}`}>
                 <div className="container mx-auto max-w-xl  flex justify-between py-4 md:py-0 px-4 items-center ">
                     <div className="text-2xl font-bold">
                         <Link href="/" className="flex items-center w-full  justify-center flex-shrink-0 md:h-12 h-8">
@@ -34,59 +28,51 @@ const Header = () => {
                         </Link>
                     </div>
                     <div className="md:flex hidden space-x-6 items-center justify-center">
-                        <Link href={"/services"} className="group hover:text-success_main inline-flex flex-col justify-center h-100" onMouseEnter={() => setIsOpenMega(true)} onMouseLeave={() => setIsOpenMega(false)}>
+                        <Link href="/services" className="group hover:text-success_main inline-flex flex-col justify-center h-100" onMouseEnter={() => openMenu("services")} onMouseLeave={closeMenu} onFocus={() => openMenu("services")}>
                             <span className="flex items-center gap-0.5">
                                 Services
                                 <RiArrowRightSLine size={18} />
                             </span>
                             <span className={`  h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
                         </Link>
-                        <Link href="/courses" className=" text-secondary group h-100 flex flex-col justify-center hover:text-success_main">
-                            Courses
+                        <Link href="/product" className=" hidden lg:inline-flex text-secondary group h-100 flex-col justify-center hover:text-success_main" onMouseEnter={closeMenu}>
+                            Product
                             <span className={`h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
                         </Link>
-                        <Link href="/portfolio" className=" text-secondary group h-100 flex flex-col justify-center hover:text-success_main">
+                        <Link href="/portfolio" className=" text-secondary group h-100 flex flex-col justify-center hover:text-success_main" onMouseEnter={closeMenu}>
                             Portfolio
                             <span className={`  h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
                         </Link>
-                        <Link href="/product" className=" hidden lg:inline-flex text-secondary group h-100 flex-col justify-center hover:text-success_main">
-                            Product
-                            <span className={`  h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
+                        <Link href="/courses" className="text-secondary group h-100 inline-flex flex-col justify-center hover:text-success_main" onMouseEnter={() => openMenu("training")} onMouseLeave={closeMenu} onFocus={() => openMenu("training")}>
+                            <span className="flex items-center gap-0.5">
+                                Training
+                                <RiArrowRightSLine size={18} />
+                            </span>
+                            <span className="h-2px w-0 bg-success_main transition-width duration-300 ease-in-out group-hover:w-full"></span>
                         </Link>
-                        <Link href="/blog" className=" hidden lg:inline-flex text-secondary group h-100 flex-col justify-center hover:text-success_main">
-                            Blog
-                            <span className={`  h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
-                        </Link>
-                        <Link onMouseEnter={() => setIsAbout(true)} onMouseLeave={() => setIsAbout(false)} href={"#"} className=" text-secondary group h-100 inline-flex flex-col justify-center hover:text-success_main">
+                        <Link onMouseEnter={() => openMenu("about")} onMouseLeave={closeMenu} onFocus={() => openMenu("about")} href="/about" className=" text-secondary group h-100 inline-flex flex-col justify-center hover:text-success_main">
                             <span className="flex items-center gap-0.5">
                                 About
                                 <RiArrowRightSLine size={18} />
                             </span>
                             <span className={`h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
                         </Link>
-                        <Link href="#" onMouseEnter={() => setIsOther(true)} onMouseLeave={() => setIsOther(false)} className=" text-secondary group h-100 flex flex-col justify-center hover:text-success_main">
+                        <button type="button" onMouseEnter={() => openMenu("others")} onMouseLeave={closeMenu} onFocus={() => openMenu("others")} className=" text-secondary group h-100 flex flex-col justify-center hover:text-success_main">
                             <span className="flex items-center gap-0.5">
                                 Others
                                 <RiArrowRightSLine size={18} />
                             </span>
                             <span className={`h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
-                        </Link>
-                        <Link href="/contact" className=" text-secondary group h-100 flex flex-col justify-center hover:text-success_main">
-                            Contact
+                        </button>
+                        <Link href="/contact" className=" text-secondary group h-100 flex flex-col justify-center hover:text-success_main" onMouseEnter={closeMenu}>
+                            Contact Us
                             <span className={`h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
                         </Link>
                     </div>
-                    {isOpenMega && <ServiceMegaMenu MegamenuData={services} onMouseEnter={() => setIsOpenMega(true)} onMouseLeave={() => setIsOpenMega(false)} onClose={() => setIsOpenMega(false)} />}
-                    {isAbout && <AmoutMenu MegamenuData={services} onMouseEnter={() => setIsAbout(true)} onMouseLeave={() => setIsAbout(false)} onClose={() => setIsAbout(false)} />}
-                    {isOther && <OtherMenu 
-                        courses={courses} 
-                        careers={careers} 
-                        coursesLoading={coursesLoading} 
-                        careersLoading={careersLoading} 
-                        onMouseEnter={() => setIsOther(true)} 
-                        onMouseLeave={() => setIsOther(false)} 
-                        onClose={() => setIsOther(false)} 
-                    />}
+                    {activeMenu === "services" && <ServiceMegaMenu menuData={serviceNavigation} onMouseEnter={() => openMenu("services")} onMouseLeave={closeMenu} onClose={closeMenu} />}
+                    {activeMenu === "training" && <LinkMegaMenu eyebrow="Learn with us" title="Training" items={trainingNavigation} onMouseEnter={() => openMenu("training")} onMouseLeave={closeMenu} onClose={closeMenu} />}
+                    {activeMenu === "about" && <LinkMegaMenu title="About" items={aboutNavigation} featuredImage="/assets/images/Logos/familly.jpg" featuredImageAlt="The WiztecBD team" onMouseEnter={() => openMenu("about")} onMouseLeave={closeMenu} onClose={closeMenu} />}
+                    {activeMenu === "others" && <LinkMegaMenu eyebrow="Explore more" title="Others" items={otherNavigation} onMouseEnter={() => openMenu("others")} onMouseLeave={closeMenu} onClose={closeMenu} />}
                     <Button onClick={() => openModal()} type="button" size="small">
                         {"Let's Talk"}
                     </Button>
