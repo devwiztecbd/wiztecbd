@@ -430,6 +430,189 @@ body {
         linear-gradient(135deg, #f7fbef 0%, #ffffff 52%, #dcefc1 100%);
 }
 
+/* Home training-project carousel */
+.training-projects-section {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    background-image:
+        radial-gradient(circle at 6% 26%, rgba(139, 194, 64, 0.09), transparent 18%),
+        radial-gradient(circle at 94% 78%, rgba(139, 194, 64, 0.08), transparent 20%);
+}
+
+.training-projects-stage {
+    min-height: 760px;
+}
+
+.training-project-slide {
+    display: none;
+}
+
+.training-project-slide--active {
+    display: block;
+    position: relative;
+    padding-inline: 1rem;
+    animation: training-mobile-enter 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.training-project-preview {
+    display: none;
+}
+
+.training-project-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 40;
+    display: flex;
+    height: 2.75rem;
+    width: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(28, 31, 27, 0.88);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+    transform: translateY(-50%);
+    transition: background-color 250ms ease, transform 250ms ease;
+}
+
+.training-project-arrow:hover {
+    background: #20804f;
+    transform: translateY(-50%) scale(1.06);
+}
+
+.training-project-arrow--left {
+    left: 0.5rem;
+}
+
+.training-project-arrow--right {
+    right: 0.5rem;
+}
+
+@keyframes training-mobile-enter {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 1024px) {
+    .training-projects-stage {
+        height: 580px;
+        min-height: 0;
+    }
+
+    .training-project-slide {
+        position: absolute;
+        top: 0;
+        display: block;
+        height: 580px;
+        transition:
+            left 850ms cubic-bezier(0.22, 1, 0.36, 1),
+            width 850ms cubic-bezier(0.22, 1, 0.36, 1),
+            opacity 550ms ease,
+            transform 850ms cubic-bezier(0.22, 1, 0.36, 1),
+            filter 650ms ease;
+        will-change: left, width, transform, opacity;
+    }
+
+    .training-project-detail,
+    .training-project-preview {
+        position: absolute;
+        inset: 0;
+        transition: opacity 320ms ease, visibility 320ms ease;
+    }
+
+    .training-project-slide--active {
+        left: 50%;
+        z-index: 30;
+        width: clamp(760px, 66vw, 980px);
+        padding: 0;
+        opacity: 1;
+        filter: none;
+        transform: translateX(-50%) scale(1);
+        animation: none;
+    }
+
+    .training-project-slide--active .training-project-detail {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .training-project-slide--active .training-project-preview {
+        visibility: hidden;
+        display: flex;
+        opacity: 0;
+    }
+
+    .training-project-slide--previous,
+    .training-project-slide--next {
+        left: 50%;
+        z-index: 10;
+        width: clamp(210px, 18vw, 270px);
+        opacity: 0.72;
+        filter: saturate(0.78);
+    }
+
+    .training-project-slide--previous {
+        transform: translateX(calc(-50% - clamp(500px, 42vw, 630px))) scale(0.93);
+    }
+
+    .training-project-slide--next {
+        transform: translateX(calc(-50% + clamp(500px, 42vw, 630px))) scale(0.93);
+    }
+
+    .training-project-slide--previous .training-project-detail,
+    .training-project-slide--next .training-project-detail,
+    .training-project-slide--hidden .training-project-detail {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .training-project-slide--previous .training-project-preview,
+    .training-project-slide--next .training-project-preview {
+        visibility: visible;
+        display: flex;
+        opacity: 1;
+    }
+
+    .training-project-slide--hidden {
+        left: 50%;
+        z-index: 0;
+        width: clamp(210px, 18vw, 270px);
+        pointer-events: none;
+        opacity: 0;
+        transform: translateX(-50%) scale(0.78);
+    }
+
+    .training-project-slide--hidden .training-project-preview {
+        visibility: hidden;
+        display: flex;
+        opacity: 0;
+    }
+
+    .training-project-arrow--left {
+        left: max(1rem, calc(50% - clamp(500px, 42vw, 630px) - clamp(105px, 9vw, 135px) - 1.375rem));
+    }
+
+    .training-project-arrow--right {
+        right: max(1rem, calc(50% - clamp(500px, 42vw, 630px) - clamp(105px, 9vw, 135px) - 1.375rem));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .training-project-slide,
+    .training-project-detail,
+    .training-project-preview {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .mega-menu-enter {
         animation: none;

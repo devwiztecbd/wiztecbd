@@ -6,6 +6,7 @@ import OverViews from "@/widgets/OverViews";
 import ServedClients from "@/widgets/ServedClients";
 import MembershipCertification from "@/widgets/MembershipCertification";
 import OurServices from "@/widgets/OurServices";
+import TrainingProjects from "@/widgets/TrainingProjects";
 import Benefits from "@/widgets/Benefits";
 import ClientsTestMonials from "@/widgets/ClientsTestmonials";
 import GlobalClients from "@/widgets/GlobalClients";
@@ -42,9 +43,12 @@ const Home = () => {
                 </div>
             </Section>
             <Section id="Services" bgColor={HOME_BACKGROUNDS.green}>
-                <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12">
+                <div className="container mx-auto max-w-xl px-4 py-12 md:py-100">
                     <OurServices />
                 </div>
+            </Section>
+            <Section id="trainingProjects" bgColor={HOME_BACKGROUNDS.dark}>
+                <TrainingProjects />
             </Section>
             <Section id="choose" bgColor={HOME_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 md:pb-0 py-12 text-white">

@@ -43,7 +43,7 @@ const ServiceMegaMenu = ({ onMouseEnter, onMouseLeave, menuData, onClose }) => {
 
     return (
         <Menu onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <div className="mega-menu-gradient border-t border-success_main/20">
+            <div className="border-t border-success_main/20">
                 <div className="container mx-auto grid max-h-[calc(100vh-6.25rem)] max-w-xl grid-cols-[300px_minmax(0,1fr)] overflow-y-auto px-4">
                     <div className="border-r border-black/10 py-7 pr-6">
                         <div className="mb-5">
