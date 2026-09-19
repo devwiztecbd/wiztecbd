@@ -440,6 +440,16 @@ body {
         radial-gradient(circle at 94% 78%, rgba(139, 194, 64, 0.08), transparent 20%);
 }
 
+/* The software carousel shares the center-and-peek motion system below. */
+.software-projects-section {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    background-image:
+        radial-gradient(circle at 7% 22%, rgba(139, 194, 64, 0.09), transparent 18%),
+        radial-gradient(circle at 93% 80%, rgba(139, 194, 64, 0.08), transparent 20%);
+}
+
 .training-projects-stage {
     min-height: 760px;
 }

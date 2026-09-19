@@ -1,5 +1,4 @@
 import HerroBanner from "@/widgets/HerroBanner";
-import ScrollAnimatedSection from "@/components/ScrollAnimationSection";
 import { RootSection, Section } from "@/components/Section";
 import OurProcess from "@/widgets/OurProcess";
 import OverViews from "@/widgets/OverViews";
@@ -15,9 +14,9 @@ import Industries from "@/widgets/Industries";
 import OurCaseStudies from "@/widgets/FeaturedProjects";
 import ContactForm from "@/widgets/ContactForm";
 import ContactInfo from "@/widgets/ContactForm/ContactInfo";
+import SoftwareProjects from "@/widgets/SoftwareProjects";
 import { homeMetaData } from "../staticData/data";
 const { benifits } = require("../staticData/course");
-import Products from "@/widgets/Products";
 
 export const metadata = homeMetaData;
 
@@ -85,12 +84,9 @@ const Home = () => {
                     <MembershipCertification />
                 </div>
             </Section>
-            <ScrollAnimatedSection delay={200}>
-                <div className=" md:mb-12 mb-6 md:pt-100">
-                    <h2 className=" text-center text-H1  font-bold mb-2 text-white">Our Feature Projects</h2>
-                </div>
-            </ScrollAnimatedSection>
-            <Products backgroundColors={[HOME_BACKGROUNDS.green, HOME_BACKGROUNDS.dark]} />
+            <Section id="softwareProjects" bgColor={HOME_BACKGROUNDS.dark}>
+                <SoftwareProjects />
+            </Section>
             <Section id="ourCaseStudies" bgColor={HOME_BACKGROUNDS.dark}>
                 <div className=" text-white container mx-auto px-4 max-w-xl  md:pt-100 md:pb-0 py-12">
                     <OurCaseStudies />
