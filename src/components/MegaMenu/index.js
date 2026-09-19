@@ -11,7 +11,7 @@ const ServiceMegaMenu = ({ onMouseEnter, onMouseLeave, menuData, onClose }) => {
 
     return (
         <Menu onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <div className="border-t border-black/5 bg-[#F8F9FB]">
+            <div className="mega-menu-gradient border-t border-success_main/20">
                 <div className="container mx-auto grid max-h-[calc(100vh-6.25rem)] max-w-xl grid-cols-[300px_minmax(0,1fr)] overflow-y-auto px-4">
                     <div className="border-r border-black/10 py-7 pr-6">
                         <div className="mb-5">
@@ -51,7 +51,7 @@ const ServiceMegaMenu = ({ onMouseEnter, onMouseLeave, menuData, onClose }) => {
                         {hasGroupedLinks ? (
                             <div className={`grid gap-3 ${activeCategory.sections.length === 1 ? "grid-cols-2" : "grid-cols-3"}`}>
                                 {activeCategory.sections.map((section) => (
-                                    <Link key={section.id} href={section.href} onClick={onClose} className="group rounded-xl border border-black/5 bg-white p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:border-success_main/40 hover:shadow-md">
+                                    <Link key={section.id} href={section.href} onClick={onClose} className="mega-menu-card-gradient group rounded-xl border border-success_main/10 p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:border-success_main/40 hover:shadow-md">
                                         <span className="flex items-start justify-between gap-3 font-semibold text-primary transition group-hover:text-success_deep">
                                             <span className="text-sm leading-5">{section.title}</span>
                                             <BsArrowUpRight className="mt-0.5 shrink-0 text-success_main transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -70,7 +70,7 @@ const ServiceMegaMenu = ({ onMouseEnter, onMouseLeave, menuData, onClose }) => {
                                 ))}
                             </div>
                         ) : (
-                            <Link href={activeCategory.href} onClick={onClose} className="group flex min-h-56 items-end overflow-hidden rounded-2xl bg-gradient-to-br from-success_light via-white to-[#F8F9FB] p-7 shadow-lg">
+                            <Link href={activeCategory.href} onClick={onClose} className="mega-menu-feature-gradient group flex min-h-56 items-end overflow-hidden rounded-2xl border border-success_main/10 p-7 shadow-lg">
                                 <div>
                                     <span className="flex h-11 w-11 items-center justify-center rounded-full bg-success_main text-white transition-transform group-hover:scale-110">
                                         <BsArrowUpRight />

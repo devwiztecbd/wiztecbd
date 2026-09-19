@@ -7,7 +7,7 @@ import Menu from "@/components/Menu";
 const LinkMegaMenu = ({ eyebrow, title, items, featuredImage, featuredImageAlt = "", onMouseEnter, onMouseLeave, onClose }) => {
     return (
         <Menu onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <div className="border-t border-black/5 bg-[#F8F9FB]">
+            <div className="mega-menu-gradient border-t border-success_main/20">
                 <div className={`container mx-auto grid max-w-xl gap-x-3 gap-y-4 px-4 py-8 lg:grid-cols-[0.28fr_0.72fr] ${featuredImage ? "lg:items-stretch" : "lg:items-center"}`}>
                     {featuredImage ? (
                         <>
@@ -29,7 +29,7 @@ const LinkMegaMenu = ({ eyebrow, title, items, featuredImage, featuredImageAlt =
                                 key={item.title}
                                 href={item.href}
                                 onClick={onClose}
-                                className="group relative overflow-hidden rounded-xl border border-black/5 bg-white p-5 shadow-lg transition duration-300 hover:-translate-y-1 hover:border-success_main/40 hover:shadow-md"
+                                className="mega-menu-card-gradient group relative overflow-hidden rounded-xl border border-success_main/10 p-5 shadow-lg transition duration-300 hover:-translate-y-1 hover:border-success_main/40 hover:shadow-md"
                             >
                                 <span className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-success_light text-success_deep transition group-hover:bg-success_main group-hover:text-white">
                                     <BsArrowUpRight size={14} />

@@ -413,6 +413,23 @@ body {
     transform-origin: top center;
 }
 
+.mega-menu-gradient {
+    background:
+        radial-gradient(circle at 5% 0%, rgba(139, 194, 64, 0.34), transparent 34%),
+        radial-gradient(circle at 96% 100%, rgba(85, 89, 76, 0.2), transparent 38%),
+        linear-gradient(135deg, #f8f9fb 0%, #ffffff 48%, #eaf5d8 100%);
+}
+
+.mega-menu-card-gradient {
+    background: linear-gradient(145deg, #ffffff 0%, #f8fbed 58%, #e6f3d2 100%);
+}
+
+.mega-menu-feature-gradient {
+    background:
+        radial-gradient(circle at 85% 15%, rgba(139, 194, 64, 0.42), transparent 36%),
+        linear-gradient(135deg, #f7fbef 0%, #ffffff 52%, #dcefc1 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
     .mega-menu-enter {
         animation: none;
