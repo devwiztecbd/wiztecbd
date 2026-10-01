@@ -74,15 +74,17 @@ const TrainingLocations = () => (
 
                 <div className="relative mx-auto aspect-[1531/2138] w-[82%] max-w-[500px]">
                     <div className="absolute inset-[8%] rounded-full bg-success_main/15 blur-3xl" />
-                    <Image
-                        src="/assets/images/maps/bangladesh-districts.svg"
-                        alt="District-level administrative map of Bangladesh showing WiztecBD training locations"
-                        fill
-                        unoptimized
-                        sizes="(min-width: 1280px) 500px, 82vw"
-                        className="object-contain drop-shadow-[0_22px_24px_rgba(32,128,79,.2)]"
-                        style={{ filter: "sepia(1) saturate(2.4) hue-rotate(38deg) brightness(1.12)" }}
-                    />
+                    <div className="absolute inset-0" style={{ filter: "drop-shadow(0 20px 18px rgba(32, 128, 79, .28)) drop-shadow(0 8px 7px rgba(0, 0, 0, .12))" }}>
+                        <Image
+                            src="/assets/images/maps/bangladesh-districts.svg"
+                            alt="District-level administrative map of Bangladesh showing WiztecBD training locations"
+                            fill
+                            unoptimized
+                            sizes="(min-width: 1280px) 500px, 82vw"
+                            className="object-contain"
+                            style={{ filter: "sepia(1) saturate(2.4) hue-rotate(38deg) brightness(1.12)" }}
+                        />
+                    </div>
 
                     {mapLocations.map((location) => (
                         <div key={location.name} className={`absolute z-10 flex items-center ${location.position}`}>
