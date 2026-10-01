@@ -98,10 +98,11 @@ const ProjectDetail = ({ project, number }) => (
     </article>
 );
 
-const TrainingProjects = () => {
+const TrainingProjects = ({ displayMode = "section" }) => {
     const [activeIndex, setActiveIndex] = useState(1);
     const [isPaused, setIsPaused] = useState(false);
     const touchStartX = useRef(null);
+    const isHero = displayMode === "hero";
 
     const goToSlide = (index) => setActiveIndex((index + trainingProjects.length) % trainingProjects.length);
     const showPrevious = () => goToSlide(activeIndex - 1);
@@ -123,18 +124,20 @@ const TrainingProjects = () => {
     };
 
     return (
-        <div className="training-projects-section overflow-hidden bg-[#F8F9FB] py-14 text-primary md:py-20">
-            <div className="container mx-auto max-w-2xl px-4">
-                <div className="relative text-center">
-                    <p className="flex items-center justify-center gap-4 text-xs font-bold uppercase tracking-[0.16em] text-success_deep md:text-sm"><span className="h-0.5 w-10 bg-success_main" /> Our Training Projects <span className="h-0.5 w-10 bg-success_main" /></p>
-                    <h2 className="mt-4 text-3xl font-extrabold leading-tight md:text-5xl">Real Training. Real People. <span className="text-success_deep">Real Impact.</span></h2>
-                    <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray500 md:text-base">We have successfully designed and delivered large-scale technical training programs for government bodies, institutions and organizations across Bangladesh. Each project reflects our commitment to practical learning and measurable outcomes.</p>
-                    <Link href="/services/it-training" className="mt-5 inline-flex items-center gap-3 rounded-full border border-success_deep px-5 py-2.5 text-sm font-semibold text-success_deep transition hover:bg-success_deep hover:text-white lg:absolute lg:right-0 lg:top-6 lg:mt-0">View All Projects <FiArrowRight /></Link>
+        <div className={`training-projects-section overflow-hidden bg-[#F8F9FB] text-primary ${isHero ? "training-projects-section--hero flex min-h-[calc(100svh-6.25rem)] flex-col justify-center py-8 md:py-12" : "py-14 md:py-20"}`}>
+            {!isHero && (
+                <div className="container mx-auto max-w-2xl px-4">
+                    <div className="relative text-center">
+                        <p className="flex items-center justify-center gap-4 text-xs font-bold uppercase tracking-[0.16em] text-success_deep md:text-sm"><span className="h-0.5 w-10 bg-success_main" /> Our Training Projects <span className="h-0.5 w-10 bg-success_main" /></p>
+                        <h2 className="mt-4 text-3xl font-extrabold leading-tight md:text-5xl">Real Training. Real People. <span className="text-success_deep">Real Impact.</span></h2>
+                        <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray500 md:text-base">We have successfully designed and delivered large-scale technical training programs for government bodies, institutions and organizations across Bangladesh. Each project reflects our commitment to practical learning and measurable outcomes.</p>
+                        <Link href="/services/it-training" className="mt-5 inline-flex items-center gap-3 rounded-full border border-success_deep px-5 py-2.5 text-sm font-semibold text-success_deep transition hover:bg-success_deep hover:text-white lg:absolute lg:right-0 lg:top-6 lg:mt-0">View All Projects <FiArrowRight /></Link>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div
-                className="training-projects-stage relative mt-10 outline-none"
+                className={`training-projects-stage relative outline-none ${isHero ? "mt-0" : "mt-10"}`}
                 role="region"
                 aria-label="Training projects carousel"
                 tabIndex={0}
@@ -168,17 +171,19 @@ const TrainingProjects = () => {
                 </button>
             </div>
 
-            <div className="container mx-auto mt-10 grid max-w-2xl gap-5 px-4 sm:grid-cols-2 lg:grid-cols-4">
-                {impactItems.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                        <div key={item.title} className="flex items-center gap-4">
-                            <Icon className="shrink-0 text-success_deep" size={32} />
-                            <p><strong className="block text-xs text-secondary">{item.title}</strong><span className="mt-1 block text-[11px] leading-4 text-gray500">{item.text}</span></p>
-                        </div>
-                    );
-                })}
-            </div>
+            {!isHero && (
+                <div className="container mx-auto mt-10 grid max-w-2xl gap-5 px-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {impactItems.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                            <div key={item.title} className="flex items-center gap-4">
+                                <Icon className="shrink-0 text-success_deep" size={32} />
+                                <p><strong className="block text-xs text-secondary">{item.title}</strong><span className="mt-1 block text-[11px] leading-4 text-gray500">{item.text}</span></p>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
         </div>
     );
 };

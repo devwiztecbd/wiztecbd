@@ -43,7 +43,7 @@ const Header = () => {
                             Portfolio
                             <span className={`  h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
                         </Link>
-                        <Link href="/courses" className="text-secondary group h-100 inline-flex flex-col justify-center hover:text-success_main" onMouseEnter={() => openMenu("training")} onMouseLeave={closeMenu} onFocus={() => openMenu("training")}>
+                        <Link href="/training" className="text-secondary group h-100 inline-flex flex-col justify-center hover:text-success_main" onMouseEnter={() => openMenu("training")} onMouseLeave={closeMenu} onFocus={() => openMenu("training")}>
                             <span className="flex items-center gap-0.5">
                                 Training
                                 <RiArrowRightSLine size={18} />

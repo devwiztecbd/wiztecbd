@@ -107,7 +107,7 @@ export const serviceNavigation = [
 
 export const trainingNavigation = [
     { title: "Courses", href: "/courses", description: "Explore our practical IT and technical courses." },
-    { title: "Training Portfolio", href: "/portfolio", description: "See the training programs and engagements we have delivered." },
+    { title: "Training Portfolio", href: "/training", description: "See the training programs and engagements we have delivered." },
 ];
 
 export const aboutNavigation = [
