@@ -1,8 +1,10 @@
 import { RootSection, Section } from "@/components/Section";
+import InstitutionalTraining from "@/widgets/InstitutionalTraining";
 import Training4IRFeature from "@/widgets/Training4IRFeature";
 import TrainingAreas from "@/widgets/TrainingAreas";
 import TrainingAudiences from "@/widgets/TrainingAudiences";
 import TrainingIntroduction from "@/widgets/TrainingIntroduction";
+import TrainingLocations from "@/widgets/TrainingLocations";
 import TrainingProjects from "@/widgets/TrainingProjects";
 import TrainingStakeholders from "@/widgets/TrainingStakeholders";
 import { FiBookOpen, FiLayers, FiMapPin, FiTrendingUp, FiUsers } from "react-icons/fi";
@@ -58,6 +60,12 @@ const TrainingPage = () => (
         </Section>
         <Section id="training4IR" bgColor="#173F31">
             <Training4IRFeature />
+        </Section>
+        <Section id="institutionalTraining" bgColor="#F8F9FB">
+            <InstitutionalTraining />
+        </Section>
+        <Section id="trainingLocations" bgColor="#F7FAF4">
+            <TrainingLocations />
         </Section>
     </RootSection>
 );
