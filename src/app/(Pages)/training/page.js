@@ -1,13 +1,20 @@
 import { RootSection, Section } from "@/components/Section";
 import FeaturedTrainingPortfolio from "@/widgets/FeaturedTrainingPortfolio";
 import InstitutionalTraining from "@/widgets/InstitutionalTraining";
+import MembershipCertification from "@/widgets/MembershipCertification";
 import Training4IRFeature from "@/widgets/Training4IRFeature";
 import TrainingAreas from "@/widgets/TrainingAreas";
 import TrainingAudiences from "@/widgets/TrainingAudiences";
+import TrainingDeliveryModel from "@/widgets/TrainingDeliveryModel";
+import TrainingFinalCTA from "@/widgets/TrainingFinalCTA";
 import TrainingIntroduction from "@/widgets/TrainingIntroduction";
+import TrainingInquiryForm from "@/widgets/TrainingInquiryForm";
 import TrainingLocations from "@/widgets/TrainingLocations";
+import TrainingPartnerships from "@/widgets/TrainingPartnerships";
 import TrainingProjects from "@/widgets/TrainingProjects";
+import TrainingResults from "@/widgets/TrainingResults";
 import TrainingStakeholders from "@/widgets/TrainingStakeholders";
+import WhyChooseTraining from "@/widgets/WhyChooseTraining";
 import { FiBookOpen, FiLayers, FiMapPin, FiTrendingUp, FiUsers } from "react-icons/fi";
 
 const trainingImpact = [
@@ -70,6 +77,29 @@ const TrainingPage = () => (
         </Section>
         <Section id="featuredTrainingPortfolio" bgColor="#F8F9FB">
             <FeaturedTrainingPortfolio />
+        </Section>
+        <Section id="trainingResults" bgColor="#EEF5E9">
+            <TrainingResults />
+        </Section>
+        <Section id="trainingDeliveryModel" bgColor="#F8F9FB">
+            <TrainingDeliveryModel />
+        </Section>
+        <Section id="trainingPartnerships" bgColor="#55594C">
+            <TrainingPartnerships />
+        </Section>
+        <Section id="whyChooseTraining" bgColor="#F2F7EC">
+            <WhyChooseTraining />
+        </Section>
+        <Section id="trainingMembershipCertification" bgColor="#8BC240">
+            <div className="py-14 md:py-20">
+                <MembershipCertification />
+            </div>
+        </Section>
+        <Section id="trainingInquiry" bgColor="#F8F9FB">
+            <TrainingInquiryForm />
+        </Section>
+        <Section id="trainingFinalCTA" bgColor="#173F31">
+            <TrainingFinalCTA />
         </Section>
     </RootSection>
 );
