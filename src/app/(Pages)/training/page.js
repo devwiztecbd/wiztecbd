@@ -1,4 +1,5 @@
 import { RootSection, Section } from "@/components/Section";
+import FeaturedTrainingPortfolio from "@/widgets/FeaturedTrainingPortfolio";
 import InstitutionalTraining from "@/widgets/InstitutionalTraining";
 import Training4IRFeature from "@/widgets/Training4IRFeature";
 import TrainingAreas from "@/widgets/TrainingAreas";
@@ -66,6 +67,9 @@ const TrainingPage = () => (
         </Section>
         <Section id="trainingLocations" bgColor="#F7FAF4">
             <TrainingLocations />
+        </Section>
+        <Section id="featuredTrainingPortfolio" bgColor="#F8F9FB">
+            <FeaturedTrainingPortfolio />
         </Section>
     </RootSection>
 );
