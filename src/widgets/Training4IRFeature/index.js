@@ -6,9 +6,9 @@ const capabilities = [
     { title: "RPA & Automation", icon: FiRefreshCw, position: "right-[3%] top-[8%]" },
     { title: "Embedded Systems", icon: FiSettings, position: "left-0 top-[42%]" },
     { title: "Microcontroller Programming", icon: FiCode, position: "right-0 top-[43%]" },
-    { title: "Data Analytics & Power BI", icon: FiBarChart2, position: "bottom-[4%] left-[1%]" },
-    { title: "Information Systems Security", icon: FiShield, position: "bottom-0 left-1/2 -translate-x-1/2" },
-    { title: "Enterprise IT Governance", icon: FiLayers, position: "bottom-[4%] right-[1%]" },
+    { title: "Data Analytics & Power BI", icon: FiBarChart2, position: "bottom-0 left-0" },
+    { title: "Information Systems Security", icon: FiShield, position: "bottom-[19%] left-1/2 -translate-x-1/2" },
+    { title: "Enterprise IT Governance", icon: FiLayers, position: "bottom-0 right-0" },
 ];
 
 const Training4IRFeature = () => (
@@ -49,7 +49,7 @@ const Training4IRFeature = () => (
             </div>
 
             <div className="lg:hidden">
-                <div className="grid gap-3 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2">
                     {capabilities.map((capability) => {
                         const Icon = capability.icon;
                         return (
