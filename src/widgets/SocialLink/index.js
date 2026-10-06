@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BsFillChatDotsFill } from "react-icons/bs";
+import { FiChevronDown } from "react-icons/fi";
 
 import { socialLinks as staticSocialLinks } from "@/app/staticData/data";
 import api from "@/config/api";
@@ -10,6 +10,7 @@ import api from "@/config/api";
 const SocialLink = () => {
     const [open, setOpen] = useState(false);
     const [socialLinks, setSocialLinks] = useState(staticSocialLinks);
+    const socialRailRef = useRef(null);
 
     useEffect(() => {
         const fetchSocialLinks = async () => {
@@ -46,33 +47,64 @@ const SocialLink = () => {
         fetchSocialLinks();
     }, []);
 
-    return (
-        <>
-            {/* Desktop View */}
-            <div className="relative z-[100] hidden md:flex flex-col gap-2 rounded-br-xl rounded-tr-xl bg-white px-2 py-4 shadow-social">
-                {socialLinks.map(({ href, icon, alt }) => (
-                    <Link key={alt} href={href} target="_blank" className="h-6 w-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
-                        <Image src={`/assets/images/Social/${icon}`} height={24} width={24} alt={alt} />
-                    </Link>
-                ))}
-            </div>
+    useEffect(() => {
+        const closeDrawer = (event) => {
+            if (event.key === "Escape") setOpen(false);
+            if (event.type === "mousedown" && socialRailRef.current && !socialRailRef.current.contains(event.target)) setOpen(false);
+        };
 
-            {/* Mobile View */}
-            <div className="relative z-[100] flex flex-col rounded-br-xl rounded-tr-xl bg-white px-1 py-2 shadow-social md:hidden">
-                <div onClick={() => setOpen((prev) => !prev)} className="flex items-center justify-center rounded-full transition-all duration-300 group">
-                    <BsFillChatDotsFill className="text-success_main" size={24} />
+        document.addEventListener("mousedown", closeDrawer);
+        document.addEventListener("keydown", closeDrawer);
+
+        return () => {
+            document.removeEventListener("mousedown", closeDrawer);
+            document.removeEventListener("keydown", closeDrawer);
+        };
+    }, []);
+
+    const visibleLinks = socialLinks.slice(0, 4);
+    const drawerLinks = socialLinks.slice(4);
+
+    return (
+        <div className="relative h-[168px] w-8 md:h-[184px] md:w-10">
+            <div ref={socialRailRef} className="absolute left-0 top-0 z-[100] flex flex-col items-center rounded-br-xl rounded-tr-xl bg-white px-1 py-2 shadow-social md:px-2 md:py-4">
+                <div className="flex flex-col items-center gap-2">
+                    {visibleLinks.map(({ href, icon, alt }) => (
+                        <Link key={alt} href={href} target="_blank" rel="noopener noreferrer" aria-label={alt} className="h-6 w-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+                            <Image src={`/assets/images/Social/${icon}`} height={24} width={24} alt={alt} />
+                        </Link>
+                    ))}
                 </div>
-                <div className={`overflow-hidden transition-all duration-500 ${open ? "h-64 mt-1" : "h-0"}`}>
-                    <div className="flex flex-col items-center gap-2">
-                        {socialLinks.map(({ href, icon, alt }) => (
-                            <Link key={alt} href={href} target="_blank" className="h-6 w-6">
-                                <Image src={`/assets/images/Social/${icon}`} height={24} width={24} alt={alt} />
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+
+                {drawerLinks.length > 0 && (
+                    <>
+                        <div
+                            id="additional-social-links"
+                            className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${open ? "max-h-64 opacity-100" : "pointer-events-none max-h-0 opacity-0"}`}
+                        >
+                            <div className="flex flex-col items-center gap-2 pt-2">
+                                {drawerLinks.map(({ href, icon, alt }) => (
+                                    <Link key={alt} href={href} target="_blank" rel="noopener noreferrer" aria-label={alt} className="h-6 w-6 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+                                        <Image src={`/assets/images/Social/${icon}`} height={24} width={24} alt={alt} />
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            aria-expanded={open}
+                            aria-controls="additional-social-links"
+                            aria-label={open ? "Hide additional social links" : "Show all social links"}
+                            onClick={() => setOpen((current) => !current)}
+                            className="mt-2 flex h-6 w-6 items-center justify-center text-success_main transition-transform duration-300 hover:-translate-y-1"
+                        >
+                            <FiChevronDown className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} size={20} />
+                        </button>
+                    </>
+                )}
             </div>
-        </>
+        </div>
     );
 };
 
