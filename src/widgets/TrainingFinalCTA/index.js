@@ -22,10 +22,10 @@ const TrainingFinalCTA = () => (
                 </p>
 
                 <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-                    <Link href="#trainingAreas" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl border border-white/35 px-7 py-3 text-sm font-bold text-white transition hover:border-white hover:bg-white hover:text-success_deep md:text-base">
+                    <Link href="/courses" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl border border-white/35 px-7 py-3 text-sm font-bold text-white transition hover:border-white hover:bg-white hover:text-success_deep md:text-base">
                         <FiBookOpen size={19} /> Explore Training Programs
                     </Link>
-                    <Link href="#trainingInquiry" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-success_main px-7 py-3 text-sm font-bold text-primary transition hover:bg-white hover:text-success_deep md:text-base">
+                    <Link href="/contact" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-success_main px-7 py-3 text-sm font-bold text-primary transition hover:bg-white hover:text-success_deep md:text-base">
                         Partner With WiztecBD <FiArrowRight size={19} />
                     </Link>
                 </div>

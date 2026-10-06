@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiBookOpen, FiBriefcase, FiFlag, FiUsers } from "react-icons/fi";
 
@@ -6,21 +7,25 @@ const partnershipModels = [
         title: "Government Training Projects",
         description: "Technology and workforce-development initiatives.",
         icon: FiFlag,
+        image: "/assets/images/partner images/ChatGPT Image Oct 4, 2026, 12_33_30 PM.png",
     },
     {
         title: "Institutional Training Programs",
         description: "Programs for universities, educational institutions and training organizations.",
         icon: FiBookOpen,
+        image: "/assets/images/partner images/Smiling Students on Campus.png",
     },
     {
         title: "Corporate Upskilling",
         description: "Technology training tailored to organizational teams.",
         icon: FiBriefcase,
+        image: "/assets/images/partner images/Collaborative Team Meeting in a Glass Office.png",
     },
     {
         title: "Youth & Employability Programs",
         description: "Large-scale digital-skills and employment-oriented training.",
         icon: FiUsers,
+        image: "/assets/images/partner images/Celebrating Campus Friends Together.png",
     },
 ];
 
@@ -37,17 +42,28 @@ const TrainingPartnerships = () => (
                 <h2 className="mt-5 text-3xl font-extrabold leading-tight text-white md:text-5xl">Partner With <span className="text-success_main">WiztecBD</span></h2>
             </div>
 
-            <div className="mt-12 grid border-y border-white/15 sm:grid-cols-2 lg:grid-cols-4">
-                {partnershipModels.map((model, index) => {
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {partnershipModels.map((model) => {
                     const Icon = model.icon;
 
                     return (
-                        <article key={model.title} className={`py-8 sm:px-7 lg:min-h-64 lg:px-8 ${index > 0 ? "border-t border-white/15 sm:border-t-0" : ""} ${index % 2 === 1 ? "sm:border-l sm:border-white/15" : ""} ${index >= 2 ? "sm:border-t sm:border-white/15 lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-white/15" : ""}`}>
-                            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-success_main text-primary">
+                        <article key={model.title} className="group relative flex min-h-[310px] flex-col justify-between overflow-hidden rounded-2xl border border-white/15 p-7 shadow-xl md:p-8">
+                            <Image
+                                src={model.image}
+                                alt=""
+                                fill
+                                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                                className="object-cover transition duration-700 ease-out group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,30,23,.14)_0%,rgba(8,30,23,.36)_45%,rgba(8,30,23,.86)_100%)] transition-opacity duration-500 group-hover:opacity-90" />
+
+                            <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-success_main text-primary shadow-lg transition duration-300 group-hover:scale-105 group-hover:bg-white group-hover:text-success_deep">
                                 <Icon size={22} />
                             </span>
-                            <h3 className="mt-6 text-lg font-extrabold leading-7 text-white">{model.title}</h3>
-                            <p className="mt-3 text-sm leading-6 text-white/70">{model.description}</p>
+                            <div className="relative z-10 mt-14">
+                                <h3 className="text-lg font-extrabold leading-7 text-white [text-shadow:0_2px_12px_rgba(0,0,0,.5)]">{model.title}</h3>
+                                <p className="mt-3 text-sm leading-6 text-white/90 [text-shadow:0_1px_8px_rgba(0,0,0,.7)]">{model.description}</p>
+                            </div>
                         </article>
                     );
                 })}
