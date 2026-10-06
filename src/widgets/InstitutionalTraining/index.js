@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiLayers, FiMapPin, FiTrendingUp, FiUsers } from "react-icons/fi";
 
@@ -6,21 +7,25 @@ const capabilities = [
         title: "Large-Scale Delivery",
         description: "Training engagements ranging from focused cohorts to programs involving thousands of participants.",
         icon: FiUsers,
+        image: "/assets/images/training images/large_scale_delivery_training_lab.png",
     },
     {
         title: "Multi-Location Implementation",
         description: "Experience across Dhaka, Chattogram, Sylhet, Khulna and Rajshahi.",
         icon: FiMapPin,
+        image: "/assets/images/training images/multi_location_implementation_lab.png",
     },
     {
         title: "Multi-Domain Curriculum",
         description: "Software development, AI, analytics, automation, digital skills and professional development.",
         icon: FiLayers,
+        image: "/assets/images/training images/multi_domain_curriculum_lab.png",
     },
     {
         title: "Outcome-Oriented Programs",
         description: "Several listed projects report placement outcomes between 80% and 90%.",
         icon: FiTrendingUp,
+        image: "/assets/images/training images/Collaborative Tech Lab Celebration.png",
     },
 ];
 
@@ -58,24 +63,33 @@ const InstitutionalTraining = () => (
                     </div>
                 </div>
 
-                <div className="grid bg-white sm:grid-cols-2">
+                <div className="grid bg-[#173F31] sm:grid-cols-2">
                     {capabilities.map((capability, index) => {
                         const Icon = capability.icon;
 
                         return (
                             <article
                                 key={capability.title}
-                                className={`group relative flex min-h-64 flex-col justify-between p-7 transition-colors duration-300 hover:bg-[#F2F7EC] md:p-9 ${index > 0 ? "border-t border-divider sm:border-t-0" : ""} ${index % 2 === 1 ? "sm:border-l sm:border-divider" : ""} ${index >= 2 ? "sm:border-t sm:border-divider" : ""}`}
+                                className={`group relative flex min-h-64 flex-col justify-between overflow-hidden p-7 text-white md:p-9 ${index > 0 ? "border-t border-white/15 sm:border-t-0" : ""} ${index % 2 === 1 ? "sm:border-l sm:border-white/15" : ""} ${index >= 2 ? "sm:border-t sm:border-white/15" : ""}`}
                             >
-                                <div className="flex items-start justify-between">
-                                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-success_light text-success_deep transition duration-300 group-hover:bg-success_deep group-hover:text-white">
+                                <Image
+                                    src={capability.image}
+                                    alt=""
+                                    fill
+                                    sizes="(min-width: 1024px) 27vw, (min-width: 640px) 50vw, 100vw"
+                                    className="object-cover transition duration-700 ease-out group-hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,30,23,.2)_0%,rgba(8,30,23,.42)_42%,rgba(8,30,23,.8)_100%)] transition-opacity duration-500 group-hover:opacity-90" />
+
+                                <div className="relative z-10 flex items-start justify-between">
+                                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-success_main backdrop-blur-sm transition duration-300 group-hover:bg-success_main group-hover:text-primary">
                                         <Icon size={25} />
                                     </span>
-                                    <span className="text-xs font-bold tracking-[0.18em] text-success_deep/35">0{index + 1}</span>
+                                    <span className="text-xs font-bold tracking-[0.18em] text-white/60">0{index + 1}</span>
                                 </div>
-                                <div className="mt-8">
-                                    <h3 className="text-xl font-extrabold leading-7 text-primary">{capability.title}</h3>
-                                    <p className="mt-3 text-sm leading-6 text-gray500">{capability.description}</p>
+                                <div className="relative z-10 mt-8">
+                                    <h3 className="text-xl font-extrabold leading-7 text-white [text-shadow:0_2px_12px_rgba(0,0,0,.45)]">{capability.title}</h3>
+                                    <p className="mt-3 text-sm leading-6 text-white/90 [text-shadow:0_1px_8px_rgba(0,0,0,.65)]">{capability.description}</p>
                                 </div>
                             </article>
                         );
