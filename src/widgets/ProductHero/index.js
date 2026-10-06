@@ -7,66 +7,7 @@ import { FiArrowRight, FiBarChart2, FiCheckCircle, FiExternalLink, FiLink } from
 
 import Select from "@/components/Select";
 import Slider from "@/components/Slider";
-
-const productSlides = [
-    {
-        eyebrow: "Featured solution",
-        category: "Enterprise solution",
-        title: "Insurance Management",
-        subtitle: "A complete digital insurance ecosystem",
-        description: "Bring policy sales, claims, customer service and reporting together in one secure platform built for modern insurers.",
-        technologies: ["Laravel", "PHP", "MySQL", "REST API"],
-        industries: ["Insurance", "Finance", "Enterprise"],
-        image: "/assets/images/Case Study Insurance Image/Case Study Banner.webp",
-        imageAlt: "Insurance management platform shown on desktop, tablet and mobile devices",
-        badge: "Secure & scalable",
-        portfolioId: 1,
-        liveUrl: "/portfolio/1",
-        stats: [
-            { value: "18+", label: "Hours saved weekly" },
-            { value: "$40K", label: "Annual savings" },
-            { value: "90%", label: "High usability" },
-        ],
-    },
-    {
-        eyebrow: "Commerce platform",
-        category: "E-commerce",
-        title: "Perfecto Commerce",
-        subtitle: "Connected retail across every screen",
-        description: "Manage products, orders, payments and customer experiences through an integrated commerce platform designed to grow with your business.",
-        technologies: ["React.js", "Node.js", "Flutter", "AWS"],
-        industries: ["E-commerce", "Retail", "Beauty"],
-        image: "/assets/images/portfolio/Case Study 2 Image Perfecto/Case Study Banner Perfecto.webp",
-        imageAlt: "Perfecto commerce platform displayed across multiple devices",
-        badge: "Cloud powered",
-        portfolioId: 2,
-        liveUrl: "/portfolio/2",
-        stats: [
-            { value: "30%", label: "Online sales growth" },
-            { value: "40%", label: "Admin efficiency" },
-            { value: "95%", label: "Positive experience" },
-        ],
-    },
-    {
-        eyebrow: "Learning platform",
-        category: "EdTech",
-        title: "Exam Preparation",
-        subtitle: "A smarter learning and assessment experience",
-        description: "Give learners an intuitive place to study, practice and track progress while administrators manage content and performance from one dashboard.",
-        technologies: ["Laravel", "MySQL", "Bootstrap", "REST API"],
-        industries: ["Education", "Training", "Assessment"],
-        image: "/assets/images/portfolio/Casec Study 4/Banner lx.webp",
-        imageAlt: "Exam preparation website and administration dashboard on laptop and tablet",
-        badge: "Built for growth",
-        portfolioId: 4,
-        liveUrl: "/portfolio/4",
-        stats: [
-            { value: "90%", label: "Less moderation time" },
-            { value: "40%", label: "Revenue increase" },
-            { value: "2,000+", label: "Active learners" },
-        ],
-    },
-];
+import { products as productSlides } from "@/app/staticData/products";
 
 const createFilterOptions = (values, allLabel) => [
     { label: allLabel, value: "" },
@@ -188,7 +129,7 @@ const ProductHero = () => {
                                     <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-success_main px-6 py-3 font-semibold text-white shadow-md transition hover:bg-success_dark">
                                         Request a demo <FiArrowRight />
                                     </Link>
-                                    <Link href={`/portfolio/${product.portfolioId}`} className="inline-flex items-center gap-2 rounded-full border border-success_main/50 bg-white px-6 py-3 font-semibold text-success_deep transition hover:border-success_main hover:bg-success_light">
+                                    <Link href={product.detailsHref} className="inline-flex items-center gap-2 rounded-full border border-success_main/50 bg-white px-6 py-3 font-semibold text-success_deep transition hover:border-success_main hover:bg-success_light">
                                         Learn more <FiExternalLink />
                                     </Link>
                                 </div>
@@ -200,7 +141,7 @@ const ProductHero = () => {
                                         {product.badge}
                                     </div>
                                     <div className="relative h-[280px] w-full md:h-[420px]">
-                                        <Image src={product.image} alt={product.imageAlt} fill priority={product.portfolioId === 1} sizes="(min-width: 1024px) 48vw, 90vw" className="object-contain drop-shadow-2xl" />
+                                        <Image src={product.image} alt={product.imageAlt} fill priority={product.id === productSlides[0].id} sizes="(min-width: 1024px) 48vw, 90vw" className="object-contain drop-shadow-2xl" />
                                     </div>
                                 </div>
                             </article>
@@ -252,7 +193,7 @@ const ProductHero = () => {
 
                     <div className="grid gap-4 md:grid-cols-3">
                         {filteredProducts.map((product) => {
-                            const productIndex = productSlides.findIndex((item) => item.portfolioId === product.portfolioId);
+                            const productIndex = productSlides.findIndex((item) => item.id === product.id);
 
                             return (
                                 <article key={product.title} className="group relative overflow-hidden rounded-xl bg-white text-left shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-md">
@@ -263,7 +204,7 @@ const ProductHero = () => {
                                     <div className="min-w-0 p-5">
                                         <p className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-success_deep">{product.eyebrow}</p>
                                         <h3 className="text-sm font-bold leading-snug text-primary md:text-base">{product.title}</h3>
-                                        <Link href={`/portfolio/${product.portfolioId}`} className="relative z-20 mt-2 inline-flex items-center gap-1 text-xs font-semibold text-success_deep underline-offset-4 transition hover:text-success_main hover:underline">
+                                        <Link href={product.detailsHref} className="relative z-20 mt-2 inline-flex items-center gap-1 text-xs font-semibold text-success_deep underline-offset-4 transition hover:text-success_main hover:underline">
                                             View product <FiArrowRight className="transition-transform group-hover:translate-x-1" />
                                         </Link>
                                     </div>
