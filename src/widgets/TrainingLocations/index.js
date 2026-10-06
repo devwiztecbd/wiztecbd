@@ -44,8 +44,8 @@ const TrainingLocations = () => (
 
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                     {trainingEngagements.map((engagement, index) => (
-                        <div key={engagement.name} className={`flex items-center gap-4 rounded-2xl border border-success_main/10 bg-white/90 p-4 shadow-lg backdrop-blur-sm ${index === trainingEngagements.length - 1 ? "sm:col-span-2" : ""}`}>
-                            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-success_light text-[11px] font-black text-success_deep">{engagement.mark}</span>
+                        <div key={engagement.name} className={`group flex items-center gap-4 rounded-2xl border border-success_main/10 bg-white/90 p-4 shadow-lg backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-success_main/45 hover:bg-white hover:shadow-xl ${index === trainingEngagements.length - 1 ? "sm:col-span-2" : ""}`}>
+                            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-success_light text-[11px] font-black text-success_deep transition duration-300 group-hover:scale-105 group-hover:bg-success_deep group-hover:text-white">{engagement.mark}</span>
                             <span className="min-w-0">
                                 <strong className="block text-sm font-extrabold leading-5 text-primary">{engagement.name}</strong>
                                 <span className="mt-1 flex items-start gap-1.5 text-xs leading-4 text-gray500"><FiMapPin className="mt-0.5 shrink-0 text-success_deep" /> {engagement.locations}</span>
@@ -55,10 +55,10 @@ const TrainingLocations = () => (
                 </div>
 
                 <div className="mt-5 grid overflow-hidden rounded-2xl border border-success_main/10 bg-white/90 shadow-lg sm:grid-cols-2 lg:grid-cols-4">
-                    <div className="flex items-center gap-3 border-b border-divider p-4 sm:border-r lg:border-b-0"><FiMapPin className="shrink-0 text-success_deep" size={25} /><p><strong className="block text-xl text-success_deep">8</strong><span className="text-[10px] text-gray500">Major Regions</span></p></div>
-                    <div className="flex items-center gap-3 border-b border-divider p-4 lg:border-b-0 lg:border-r"><FiLayers className="shrink-0 text-success_deep" size={25} /><p><strong className="block text-xs text-primary">Multi-District</strong><span className="text-[10px] text-gray500">Coverage</span></p></div>
-                    <div className="flex items-center gap-3 border-b border-divider p-4 sm:border-b-0 sm:border-r"><FiUsers className="shrink-0 text-success_deep" size={25} /><p><strong className="block text-xl text-success_deep">7,000+</strong><span className="text-[10px] text-gray500">Learners Engaged</span></p></div>
-                    <div className="flex items-center gap-3 p-4"><HiOutlineBuildingLibrary className="shrink-0 text-success_deep" size={27} /><p><strong className="block text-xs text-primary">Institutional</strong><span className="text-[10px] text-gray500">Delivery</span></p></div>
+                    <div className="group flex items-center gap-3 border-b border-divider p-4 transition duration-300 hover:bg-success_light sm:border-r lg:border-b-0"><FiMapPin className="shrink-0 text-success_deep transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" size={25} /><p><strong className="block text-xl text-success_deep">8</strong><span className="text-[10px] text-gray500">Major Regions</span></p></div>
+                    <div className="group flex items-center gap-3 border-b border-divider p-4 transition duration-300 hover:bg-success_light lg:border-b-0 lg:border-r"><FiLayers className="shrink-0 text-success_deep transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" size={25} /><p><strong className="block text-xs text-primary">Multi-District</strong><span className="text-[10px] text-gray500">Coverage</span></p></div>
+                    <div className="group flex items-center gap-3 border-b border-divider p-4 transition duration-300 hover:bg-success_light sm:border-b-0 sm:border-r"><FiUsers className="shrink-0 text-success_deep transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" size={25} /><p><strong className="block text-xl text-success_deep">7,000+</strong><span className="text-[10px] text-gray500">Learners Engaged</span></p></div>
+                    <div className="group flex items-center gap-3 p-4 transition duration-300 hover:bg-success_light"><HiOutlineBuildingLibrary className="shrink-0 text-success_deep transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" size={27} /><p><strong className="block text-xs text-primary">Institutional</strong><span className="text-[10px] text-gray500">Delivery</span></p></div>
                 </div>
 
                 <Link href="#trainingInquiry" className="mt-7 inline-flex items-center gap-4 rounded-xl bg-success_deep px-7 py-4 text-sm font-bold text-white shadow-lg transition hover:bg-success_main hover:text-primary md:text-base">

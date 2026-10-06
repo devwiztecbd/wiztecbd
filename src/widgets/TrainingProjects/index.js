@@ -8,7 +8,7 @@ import { FiArrowLeft, FiArrowRight, FiBarChart2, FiBriefcase, FiCheck, FiMapPin,
 
 import { trainingProjects } from "@/app/staticData/trainingProjects";
 
-const AUTOPLAY_DELAY = 6500;
+const AUTOPLAY_DELAY = 2500;
 
 const impactItems = [
     { title: "Multiple Technology Domains", text: "From basic skills to advanced 4IR technologies", icon: FiTarget },
