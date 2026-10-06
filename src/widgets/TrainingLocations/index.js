@@ -61,7 +61,7 @@ const TrainingLocations = () => (
                     <div className="flex items-center gap-3 p-4"><HiOutlineBuildingLibrary className="shrink-0 text-success_deep" size={27} /><p><strong className="block text-xs text-primary">Institutional</strong><span className="text-[10px] text-gray500">Delivery</span></p></div>
                 </div>
 
-                <Link href="/contact" className="mt-7 inline-flex items-center gap-4 rounded-xl bg-success_deep px-7 py-4 text-sm font-bold text-white shadow-lg transition hover:bg-success_main hover:text-primary md:text-base">
+                <Link href="#trainingInquiry" className="mt-7 inline-flex items-center gap-4 rounded-xl bg-success_deep px-7 py-4 text-sm font-bold text-white shadow-lg transition hover:bg-success_main hover:text-primary md:text-base">
                     Discuss a Training Program <FiArrowRight size={19} />
                 </Link>
             </div>

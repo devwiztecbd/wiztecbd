@@ -84,7 +84,7 @@ const TrainingAudiences = () => (
                         </div>
                     </div>
 
-                    <Link href="/courses" className="inline-flex w-fit shrink-0 items-center justify-center gap-3 rounded-xl bg-success_main px-6 py-4 text-sm font-bold text-primary transition hover:bg-white hover:text-success_deep">
+                    <Link href="#trainingInquiry" className="inline-flex w-fit shrink-0 items-center justify-center gap-3 rounded-xl bg-success_main px-6 py-4 text-sm font-bold text-primary transition hover:bg-white hover:text-success_deep">
                         Find the Right Training Program <FiArrowRight size={18} />
                     </Link>
                 </div>

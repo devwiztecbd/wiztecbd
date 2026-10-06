@@ -54,7 +54,7 @@ const TrainingPartnerships = () => (
             </div>
 
             <div className="mt-10 text-center">
-                <Link href="/contact" className="inline-flex items-center justify-center gap-3 rounded-xl bg-success_main px-7 py-4 text-sm font-bold text-primary transition hover:bg-white hover:text-success_deep md:text-base">
+                <Link href="#trainingInquiry" className="inline-flex items-center justify-center gap-3 rounded-xl bg-success_main px-7 py-4 text-sm font-bold text-primary transition hover:bg-white hover:text-success_deep md:text-base">
                     Discuss Your Training Requirement <FiArrowRight size={19} />
                 </Link>
             </div>

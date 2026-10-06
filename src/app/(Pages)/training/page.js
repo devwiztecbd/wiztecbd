@@ -95,7 +95,7 @@ const TrainingPage = () => (
                 <MembershipCertification />
             </div>
         </Section>
-        <Section id="trainingInquiry" bgColor="#F8F9FB">
+        <Section id="trainingInquiry" bgColor="#F8F9FB" className="scroll-mt-[100px]">
             <TrainingInquiryForm />
         </Section>
         <Section id="trainingFinalCTA" bgColor="#173F31">
