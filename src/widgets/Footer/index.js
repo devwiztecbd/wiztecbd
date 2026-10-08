@@ -1,149 +1,137 @@
-'use client'
+﻿"use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { FaFacebook, FaXTwitter } from "react-icons/fa6";
-import { FaLinkedinIn } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
-import { MdArrowRightAlt } from "react-icons/md";
 import Link from "next/link";
+import { FaFacebookF, FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { FiArrowUpRight, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+
 import api from "@/config/api";
 import { membershipCredentials } from "@/app/staticData/home";
 
-const Footer = () => {
+const linkGroups = [
+    {
+        title: "What we do",
+        links: [
+            { label: "Website development", href: "/services/website-development" },
+            { label: "Software development", href: "/services/custom-software-development" },
+            { label: "Mobile app development", href: "/services/mobile-app-development" },
+            { label: "Digital marketing", href: "/services/digital-marketing" },
+            { label: "IT training", href: "/training" },
+            { label: "Explore all services", href: "/services" },
+        ],
+    },
+    {
+        title: "Explore WiztecBD",
+        links: [
+            { label: "About us", href: "/about" },
+            { label: "Our work", href: "/portfolio" },
+            { label: "Our products", href: "/product" },
+            { label: "Courses", href: "/courses" },
+            { label: "Our team", href: "/team" },
+            { label: "Careers", href: "/career" },
+            { label: "Blog", href: "/blog" },
+        ],
+    },
+];
+
+const socialLinks = [
+    { name: "Facebook", href: "https://www.facebook.com/wiztecbd", icon: FaFacebookF },
+    { name: "LinkedIn", href: "https://www.linkedin.com/company/wiztecbd", icon: FaLinkedinIn },
+    { name: "X", href: "https://x.com/Wiztecsoft", icon: FaXTwitter },
+    { name: "YouTube", href: "https://www.youtube.com/@wizardsoftwaretechnologyba7240", icon: FaYoutube },
+];
+
+const linkClass = "transition-colors hover:text-[#b5df76] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b5df76]";
+
+export default function Footer() {
     const [offices, setOffices] = useState([]);
 
     useEffect(() => {
-        const fetchOffices = async () => {
-            try {
-                const response = await api.get("/api/get-offices");
-                console.log(response)
-                if (response.data.status === 200) {
-                    setOffices(response.data.offices);
-                }
-            } catch (error) {
-                console.error("Failed to fetch offices:", error);
-            }
-        };
-
-        fetchOffices();
+        const controller = new AbortController();
+        api.get("/api/get-offices", { signal: controller.signal })
+            .then(({ data }) => {
+                if (data.status === 200 && Array.isArray(data.offices)) setOffices(data.offices);
+            })
+            .catch((error) => {
+                if (error.code !== "ERR_CANCELED") console.error("Failed to fetch offices:", error);
+            });
+        return () => controller.abort();
     }, []);
 
     return (
-        <div>
-            <div className="bg-footer-image  bg-cover bg-center h-130 bg-default_bg"></div>
+        <footer className="border-t border-[#253a30] bg-[#10231b] text-[#c0cec6]">
+            <div className="mx-auto w-full max-w-[1280px] px-10 sm:px-6 lg:px-8">
+                <div className="flex flex-col justify-between gap-7 border-b border-white/10 py-10 md:flex-row md:items-center md:py-12">
+                    <div>
+                        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#b5df76]">Let’s build what’s next</p>
+                        <h2 className="max-w-[600px] text-[28px] font-bold leading-tight tracking-[-0.035em] text-white md:text-[36px]">Good ideas deserve great execution.</h2>
+                    </div>
+                    <Link href="/contact" className="inline-flex w-fit shrink-0 items-center gap-3 rounded-xl bg-[#b5df76] px-6 py-4 text-sm font-bold text-[#10231b] transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b5df76]">
+                        Start a conversation <FiArrowUpRight aria-hidden="true" size={20} />
+                    </Link>
+                </div>
 
-            <div className=" bg-footer pt-100 -mt-4">
-                <div className="container mx-auto px-4 max-w-xl grid grid-cols-4 text-white gap-16">
-                    <div className=" col-span-4 md:col-span-1">
-                        <Link href="/" className="flex items-center justify-center xs:justify-start w-full flex-shrink-0 h-9 mb-4">
-                            <Image src={`/assets/images/Logos/logo.png`} alt="logo" height={38} width={167} className="w-auto max-w-full max-h-full h-auto object-cover" />
+                <div className="grid grid-cols-2 gap-x-5 gap-y-10 py-10 sm:gap-x-8 lg:grid-cols-[1.2fr_1fr_0.85fr_1.3fr] lg:gap-x-10 lg:py-12">
+                    <div className="col-span-2 sm:col-span-1">
+                        <Link href="/" aria-label="WiztecBD home" className="mb-5 inline-flex rounded-lg bg-white px-3 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b5df76]">
+                            <Image src="/assets/images/Logos/logo.png" alt="WiztecBD" width={167} height={38} className="h-[38px] w-auto object-contain" />
                         </Link>
-                        <div className=" flex xs:justify-between flex-col xs:flex-row md:flex-col">
-                            <div className=" flex justify-center flex-wrap xs:justify-start items-center gap-2 md:mb-6 ">
-                                <Link target="_blank" href=" https://www.facebook.com/wiztecbd" className="px-3 py-2 hover:bg-success_main bg-success_main md:bg-transparent transition-all duration-400">
-                                    <FaFacebook className=" text-white " size={24} />
-                                </Link>
-                                <Link target="_blank" href="http://www.youtube.com/@wizardsoftwaretechnologyba7240 " className="px-3 py-2 hover:bg-success_main bg-success_main md:bg-transparent transition-all duration-400">
-                                    <FaYoutube className=" text-white " size={24} />
-                                </Link>
-                                <Link target="_blank" href="https://x.com/Wiztecsoft " className="px-3 py-2 hover:bg-success_main bg-success_main md:bg-transparent transition-all duration-400">
-                                    <FaXTwitter className=" text-white " size={24} />
-                                </Link>
-                                <Link target="_blank" href="https://www.linkedin.com/company/wiztecbd " className="px-3 py-2 hover:bg-success_main bg-success_main md:bg-transparent transition-all duration-400">
-                                    <FaLinkedinIn className=" text-white " size={24} />
-                                </Link>
-                            </div>
-                            <div className=" flex flex-col xs:justify-start justify-center items-center xs:items-start mt-4 md:mt-0">
-                                <h6 className=" font-medium text-H6 mb-4 ">Proud Member of</h6>
-                                <div className="grid w-full max-w-[260px] grid-cols-3 items-center gap-4">
-                                    {membershipCredentials.map((credential) => (
-                                        <div key={credential.id} className="flex h-14 min-w-0 items-center justify-center" title={credential.name}>
-                                            <Image
-                                                src={credential.image}
-                                                alt={`${credential.name} logo`}
-                                                height={56}
-                                                width={80}
-                                                className="max-h-full w-auto max-w-full object-contain"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                        <p className="max-w-[290px] text-sm leading-7">Software, digital solutions, and practical training to help businesses and people move forward.</p>
+                        <div aria-label="Follow WiztecBD" className="mt-6 flex gap-2.5">
+                            {socialLinks.map(({ name, href, icon: Icon }) => (
+                                <a key={name} href={href} target="_blank" rel="noopener noreferrer" aria-label={`WiztecBD on ${name}`} className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 text-white transition-colors hover:border-[#b5df76] hover:bg-[#b5df76] hover:text-[#10231b] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#b5df76]">
+                                    <Icon aria-hidden="true" size={15} />
+                                </a>
+                            ))}
                         </div>
                     </div>
 
-                    <div className=" col-span-4 xs:col-span-2 md:col-span-1">
-                        <p className=" font-semibold mb-7">Terms</p>
-                        <div className=" flex justify-between xs:inline">
-                            <div>
-                                <Link href="/services" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className=" ">Services</p>
-                                </Link>
-                                <Link href="/about" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className=" ">About Us</p>
-                                </Link>
-                                <Link href="/contact" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className=" ">Contact Us</p>
-                                </Link>
-                                <Link href="/portfolio" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className=" ">Portfolio</p>
-                                </Link>
-                                <Link href="/product" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className="/product">Product</p>
-                                </Link>
+                    {linkGroups.map((group) => (
+                        <nav key={group.title} aria-label={`Footer ${group.title}`}>
+                            <h3 className="mb-5 text-sm font-bold text-white">{group.title}</h3>
+                            <ul className="space-y-3">
+                                {group.links.map((link) => <li key={link.href}><Link href={link.href} className={`${linkClass} text-[13px] leading-relaxed`}>{link.label}</Link></li>)}
+                            </ul>
+                        </nav>
+                    ))}
+
+                    <div className="col-span-2 sm:col-span-1">
+                        <h3 className="mb-5 text-sm font-bold text-white">Let’s connect</h3>
+                        {offices.length > 0 ? (
+                            <div className="space-y-6">
+                                {offices.map((office) => (
+                                    <address key={office.id} className="space-y-2.5 text-[13px] leading-relaxed not-italic">
+                                        <p className="font-semibold text-[#e8eee9]">{office.title}</p>
+                                        {office.address && <p className="flex items-start gap-2.5"><FiMapPin aria-hidden="true" size={15} className="mt-1 shrink-0 text-[#b5df76]" /><span>{office.address}</span></p>}
+                                        {office.phone && <a href={`tel:${office.phone}`} className={`${linkClass} flex items-center gap-2.5`}><FiPhone aria-hidden="true" size={14} className="shrink-0 text-[#b5df76]" />{office.phone}</a>}
+                                        {office.email && <a href={`mailto:${office.email}`} className={`${linkClass} flex items-start gap-2.5`}><FiMail aria-hidden="true" size={14} className="mt-1 shrink-0 text-[#b5df76]" /><span className="break-all">{office.email}</span></a>}
+                                    </address>
+                                ))}
                             </div>
-                            <div>
-                                <Link href="#" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className="/blog">Blog</p>
-                                </Link>
-                                <Link href="#" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className="/career">Career</p>
-                                </Link>
-                                <Link href="#" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className="/courses">Cources</p>
-                                </Link>
-                                <Link href="/team" className=" flex items-center gap-10px hover:text-success_main mb-2">
-                                    <MdArrowRightAlt size={21} className=" text-success_main" />
-                                    <p className=" ">Our Team</p>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className=" col-span-4 xs:col-span-2 md:col-span-2 space-y-8">
-                        {offices.map((office) => (
-                            <div key={office.id}>
-                                <p className=" font-semibold mb-4">{office.title}</p>
-                                <p className=" mb-0">
-                                    {office.address} <br />
-                                    Mobile :{" "}
-                                    <Link href={`tel:${office.phone}`} target="_blank" className=" hover:text-success_main hover:underline">
-                                        {office.phone}
-                                    </Link>{" "}
-                                    <br />
-                                    Email :{" "}
-                                    <Link href={`mailto:${office.email}`} target="_blank" className=" hover:text-success_main hover:underline">
-                                        {office.email}
-                                    </Link>
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="col-span-4 pb-4 text-subtitle2">
-                        <p className="text-center">© {new Date().getFullYear()} Wizard Software & Technology Bangladesh Ltd. All Rights Reserved</p>
+                        ) : (
+                            <p className="text-sm leading-7">Have a project, a training need, or a question? We’d love to hear from you.</p>
+                        )}
+                        <Link href="/contact" className={`${linkClass} mt-5 inline-flex items-center gap-2 text-[13px] font-semibold text-[#b5df76]`}>Get in touch <FiArrowUpRight aria-hidden="true" size={16} /></Link>
                     </div>
                 </div>
-            </div>
-        </div>
-    );
-};
 
-export default Footer;
+                <div className="flex flex-col justify-between gap-5 border-t border-white/10 py-6 sm:flex-row sm:items-center">
+                    <p className="text-xs font-medium tracking-wide text-[#a0b4a7]">Memberships &amp; credentials</p>
+                    <ul className="flex flex-wrap gap-3">
+                        {membershipCredentials.map((credential) => (
+                            <li key={credential.id} title={credential.name} className="flex h-14 w-24 items-center justify-center rounded-lg bg-white px-3 py-2">
+                                <Image src={credential.image} alt={credential.name} height={40} width={72} className="max-h-10 w-auto max-w-full object-contain" />
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className="flex flex-col justify-between gap-3 border-t border-white/10 py-5 text-[11px] leading-relaxed text-[#a0b4a7] sm:flex-row sm:items-center">
+                    <p>© {new Date().getFullYear()} Wizard Software &amp; Technology Bangladesh Ltd. All rights reserved.</p>
+                    <Link href="/contact" className={linkClass}>Contact &amp; support</Link>
+                </div>
+            </div>
+        </footer>
+    );
+}
