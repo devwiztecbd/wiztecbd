@@ -11,6 +11,22 @@ import useCourses from "@/hooks/useCourses";
 import { resolveCourseIdFromSlug } from "@/utils/courseSlug";
 import staticCourses from "/public/Json/courses.json";
 
+// API lists may arrive as arrays or JSON strings. Plain text is supported
+// only for text lists; software and audience lists require object arrays.
+const normalizeCourseList = (value, allowText = false) => {
+    if (Array.isArray(value)) return value;
+    if (typeof value !== "string" || !value.trim()) return [];
+
+    try {
+        const parsed = JSON.parse(value);
+        if (Array.isArray(parsed)) return parsed;
+        if (allowText && typeof parsed === "string" && parsed.trim()) return [parsed];
+        return [];
+    } catch {
+        return allowText ? [value.trim()] : [];
+    }
+};
+
 /**
  * Maps a raw API course object into the nested shape expected by
  * Banner, IntroDesign, and CourseOverview / CourseDetails.
@@ -18,13 +34,18 @@ import staticCourses from "/public/Json/courses.json";
 const mapApiCourse = (course, courseId) => {
     // Slider and selected overview blocks must come from static course data only.
     const staticCourse = staticCourses.find((c) => Number(c.id) === Number(courseId));
+    const curriculumItems = normalizeCourseList(course.course_curriculum, true);
+    const softwares = normalizeCourseList(course.softwares_included);
+    const audiences = normalizeCourseList(course.designed_for);
+    const careers = normalizeCourseList(course.career_opportunities);
+    const jobPositions = normalizeCourseList(course.open_job_positions, true);
 
     const facilities = {
         houre: course.hour,
         seats: course.seats,
         time: course.time,
         classes: course.classes,
-        day: Array.isArray(course.days) ? course.days.join(", ") : (course.days || ""),
+        day: normalizeCourseList(course.days, true).filter((day) => typeof day === "string" && day.trim()).join(", "),
     };
 
     const introFacilities = [
@@ -34,18 +55,18 @@ const mapApiCourse = (course, courseId) => {
     ];
 
     const curriculum =
-        course.course_curriculum?.length > 0
+        curriculumItems.length > 0
             ? {
                   title: "Course Curriculum",
-                  lists: course.course_curriculum.map((item, i) => ({ id: i + 1, content: item })),
+                  lists: curriculumItems.map((item, i) => ({ id: i + 1, content: item })),
               }
             : null;
 
     const software_learn =
-        course.softwares_included?.length > 0
+        softwares.length > 0
             ? {
                   title: "Softwares You'll Learn",
-                  list: course.softwares_included.map((s) => ({
+                  list: softwares.map((s) => ({
                       id: s.id,
                       title: s.name,
                       icon: s.image,
@@ -55,10 +76,10 @@ const mapApiCourse = (course, courseId) => {
             : null;
 
     const designed =
-        course.designed_for?.length > 0
+        audiences.length > 0
             ? {
                   title: "This Course is Designed for",
-                  list: course.designed_for.map((d) => ({
+                  list: audiences.map((d) => ({
                       id: d.id,
                       title: d.name,
                       icon: d.image,
@@ -67,10 +88,10 @@ const mapApiCourse = (course, courseId) => {
             : null;
 
     const opportunities =
-        course.career_opportunities?.length > 0
+        careers.length > 0
             ? {
                   title: "Career Opportunities",
-                  list: course.career_opportunities.map((c) => ({
+                  list: careers.map((c) => ({
                       id: c.id,
                       description: c.name,
                       icon: c.image,
@@ -79,10 +100,10 @@ const mapApiCourse = (course, courseId) => {
             : null;
 
     const open_job =
-        course.open_job_positions?.length > 0
+        jobPositions.length > 0
             ? {
                   title: "Open Job Positions",
-                  list: course.open_job_positions.map((item, i) => ({ id: i + 1, content: item })),
+                  list: jobPositions.map((item, i) => ({ id: i + 1, content: item })),
               }
             : null;
 
