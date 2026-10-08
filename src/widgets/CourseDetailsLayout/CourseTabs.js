@@ -7,9 +7,11 @@ import AudienceGrid from "./AudienceGrid";
 import BenefitsList from "./BenefitsList";
 import ProjectsList from "./ProjectsList";
 import JobPositionsGrid from "./JobPositionsGrid";
+import CourseModeDetails from "./CourseModeDetails";
 
 const tabs = [
     { id: "overview", label: "Overview" },
+    { id: "course-details", label: "Course Details" },
     { id: "curriculum", label: "Curriculum" },
     { id: "software", label: "Software" },
     { id: "for-whom", label: "For Whom" },
@@ -18,7 +20,7 @@ const tabs = [
     { id: "open-job-position", label: "Open Job Position" },
 ];
 
-export default function CourseTabs() {
+export default function CourseTabs({ course }) {
     const [activeTab, setActiveTab] = useState(tabs[0].id);
     const tabRefs = useRef([]);
 
@@ -75,6 +77,7 @@ export default function CourseTabs() {
                     {tab.id === "benefits" && <BenefitsList />}
                     {tab.id === "projects" && <ProjectsList />}
                     {tab.id === "open-job-position" && <JobPositionsGrid />}
+                    {tab.id === "course-details" && <CourseModeDetails options={course.enrollmentOptions} />}
                 </div>
             ))}
         </div>

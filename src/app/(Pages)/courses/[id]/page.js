@@ -4,12 +4,9 @@
 const previewCourse = {
     title: "AI-Powered Power BI Data Analyst",
     image: "/assets/images/training images/multi_domain_curriculum_lab.png",
-    duration: "2 months",
-    lectures: "16 classes",
-    hours: "32 hours",
     enrollmentOptions: [
-        { id: "online", label: "Online", description: "Attend live from anywhere", price: 8000 },
-        { id: "offline", label: "Offline", description: "Learn in our classroom", price: 12000 },
+        { id: "online", label: "Online", description: "Attend live from anywhere", price: 8000, duration: "2 months", classes: "16 classes", learningHours: "32 hours", classDuration: "2 hours" },
+        { id: "offline", label: "Offline", description: "Learn in our classroom", price: 12000, duration: "3 months", classes: "24 classes", learningHours: "48 hours", classDuration: "2 hours" },
     ],
 };
 
