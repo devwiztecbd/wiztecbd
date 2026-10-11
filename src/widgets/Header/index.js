@@ -11,10 +11,12 @@ import Button from "@/components/Button";
 import ServiceMegaMenu from "@/components/MegaMenu";
 import LinkMegaMenu from "@/components/LinkMegaMenu";
 import useModal from "@/hooks/useModal";
+import useCourses from "@/hooks/useCourses";
 
 const Header = () => {
     const [activeMenu, setActiveMenu] = useState(null);
     const { isOpen, openModal, closeModal } = useModal();
+    const { courses } = useCourses();
     const openMenu = (menu) => setActiveMenu(menu);
     const closeMenu = () => setActiveMenu(null);
 
@@ -69,7 +71,7 @@ const Header = () => {
                             <span className={`h-2px bg-success_main transition-width duration-300 ease-in-out w-0 group-hover:w-full`}></span>
                         </Link>
                     </div>
-                    {activeMenu === "services" && <ServiceMegaMenu menuData={serviceNavigation} onMouseEnter={() => openMenu("services")} onMouseLeave={closeMenu} onClose={closeMenu} />}
+                    {activeMenu === "services" && <ServiceMegaMenu menuData={serviceNavigation} courses={courses} onMouseEnter={() => openMenu("services")} onMouseLeave={closeMenu} onClose={closeMenu} />}
                     {activeMenu === "training" && <LinkMegaMenu eyebrow="Learn with us" title="Training" items={trainingNavigation} onMouseEnter={() => openMenu("training")} onMouseLeave={closeMenu} onClose={closeMenu} />}
                     {activeMenu === "about" && <LinkMegaMenu title="About" items={aboutNavigation} featuredImage="/assets/images/Logos/familly.jpg" featuredImageAlt="The WiztecBD team" onMouseEnter={() => openMenu("about")} onMouseLeave={closeMenu} onClose={closeMenu} />}
                     {activeMenu === "others" && <LinkMegaMenu eyebrow="Explore more" title="Others" items={otherNavigation} onMouseEnter={() => openMenu("others")} onMouseLeave={closeMenu} onClose={closeMenu} />}

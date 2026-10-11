@@ -3,11 +3,13 @@ import Link from "next/link";
 import { BsArrowRight, BsArrowUpRight } from "react-icons/bs";
 
 import Menu from "@/components/Menu";
+import { getCourseSlug } from "@/utils/courseSlug";
 
-const ServiceMegaMenu = ({ onMouseEnter, onMouseLeave, menuData, onClose }) => {
+const ServiceMegaMenu = ({ onMouseEnter, onMouseLeave, menuData, onClose, courses = [] }) => {
     const [activeId, setActiveId] = useState(menuData[0].id);
     const activeCategory = menuData.find((category) => category.id === activeId) || menuData[0];
     const hasGroupedLinks = activeCategory.sections.length > 0;
+    const featuredCourses = courses.slice(0, 4);
 
     const renderSectionCard = (section, isWide = false) => (
         <Link key={section.id} href={section.href} onClick={onClose} className={`mega-menu-card-gradient group block rounded-xl border border-success_main/10 p-4 shadow-lg transition duration-300 hover:-translate-y-1 hover:border-success_main/40 hover:shadow-md ${isWide ? "col-span-2" : ""}`}>
@@ -80,7 +82,18 @@ const ServiceMegaMenu = ({ onMouseEnter, onMouseLeave, menuData, onClose }) => {
                             </div>
                         </div>
 
-                        {hasGroupedLinks ? (
+                        {activeCategory.id === "courses" && featuredCourses.length > 0 ? (
+                            <div className="grid grid-cols-3 items-stretch gap-3">
+                                <div className="col-span-2 grid grid-cols-2 gap-3">
+                                    {featuredCourses.map((course) => (
+                                        <Link key={course.id} href={`/courses/${getCourseSlug(course)}`} onClick={onClose} className="mega-menu-card-gradient flex items-center justify-center rounded-xl border border-success_main/10 p-4 text-center text-sm font-semibold leading-5 text-primary shadow-lg transition duration-300 hover:-translate-y-1 hover:border-success_main/40 hover:text-success_deep hover:shadow-md">
+                                            {course.title}
+                                        </Link>
+                                    ))}
+                                </div>
+                                {viewAllCard}
+                            </div>
+                        ) : hasGroupedLinks ? (
                             activeCategory.sections.length === 1 ? (
                                 <div className="grid grid-cols-3 items-start gap-3">
                                     {renderSectionCard(activeCategory.sections[0], true)}
