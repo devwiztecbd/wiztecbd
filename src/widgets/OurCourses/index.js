@@ -75,7 +75,8 @@ const OurCourses = () => {
                                 classes={data.classes}
                                 status={data.course_type}
                                 handlEnrole={handlEnrole}
-                                classTime={null}
+                                classTime={data.class_duration}
+                                duration={data.duration}
                                 link={data.apply_link || null}
                                 linkText={"Register Now"}
                             />
@@ -87,7 +88,7 @@ const OurCourses = () => {
                     <h6 className=" text-H6 text-center font-semibold text-black/50 capitalize">{selectedType ? `${selectedType} Course Not Available` : "Course Not Available"}</h6>
                 </div>
             )}
-            <EnrollPop title={"Course Summary"} isOpen={isOpen} onClose={() => setIsOpen(false)} modalData={modalData} />
+            <EnrollPop isOpen={isOpen} onClose={() => setIsOpen(false)} modalData={modalData} />
         </div>
     );
 };

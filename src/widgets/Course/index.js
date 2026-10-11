@@ -13,7 +13,7 @@ const formatCoursePrice = (price) => {
     return `BDT ${normalized}`;
 };
 
-const Course = ({ id, img, alt, title, classes, houre, seats, status, handlEnrole, time, classTime, link, linkText, price }) => {
+const Course = ({ id, img, alt, title, classes, houre, seats, status, handlEnrole, time, classTime, link, linkText, price, duration }) => {
     const [showPopup, setShowPopup] = useState(false);
     const handleClick = (e) => {
         if (!isValidURL(link)) {
@@ -78,7 +78,7 @@ const Course = ({ id, img, alt, title, classes, houre, seats, status, handlEnrol
                                         <span>{linkText}</span>
                                     </Link>
                                 ) : (
-                                    <button onClick={(e) => handlEnrole(e, { id, houre, seats, status, classes, time, price })} className=" hover-bg-left-to-right capitalize border border-success_dark cursor-pointer px-4 py-[6px] text-primary rounded-full text-subtitle2">
+                                    <button onClick={(e) => handlEnrole(e, { id, title, houre, seats, status, classes, time, price, duration, classTime })} className=" hover-bg-left-to-right capitalize border border-success_dark cursor-pointer px-4 py-[6px] text-primary rounded-full text-subtitle2">
                                         <span>enroll now</span>
                                     </button>
                                 )}
