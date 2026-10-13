@@ -1,4 +1,5 @@
 "use client";
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React, { useState, useEffect } from "react";
 
 import CaseStudiesBanner from "@/widgets/CaseStudiesBanner";
@@ -106,7 +107,7 @@ const CaseStudies = ({ params }) => {
             {cases.products.map((product, index) => {
                 console.log("product.id / 2 == 0", product.id / 2 == 0);
                 return (
-                    <Section key={index} id={`product-${index}`} bgColor={product.color}>
+                    <Section key={index} id={`product-${index}`} bgColor={SCROLL_BACKGROUNDS.dark}>
                         <div className="container mx-auto px-4 text-white max-w-xl md:py-100 py-12">
                             <Product revers={product.id % 2 == 0} title={product.title} description={product.description} img={product.img} alt={product.alt} />
                         </div>

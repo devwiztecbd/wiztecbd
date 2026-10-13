@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import { ecomerseExpertistData, faqItems, introData } from "@/app/staticData/service/ecomerce";
@@ -25,32 +26,32 @@ const EcommercePlatform = () => {
                     <Banner subTitle={"E-commerce Platform Service our company"} title={"E-commerce Platform Development Services"} description={"We deliver exceptional E-commerce experiences to bring out the favorable business outcomes"} img={"/assets/images/banners/ecomers.webp"} />
                 </div>
             </Section>
-            <Section id={"automationIntroDesign"} bgColor="#ff8b22">
+            <Section id={"automationIntroDesign"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <IntroDesign bug={introData.bug} title={introData.title} img={introData.img} header={introData.header} subheader={introData.subheader} facilities={introData.facilities} buttonText={introData.buttonText} />
                 </div>
             </Section>
-            <Section id={"ecomerseDreamjobEcom"} bgColor="#17a2b8">
+            <Section id={"ecomerseDreamjobEcom"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <DreamjobEcom />
                 </div>
             </Section>
-            <Section id={"ecomerseTechExpartise"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"ecomerseTechExpartise"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <TechExpartise expertistData={ecomerseExpertistData} />
                 </div>
             </Section>
-            <Section id={"ecomerseWorkProcess"} bgColor="#63a077">
+            <Section id={"ecomerseWorkProcess"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <WorkProcess title="Work Process Image" img="/assets/images/service/Our-Development-Process.png" imgMob={"/assets/images/service/process-mob.svg"} alt="Work Process" />
                 </div>
             </Section>
-            <Section id={"ecomerseBenefits"} bgColor="rgba(139, 196, 63, .1)">
+            <Section id={"ecomerseBenefits"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits benifits={benifits} title={"Our Engagement Models "} />
                 </div>
             </Section>
-            <Section id={"ecomerseClientsTestMonials"} bgColor="#000000">
+            <Section id={"ecomerseClientsTestMonials"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className="md:py-100 py-12 text-white">
                     <ClientsTestMonials />
                 </div>
@@ -61,12 +62,12 @@ const EcommercePlatform = () => {
                     <RelatedCases relatedCaseStudies={portfolio.slice(0, 3)} />
                 </div>
             </Section>
-            <Section id={"ecomerseFaqHome"} bgColor="#4338ca">
+            <Section id={"ecomerseFaqHome"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className="  container mx-auto px-4 max-w-xl  md:py-100 py-12 text-white">
                     <FaqHome faqItems={faqItems} />
                 </div>
             </Section>
-            <Section id={"ecomerseContactButton"} bgColor="#EEEEEE">
+            <Section id={"ecomerseContactButton"} bgColor={SCROLL_BACKGROUNDS.light}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <ContactButton />
                 </div>

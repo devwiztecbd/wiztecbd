@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import { benifitsCources, introData, trainingData, trainingData2 } from "@/app/staticData/course";
@@ -15,32 +16,32 @@ import ImageURL from "@/components/ImageUrl";
 const Courses = () => {
     return (
         <RootSection>
-            <Section id={"course"} bgColor={"bg-success_light"}>
+            <Section id={"course"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <OurCourses />
                 </div>
             </Section>
-            <Section id={"popularCourse"} bgColor="#ff8b22">
+            <Section id={"popularCourse"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <PopularCourses />
                 </div>
             </Section>
-            <Section id={"introDesign"} bgColor="#63a077">
+            <Section id={"introDesign"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <IntroDesign title={introData.title} img={introData.img} header={introData.header} subheader={introData.subheader} facilities={introData.facilities} buttonText={introData.buttonText} />
                 </div>
             </Section>
-            <Section id={"benefits"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"benefits"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits benifits={benifitsCources} title={"Your Gateway to Care IT Mastery"} />
                 </div>
             </Section>
-            <Section id={"masterSkills"} bgColor="#17a2b8">
+            <Section id={"masterSkills"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <MasterSkills />
                 </div>
             </Section>
-            <Section id={"working"} bgColor="#17afb0">
+            <Section id={"working"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <ScrollAnimatedSection>
                         <h1 className=" text-H1 font-bold md:mb-12 mb-6 text-center">Working With Us</h1>
@@ -69,12 +70,12 @@ const Courses = () => {
                     </div>
                 </div>
             </Section>
-            <Section id={"computer"} bgColor="#63a077">
+            <Section id={"computer"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 pt-12 mb-12 text-white">
                     <Training title={trainingData.title} subTitle={trainingData.subTitle} organaization={trainingData.organaization} trainees={trainingData.trainees} duration={trainingData.duration} location={trainingData.location} sliderIImg={trainingData.sliderImage} />
                 </div>
             </Section>
-            <Section id={"mobile"} bgColor="#8BC43F">
+            <Section id={"mobile"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:pt-100 pt-12 mb-12 text-white">
                     <Training title={trainingData2.title} subTitle={trainingData2.subTitle} organaization={trainingData2.organaization} trainees={trainingData2.trainees} duration={trainingData2.duration} location={trainingData2.location} sliderIImg={trainingData2.sliderImage} />
                 </div>

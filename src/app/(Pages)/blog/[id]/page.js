@@ -1,4 +1,5 @@
 "use client";
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -137,7 +138,7 @@ const BlogDetails = ({ params }) => {
                     <BlogBanner title={blogDetails.title} expertist={blogDetails.expertist} img={blogDetails.img} alt={blogDetails.alt} catagory={blogDetails.catagory} publish={blogDetails.publish} />
                 </div>
             </Section>
-            <Section id="allDetails" bgColor="bg-white">
+            <Section id="allDetails" bgColor={SCROLL_BACKGROUNDS.light}>
                 <div className="flex container flex-col md:flex-row mx-auto px-4 max-w-2xl md:py-100 py-12 w-full gap-6">
                     <div className="md:w-1/4 w-full h-full md:sticky md:top-28">
                         <HyperlinkTable richText={blogDetails.richText} />
@@ -151,7 +152,7 @@ const BlogDetails = ({ params }) => {
                     </div>
                 </div>
             </Section>
-            <Section id="comments" bgColor="bg-secondary_bg">
+            <Section id="comments" bgColor={SCROLL_BACKGROUNDS.light}>
                 <div className="container mx-auto md:px-4 max-w-xl w-full md:py-100 py-12">
                     <CommentsSection handleComments={handleComments} comments={comments} blogID={params.id} />
                 </div>
@@ -170,7 +171,7 @@ const BlogDetails = ({ params }) => {
                     </div>
                 </div>
             </Section>
-            <Section id="topics" bgColor="bg-white">
+            <Section id="topics" bgColor={SCROLL_BACKGROUNDS.light}>
                 <div className="container mx-auto px-4 max-w-xl md:py-100 py-12 w-full">
                     <ScrollAnimatedSection>
                         <h2 className="text-H2 font-bold mb-6 text-center">Explore More Topics</h2>

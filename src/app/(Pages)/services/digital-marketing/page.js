@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import Banner from "@/components/Banner";
@@ -24,17 +25,17 @@ const MarketingServices = () => {
                     <Banner description={"Utilize targeted and data-driven strategies to grow your client base"} subTitle={"Digital Marketing Service our company"} title={"Digital Marketing Service"} img={"/assets/images/banners/Digital.webp"} />
                 </div>
             </Section>
-            <Section id={"marketingMarkatingPlyer"} bgColor="#ff8b22">
+            <Section id={"marketingMarkatingPlyer"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <MarkatingPlyer />
                 </div>
             </Section>
-            <Section id={"marketingClientRatting"} bgColor={"bg-success_light"}>
+            <Section id={"marketingClientRatting"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <ClientRatting />
                 </div>
             </Section>
-            <Section id={"marketingBussinessGrouth"} bgColor="#17a2b8">
+            <Section id={"marketingBussinessGrouth"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <BussinessGrouth
                         title={"How Digital Marketing Service Drive Business Growth"}
@@ -48,7 +49,7 @@ const MarketingServices = () => {
                     />
                 </div>
             </Section>
-            <Section id={"marketingAgencies"} bgColor="#007aff">
+            <Section id={"marketingAgencies"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <Agencies />
                 </div>
@@ -58,17 +59,17 @@ const MarketingServices = () => {
                     <ContactButton contact />
                 </div>
             </Section>
-            <Section id={"marketingDriveServices"} bgColor="#63a077">
+            <Section id={"marketingDriveServices"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:pb-100 pb-12">
                     <DriveServices driveServicesData={driveServicesData} />
                 </div>
             </Section>
-            <Section id={"marketingSoluation"} bgColor="rgba(139, 196, 63, .1)">
+            <Section id={"marketingSoluation"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Soluation solution={solution} />
                 </div>
             </Section>
-            <Section id={"marketingbussiness"} bgColor="#8BC43F">
+            <Section id={"marketingbussiness"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <BussinessGrouth
                         title={"Why Your Business Should Be Using Digital Marketing Services"}
@@ -92,7 +93,7 @@ const MarketingServices = () => {
                     </p>
                 </div>
             </Section>
-            <Section id={"marketingServices"} bgColor="#cd89e8">
+            <Section id={"marketingServices"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <div className=" mb-6 md:mb-12">
                         <BussinessGrouth
@@ -153,7 +154,7 @@ const MarketingServices = () => {
                     </div>
                 </div>
             </Section>
-            <Section id={"marketingclient"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"marketingclient"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" md:py-100 py-12 ">
                     <ServedClients title={"Awards & Recognition"} />
                 </div>

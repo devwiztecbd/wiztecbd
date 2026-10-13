@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import { benifits, faqItems, introData, services, webExpertistData, websiteCustomization, websiteRedesign, websiteRedevelopment } from "@/app/staticData/service/web";
@@ -25,52 +26,52 @@ const WebsiteDevelopment = () => {
                     <Banner subTitle={"Website Development Service our company"} title={"Website Development Service"} description={"Turning Clicks into Connections with Thoughtfully Developed Websites. Brief sentence about your unique service offerings."} img={"/assets/images/banners/Web Dev Banner.webp"} alt="website" />
                 </div>
             </Section>
-            <Section id={"webIntroDesign"} bgColor="#ff8b22">
+            <Section id={"webIntroDesign"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <IntroDesign title={introData.title} img={introData.img} header={introData.header} subheader={introData.subheader} facilities={introData.facilities} buttonText={introData.buttonText} />
                 </div>
             </Section>
-            <Section id={"webDevelopmentServices"} bgColor="#17a2b8">
+            <Section id={"webDevelopmentServices"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 ">
                     <Services title={services.title} description={services.description} service={services.service} />
                 </div>
             </Section>
-            <Section id={"webTechExpartise"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"webTechExpartise"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <TechExpartise expertistData={webExpertistData} />
                 </div>
             </Section>
-            <Section id={"webWorkProcess"} bgColor="#63a077">
+            <Section id={"webWorkProcess"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <WorkProcess title="Work Process Image" img="/assets/images/service/Our-Development-Process.png" imgMob={"/assets/images/service/process-mob.svg"} alt="Work Process" />
                 </div>
             </Section>
-            <Section id={"supportOurFeatureProjects2"} bgColor="#17a2b8">
+            <Section id={"supportOurFeatureProjects2"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="container mx-auto px-4 max-w-xl  py-12">
                     <OurFeatureProjects reverse ourFeatureProjectsData={websiteRedesign} />
                 </div>
             </Section>
-            <Section id={"supportOurFeatureProjects3"} bgColor="#63a077">
+            <Section id={"supportOurFeatureProjects3"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="container mx-auto px-4 max-w-xl  py-12">
                     <OurFeatureProjects ourFeatureProjectsData={websiteCustomization} />
                 </div>
             </Section>
-            <Section id={"supportOurFeatureProjects4"} bgColor="#8BC43F">
+            <Section id={"supportOurFeatureProjects4"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="container mx-auto px-4 max-w-xl  py-12">
                     <OurFeatureProjects reverse ourFeatureProjectsData={websiteRedevelopment} />
                 </div>
             </Section>
-            <Section id={"webBenefits"} bgColor="rgba(139, 196, 63, .1)">
+            <Section id={"webBenefits"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits benifits={benifits} title={"Our Engagement Models "} />
                 </div>
             </Section>
-            <Section id="industries" bgColor="#cd89e8">
+            <Section id="industries" bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Industries />
                 </div>
             </Section>
-            <Section id={"webClientsTestMonials"} bgColor="#000000">
+            <Section id={"webClientsTestMonials"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className="md:py-100 py-12 text-white">
                     <ClientsTestMonials />
                 </div>
@@ -81,12 +82,12 @@ const WebsiteDevelopment = () => {
                     <RelatedCases relatedCaseStudies={portfolio.slice(0, 3)} />
                 </div>
             </Section>
-            <Section id={"webFaqHome"} bgColor="#4338ca">
+            <Section id={"webFaqHome"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className="  container mx-auto px-4 max-w-xl  md:py-100 py-12 text-white">
                     <FaqHome faqItems={faqItems} />
                 </div>
             </Section>
-            <Section id={"webContactButton"} bgColor="#EEEEEE">
+            <Section id={"webContactButton"} bgColor={SCROLL_BACKGROUNDS.light}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <ContactButton />
                 </div>

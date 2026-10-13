@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import { benifits, customExpertistData, faqItems, introData, services } from "@/app/staticData/service/customSoftwer";
@@ -24,37 +25,37 @@ const CustomSoftwareDevelopment = () => {
                     <Banner subTitle={"Show Custom Software Development Service our company"} img={"/assets/images/banners/Web Dev Banner.webp"} title={"Custom Software Development Service"} description={"Transforming Complex Challenges into Seamless Software Solutions"} />
                 </div>
             </Section>
-            <Section id={"customIntroDesign"} bgColor="#ff8b22">
+            <Section id={"customIntroDesign"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <IntroDesign bug={introData.bug} title={introData.title} img={introData.img} header={introData.header} subheader={introData.subheader} facilities={introData.facilities} buttonText={introData.buttonText} />
                 </div>
             </Section>
-            <Section id={"customDevelopmentServices"} bgColor="#17a2b8">
+            <Section id={"customDevelopmentServices"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 ">
                     <Services title={services.title} description={services.description} service={services.service} />
                 </div>
             </Section>
-            <Section id={"customTechExpartise"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"customTechExpartise"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl py-12">
                     <TechExpartise expertistData={customExpertistData} />
                 </div>
             </Section>
-            <Section id={"customWorkProcess"} bgColor="#63a077">
+            <Section id={"customWorkProcess"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <WorkProcess title="Work Process Image" img="/assets/images/service/Our-Development-Process.png" imgMob={"/assets/images/service/process-mob.svg"} alt="Work Process" />
                 </div>
             </Section>
-            <Section id={"customBenefits"} bgColor="rgba(139, 196, 63, .1)">
+            <Section id={"customBenefits"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits title={"Our Engagement Models "} benifits={benifits} />
                 </div>
             </Section>
-            <Section id="industries" bgColor="#cd89e8">
+            <Section id="industries" bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Industries />
                 </div>
             </Section>
-            <Section id={"customClientsTestMonials"} bgColor="#000000">
+            <Section id={"customClientsTestMonials"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className="md:py-100 py-12 text-white">
                     <ClientsTestMonials />
                 </div>
@@ -65,12 +66,12 @@ const CustomSoftwareDevelopment = () => {
                     <RelatedCases relatedCaseStudies={portfolio.slice(0, 3)} />
                 </div>
             </Section>
-            <Section id={"customFaqHome"} bgColor="#4338ca">
+            <Section id={"customFaqHome"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className="  container mx-auto px-4 max-w-xl  md:py-100 py-12 text-white">
                     <FaqHome faqItems={faqItems} />
                 </div>
             </Section>
-            <Section id={"customContactButton"} bgColor="#EEEEEE">
+            <Section id={"customContactButton"} bgColor={SCROLL_BACKGROUNDS.light}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <ContactButton />
                 </div>

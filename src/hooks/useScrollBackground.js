@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
+import { SCROLL_BACKGROUNDS, resolveScrollBackground } from "@/config/scrollBackgrounds";
 
-export const useScrollBackground = (defaultColor = "#ffffff") => {
-    const [bgColor, setBgColor] = useState(defaultColor);
+export const useScrollBackground = (defaultColor = SCROLL_BACKGROUNDS.light) => {
+    const [bgColor, setBgColor] = useState(() => resolveScrollBackground(defaultColor));
 
     useEffect(() => {
         const handleScroll = () => {
@@ -20,7 +21,8 @@ export const useScrollBackground = (defaultColor = "#ffffff") => {
             // Keep the final section color while the footer is in view instead of
             // resetting the page to its initial color when no section crosses the midpoint.
             if (currentSectionColor) {
-                setBgColor((currentColor) => (currentColor === currentSectionColor ? currentColor : currentSectionColor));
+                const nextColor = resolveScrollBackground(currentSectionColor);
+                setBgColor((currentColor) => (currentColor === nextColor ? currentColor : nextColor));
             }
         };
 

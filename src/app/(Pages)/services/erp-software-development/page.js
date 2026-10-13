@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import Banner from "@/components/Banner";
@@ -24,38 +25,38 @@ const ERPSoftwareDevelopment = () => {
                     <Banner subTitle={"ERP Software Development Service our company"} title={"ERP Software Development Service"} description={"Empowering Businesses with Fully Integrated ERP Solutions"} img={"/assets/images/banners/ERP bannar.webp"} />
                 </div>
             </Section>
-            <Section id={"erpIntroDesign"} bgColor="#ff8b22">
+            <Section id={"erpIntroDesign"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <IntroDesign title={introData.title} img={introData.img} header={introData.header} subheader={introData.subheader} facilities={introData.facilities} buttonText={introData.buttonText} />
                 </div>
             </Section>
-            <Section id={"erpDevelopmentServices"} bgColor="#17a2b8">
+            <Section id={"erpDevelopmentServices"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <Services title={services.title} description={services.description} service={services.service} />
                 </div>
             </Section>
-            <Section id={"erpBenefits"} bgColor="rgba(139, 196, 63, .1)">
+            <Section id={"erpBenefits"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits title={"ERP Development Type"} benifits={benifits} />
                 </div>
             </Section>
-            <Section id={"erpServedClients"} bgColor="#17a2b8">
+            <Section id={"erpServedClients"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="  container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Industries />
                 </div>
             </Section>
-            <Section id={"erpTechExpartise"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"erpTechExpartise"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <TechExpartise expertistData={expertistData} />
                 </div>
             </Section>
-            <Section id={"erpWorkProcess"} bgColor="#63a077">
+            <Section id={"erpWorkProcess"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <WorkProcess title="Work Process Image" img="/assets/images/service/Our-Development-Process.png" imgMob={"/assets/images/service/process-mob.svg"} alt="Work Process" />
                 </div>
             </Section>
 
-            <Section id={"erpClientsTestMonials"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"erpClientsTestMonials"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="py-12 md:py-100">
                     <ClientsTestMonials />
                 </div>
@@ -66,12 +67,12 @@ const ERPSoftwareDevelopment = () => {
                     <RelatedCases relatedCaseStudies={portfolio.slice(0, 3)} />
                 </div>
             </Section>
-            <Section id={"erpFaqHome"} bgColor="#4338ca">
+            <Section id={"erpFaqHome"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className="  container mx-auto px-4 max-w-xl  md:py-100 py-12 text-white">
                     <FaqHome faqItems={faqItems} />
                 </div>
             </Section>
-            <Section id={"erpFaqHome"} bgColor="#EEEEEE">
+            <Section id={"erpFaqHome"} bgColor={SCROLL_BACKGROUNDS.light}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <ContactButton />
                 </div>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import OurFeatureProjects from "../OurFeatureProjects";
 import { Section } from "@/components/Section";
+import { SCROLL_BACKGROUNDS, resolveScrollBackground } from "@/config/scrollBackgrounds";
 import { fetchCaseStudies } from "@/utilities/api";
 import { transformCaseStudiesToProducts } from "@/utilities/dataTransform";
 
@@ -39,7 +40,8 @@ const Products = ({ backgroundColors = [] }) => {
     return (
         <>
             {products.map((product, index) => {
-                const backgroundColor = backgroundColors.length > 0 ? backgroundColors[index % backgroundColors.length] : product.color;
+                const requestedColor = backgroundColors.length > 0 ? backgroundColors[index % backgroundColors.length] : undefined;
+                const backgroundColor = resolveScrollBackground(requestedColor, SCROLL_BACKGROUNDS.dark);
 
                 return (
                     <Section key={index} id={`product-${index}`} bgColor={backgroundColor}>

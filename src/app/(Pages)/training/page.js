@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import { RootSection, Section } from "@/components/Section";
 import FeaturedTrainingPortfolio from "@/widgets/FeaturedTrainingPortfolio";
 import InstitutionalTraining from "@/widgets/InstitutionalTraining";
@@ -31,8 +32,8 @@ export const metadata = {
 };
 
 const TrainingPage = () => (
-    <RootSection defaultColor="#F8F9FB">
-        <Section id="trainingProjectsHero" bgColor="#F8F9FB">
+    <RootSection defaultColor={SCROLL_BACKGROUNDS.light}>
+        <Section id="trainingProjectsHero" bgColor={SCROLL_BACKGROUNDS.light}>
             <TrainingProjects displayMode="hero" />
             <div className="bg-[#F8F9FB] px-4 pb-12 md:pb-16">
                 <div className="container mx-auto grid max-w-xl overflow-hidden rounded-2xl border border-divider bg-white shadow-xl sm:grid-cols-2 lg:grid-cols-5">
@@ -54,51 +55,51 @@ const TrainingPage = () => (
                 </div>
             </div>
         </Section>
-        <Section id="trainingIntroduction" bgColor="#F2F7EC">
+        <Section id="trainingIntroduction" bgColor={SCROLL_BACKGROUNDS.green}>
             <TrainingIntroduction />
         </Section>
-        <Section id="trainingStakeholders" bgColor="#55594C">
+        <Section id="trainingStakeholders" bgColor={SCROLL_BACKGROUNDS.dark}>
             <TrainingStakeholders />
         </Section>
-        <Section id="trainingAudiences" bgColor="#F8F9FB">
+        <Section id="trainingAudiences" bgColor={SCROLL_BACKGROUNDS.light}>
             <TrainingAudiences />
         </Section>
-        <Section id="trainingAreas" bgColor="#F2F7EC">
+        <Section id="trainingAreas" bgColor={SCROLL_BACKGROUNDS.green}>
             <TrainingAreas />
         </Section>
-        <Section id="training4IR" bgColor="#173F31">
+        <Section id="training4IR" bgColor={SCROLL_BACKGROUNDS.dark}>
             <Training4IRFeature />
         </Section>
-        <Section id="institutionalTraining" bgColor="#F8F9FB">
+        <Section id="institutionalTraining" bgColor={SCROLL_BACKGROUNDS.light}>
             <InstitutionalTraining />
         </Section>
-        <Section id="trainingLocations" bgColor="#F7FAF4">
+        <Section id="trainingLocations" bgColor={SCROLL_BACKGROUNDS.green}>
             <TrainingLocations />
         </Section>
-        <Section id="featuredTrainingPortfolio" bgColor="#F8F9FB">
+        <Section id="featuredTrainingPortfolio" bgColor={SCROLL_BACKGROUNDS.light}>
             <FeaturedTrainingPortfolio />
         </Section>
-        <Section id="trainingResults" bgColor="#EEF5E9">
+        <Section id="trainingResults" bgColor={SCROLL_BACKGROUNDS.green}>
             <TrainingResults />
         </Section>
-        <Section id="trainingDeliveryModel" bgColor="#F8F9FB">
+        <Section id="trainingDeliveryModel" bgColor={SCROLL_BACKGROUNDS.light}>
             <TrainingDeliveryModel />
         </Section>
-        <Section id="trainingPartnerships" bgColor="#55594C">
+        <Section id="trainingPartnerships" bgColor={SCROLL_BACKGROUNDS.dark}>
             <TrainingPartnerships />
         </Section>
-        <Section id="whyChooseTraining" bgColor="#F2F7EC">
+        <Section id="whyChooseTraining" bgColor={SCROLL_BACKGROUNDS.green}>
             <WhyChooseTraining />
         </Section>
-        <Section id="trainingMembershipCertification" bgColor="#8BC240">
+        <Section id="trainingMembershipCertification" bgColor={SCROLL_BACKGROUNDS.green}>
             <div className="py-14 md:py-20">
                 <MembershipCertification />
             </div>
         </Section>
-        <Section id="trainingInquiry" bgColor="#F8F9FB" className="scroll-mt-[100px]">
+        <Section id="trainingInquiry" bgColor={SCROLL_BACKGROUNDS.light} className="scroll-mt-[100px]">
             <TrainingInquiryForm />
         </Section>
-        <Section id="trainingFinalCTA" bgColor="#173F31">
+        <Section id="trainingFinalCTA" bgColor={SCROLL_BACKGROUNDS.dark}>
             <TrainingFinalCTA />
         </Section>
     </RootSection>

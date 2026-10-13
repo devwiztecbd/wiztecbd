@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import ContactForm from "@/widgets/ContactForm";
@@ -20,43 +21,43 @@ const About = () => {
             <Section>
                 <MiniBanner title={"About Us"} description={"Innovation, Excellence, and Collaboration: Who We Are"} BannerImage="/assets/images/miniBanner/About.webp" />
             </Section>
-            <Section id="aboutChoose" bgColor="rgba(139, 196, 63, .1)">
+            <Section id="aboutChoose" bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits benifits={benifits} title={"Why Choose Us?"} />
                 </div>
             </Section>
 
-            <Section bgColor="#ff8b22" id={"extentTeam"}>
+            <Section bgColor={SCROLL_BACKGROUNDS.dark} id={"extentTeam"}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <ExtendTeam />
                 </div>
             </Section>
-            <Section bgColor="#007aff" id={"extentTeam"}>
+            <Section bgColor={SCROLL_BACKGROUNDS.dark} id={"extentTeam"}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <CompaniOverview />
                 </div>
             </Section>
-            <Section bgColor="#63a077" id={"aboutService"}>
+            <Section bgColor={SCROLL_BACKGROUNDS.green} id={"aboutService"}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 ">
                     <AboutServices softwer={softwer} />
                 </div>
             </Section>
-            <Section id={"resorce"} bgColor="#000">
+            <Section id={"resorce"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <Resource />
                 </div>
             </Section>
-            <Section bgColor="#c53d3d" id={"problem"}>
+            <Section bgColor={SCROLL_BACKGROUNDS.dark} id={"problem"}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <Services title={services.title} description={services.description} service={services.service} />
                 </div>
             </Section>
-            <Section bgColor="rgba(139, 196, 63, .1)" id={"engment"}>
+            <Section bgColor={SCROLL_BACKGROUNDS.green} id={"engment"}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits benifits={benifits} title={"Our Engagement models"} />
                 </div>
             </Section>
-            <Section bgColor="#8BC43F" id={"serveclient"}>
+            <Section bgColor={SCROLL_BACKGROUNDS.green} id={"serveclient"}>
                 <div className=" py-12">
                     <ServedClients title={"Awards & Recognition"} />
                 </div>

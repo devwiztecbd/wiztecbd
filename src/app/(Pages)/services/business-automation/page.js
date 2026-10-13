@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import { benifits, bussinessExpertistData, faqItems } from "@/app/staticData/service/bussinessautomation";
@@ -25,32 +26,32 @@ const BusinessAutomation = () => {
                     <Banner title={"Business Automation Software Development Service "} img={"/assets/images/banners/Business Auto Banner.webp"} description={" Future-Proof Your Business with Intelligent Automation"} />
                 </div>
             </Section>
-            <Section id={"automationIntroDesign"} bgColor="#ff8b22">
+            <Section id={"automationIntroDesign"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 ">
                     <IntroDesign bug={introData.bug} title={introData.title} img={introData.img} header={introData.header} subheader={introData.subheader} facilities={introData.facilities} buttonText={introData.buttonText} />
                 </div>
             </Section>
-            <Section id={"automationDevelopmentServices"} bgColor="#17a2b8">
+            <Section id={"automationDevelopmentServices"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 ">
                     <Services title={services.title} description={services.description} service={services.service} />
                 </div>
             </Section>
-            <Section id={"automationTechExpartise"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"automationTechExpartise"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl  py-12">
                     <TechExpartise expertistData={bussinessExpertistData} />
                 </div>
             </Section>
-            <Section id={"automationProcess"} bgColor="#63a077">
+            <Section id={"automationProcess"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <WorkProcess title="Work Process Image" img="/assets/images/service/Our-Development-Process.png" imgMob={"/assets/images/service/process-mob.svg"} alt="Work Process" />
                 </div>
             </Section>
-            <Section id={"automationBenefits"} bgColor="rgba(139, 196, 63, .1)">
+            <Section id={"automationBenefits"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits title={"Our Engagement Models "} benifits={benifits} />
                 </div>
             </Section>
-            <Section id={"automationClientsTestMonials"} bgColor="#000000">
+            <Section id={"automationClientsTestMonials"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" md:py-100 py-12 text-white">
                     <ClientsTestMonials />
                 </div>
@@ -61,17 +62,17 @@ const BusinessAutomation = () => {
                     <RelatedCases relatedCaseStudies={portfolio.slice(0, 3)} />
                 </div>
             </Section>
-            <Section id={"automationServedClients"} bgColor="#cd89e8">
+            <Section id={"automationServedClients"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="  container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Industries />
                 </div>
             </Section>
-            <Section id={"automationFaqHome"} bgColor="#4338ca">
+            <Section id={"automationFaqHome"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl  md:py-100 py-12 text-white">
                     <FaqHome faqItems={faqItems} />
                 </div>
             </Section>
-            <Section id={"automationContactButton"} bgColor="#EEEEEE">
+            <Section id={"automationContactButton"} bgColor={SCROLL_BACKGROUNDS.light}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <ContactButton />
                 </div>

@@ -1,4 +1,5 @@
 "use client";
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React, { useEffect, useState } from "react";
 
 import CurrentOpenings from "@/widgets/CurrentOpenings";
@@ -54,7 +55,7 @@ const Career = () => {
             </Section>
 
             {!loading && featuredCareers[0] && (
-                <Section id="project1" bgColor="#63a077">
+                <Section id="project1" bgColor={SCROLL_BACKGROUNDS.green}>
                     <div className="container mx-auto px-4 max-w-xl md:py-100 py-12">
                         <ScrollAnimatedSection delay={200}>
                             <div className=" md:mb-12 mb-6">
@@ -67,24 +68,24 @@ const Career = () => {
             )}
 
             {!loading && featuredCareers[1] && (
-                <Section id="project2" bgColor="#17afb0">
+                <Section id="project2" bgColor={SCROLL_BACKGROUNDS.green}>
                     <div className="container mx-auto px-4 max-w-xl md:py-100 py-12">
                         <OurFeatureProjects reverse ourFeatureProjectsData={featuredCareers[1]} />
                     </div>
                 </Section>
             )}
 
-            <Section id="findBest-career" bgColor={"bg-peas_dark"}>
+            <Section id="findBest-career" bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <FindBest />
                 </div>
             </Section>
-            <Section id="aboutBenifit" bgColor="#17a2b8">
+            <Section id="aboutBenifit" bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <Benefits benifits={benifits} title={"The Benefits of Becoming a Part of WiztecBD"} />
                 </div>
             </Section>
-            <Section id="openings" bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id="openings" bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <CurrentOpenings />
                 </div>

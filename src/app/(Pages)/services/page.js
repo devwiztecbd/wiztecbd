@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import SoftwerSection from "@/widgets/SoftwerSection";
@@ -29,28 +30,28 @@ const Services = () => {
                     <Banner title="Our Services In WiztecBd" sliderImage={images} subTitle="Show all services our company" description="Brief sentence about your unique service offerings." />
                 </div>
             </Section>
-            <Section id={"serviceWebDevelopment"} bgColor="#ff8b22">
+            <Section id={"serviceWebDevelopment"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12">
                     <WebDevelopment />
                 </div>
             </Section>
 
-            <Section id={"serviceMobileAppDevelopment"} bgColor="#007aff">
+            <Section id={"serviceMobileAppDevelopment"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <MobileAppDevelopment />
                 </div>
             </Section>
-            <Section id={"serviceSoftwerSection"} bgColor="#5201ff">
+            <Section id={"serviceSoftwerSection"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <SoftwerSection />
                 </div>
             </Section>
-            <Section id={"serviceServedClients"} bgColor="rgba(69, 144, 214, 0.253)">
+            <Section id={"serviceServedClients"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className=" md:py-100 py-12 ">
                     <ServedClients title={"Delightly Served Clients"} />
                 </div>
             </Section>
-            <Section id={"serviceEcommercePlatform"} bgColor="#5201ff">
+            <Section id={"serviceEcommercePlatform"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <EcommercePlatform />
                 </div>
@@ -60,28 +61,28 @@ const Services = () => {
                     <RelatedCases relatedCaseStudies={portfolio.slice(0, 3)} />
                 </div>
             </Section>
-            <Section id={"serviceSupportMaintanence"} bgColor="#17afb0">
+            <Section id={"serviceSupportMaintanence"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <SupportMaintanence />
                 </div>
             </Section>
-            <Section id={"serviceDesignSection"} bgColor="#63a077">
+            <Section id={"serviceDesignSection"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <DesignSection />
                 </div>
             </Section>
-            <Section id={"serviceItTraining"} bgColor="#8BC43F">
+            <Section id={"serviceItTraining"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <ItTraining />
                 </div>
             </Section>
-            <Section id={"serviceItConsultncy"} bgColor="bg-success_dark">
+            <Section id={"serviceItConsultncy"} bgColor={SCROLL_BACKGROUNDS.dark}>
                 <div className=" container mx-auto px-4 max-w-xl md:py-100 py-12 text-white">
                     <ItConsultncy />
                 </div>
             </Section>
-            <Section id={"serviceClientsTestMonials"} bgColor="#007aff">
-                <div className="py-12">
+            <Section id={"serviceClientsTestMonials"} bgColor={SCROLL_BACKGROUNDS.dark}>
+                <div className="py-12 text-white">
                     <ClientsTestMonials />
                 </div>
             </Section>

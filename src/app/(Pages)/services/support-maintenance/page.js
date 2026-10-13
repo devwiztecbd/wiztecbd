@@ -1,3 +1,4 @@
+import { SCROLL_BACKGROUNDS } from "@/config/scrollBackgrounds";
 import React from "react";
 
 import { ourFeatureProjectsDataSupport1, ourFeatureProjectsDataSupport6 } from "@/app/staticData/service/support";
@@ -15,7 +16,7 @@ const SupportMaintenance = () => {
                     <Banner subTitle={"Support & Maintenance Service our company"} title={"Support & Maintenance Service"} description={"Turning Clicks into Connections with Thoughtfully Developed WebsitesBrief sentence about your unique service offerings."} img={"/assets/images/banners/Support.webp"} />
                 </div>
             </Section>
-            <Section id={"supportOurFeatureProjects1"} bgColor="#ff8b22">
+            <Section id={"supportOurFeatureProjects1"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="container mx-auto px-4 max-w-xl  py-12">
                     <ScrollAnimatedSection>
                         <h1 className=" text-H1 font-bold mb-16 text-center">Our E-commerce Platform Development Services</h1>
@@ -24,7 +25,7 @@ const SupportMaintenance = () => {
                 </div>
             </Section>
 
-            <Section id={"supportOurFeatureProjects6"} bgColor="#cd89e8">
+            <Section id={"supportOurFeatureProjects6"} bgColor={SCROLL_BACKGROUNDS.green}>
                 <div className="container mx-auto px-4 max-w-xl  py-12">
                     <OurFeatureProjects reverse ourFeatureProjectsData={ourFeatureProjectsDataSupport6} />
                 </div>
