@@ -18,6 +18,8 @@ export default function CourseModeDetails({ options }) {
                         { label: "Classes", value: option.classes, icon: FiBookOpen },
                         { label: "Learning hours", value: option.learningHours, icon: FiClock },
                         { label: "Class duration", value: option.classDuration, icon: FiWatch },
+                        { label: "Days", value: option.days?.join(", ") || "To be announced", icon: FiCalendar },
+                        { label: "Time", value: option.time || "To be announced", icon: FiClock },
                     ];
 
                     return (
@@ -33,8 +35,8 @@ export default function CourseModeDetails({ options }) {
                                 <dl className="space-y-5">
                                     {details.map(({ label, value, icon: Icon }) => (
                                         <div key={label} className="flex items-center justify-between gap-3 text-xs sm:text-sm">
-                                            <dt className="flex items-center gap-2 text-gray700"><Icon aria-hidden="true" size={16} className="shrink-0 text-success_deep" />{label}</dt>
-                                            <dd className="shrink-0 font-semibold text-secondary">{value}</dd>
+                                            <dt className="flex shrink-0 items-center gap-2 text-gray700"><Icon aria-hidden="true" size={16} className="shrink-0 text-success_deep" />{label}</dt>
+                                            <dd className="min-w-0 text-right font-semibold text-secondary">{value}</dd>
                                         </div>
                                     ))}
                                 </dl>
