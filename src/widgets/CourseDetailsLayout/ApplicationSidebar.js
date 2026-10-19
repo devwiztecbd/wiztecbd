@@ -1,7 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
-import { FiArrowUpRight, FiBookOpen, FiCalendar, FiClock, FiMapPin, FiMonitor, FiWatch } from "react-icons/fi";
+import { FiArrowUpRight, FiBookOpen, FiCalendar, FiClock, FiMapPin, FiMonitor, FiWatch, FiCheckCircle } from "react-icons/fi";
+import { applyCourse } from "@/utilities/api";
 
 const inputClass = "w-full rounded-lg border border-[#dfe4dc] bg-white px-3.5 py-3 text-sm text-secondary outline-none transition placeholder:text-gray700/60 focus:border-success_deep focus:ring-2 focus:ring-success_deep/10";
 const formatPrice = (price) => {
@@ -15,9 +16,20 @@ export default function ApplicationSidebar({ course, sidebarRef, embedded = fals
     const instanceId = useId();
     const applicationId = embedded ? `course-application-${instanceId}` : "course-application";
     const formId = `${applicationId}-form`;
-    const [showAvailability, setShowAvailability] = useState(false);
-    const [selectedMode, setSelectedMode] = useState(course.enrollmentOptions[0].id);
-    const selectedOption = course.enrollmentOptions.find((option) => option.id === selectedMode) || course.enrollmentOptions[0];
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState("");
+    const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
+
+    const enrollmentOptions = Array.isArray(course?.enrollmentOptions) && course.enrollmentOptions.length > 0
+        ? course.enrollmentOptions
+        : [
+            { id: "online", label: "Online", price: 8000, duration: "3 Months", classes: "24 classes", learningHours: "40 hours", classDuration: "2 hours", description: "Attend live from anywhere" },
+            { id: "offline", label: "Offline", price: 12000, duration: "3 Months", classes: "24 classes", learningHours: "40 hours", classDuration: "2 hours", description: "Learn in our classroom" }
+        ];
+
+    const [selectedMode, setSelectedMode] = useState(enrollmentOptions[0]?.id || "offline");
+    const selectedOption = enrollmentOptions.find((option) => option.id === selectedMode) || enrollmentOptions[0] || {};
     const details = [
         { label: "Duration", value: selectedOption.duration, icon: FiCalendar },
         { label: "Classes", value: selectedOption.classes, icon: FiBookOpen },
@@ -25,10 +37,34 @@ export default function ApplicationSidebar({ course, sidebarRef, embedded = fals
         { label: "Class duration", value: selectedOption.classDuration, icon: FiWatch },
     ];
 
-    const handleSubmit = (event) => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        if (submitError) setSubmitError("");
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // The design preview has no submission integration yet.
-        setShowAvailability(true);
+        setSubmitError("");
+        setIsSubmitting(true);
+
+        try {
+            await applyCourse({
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone,
+                courseID: course?.id || 3407,
+                classID: selectedOption?.classTypeId || selectedOption?.id || 123456,
+                type: selectedMode,
+            });
+            setSubmitSuccess(true);
+            setFormData({ name: "", email: "", phone: "" });
+        } catch (error) {
+            console.error("Course application failed:", error);
+            setSubmitError("Failed to submit application. Please try again or contact us directly.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -36,10 +72,10 @@ export default function ApplicationSidebar({ course, sidebarRef, embedded = fals
             <div className="border-b border-[#e3e9dd] bg-[#f2f6ed] px-6 py-5">
                 <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.16em] text-success_deep">Your next step</p>
                 <h2 id={`${applicationId}-title`} className="text-[22px] font-bold leading-tight tracking-[-0.025em] text-primary">Apply for this course</h2>
-                {embedded && course.title && <p className="mt-2 text-sm text-gray700">{course.title}</p>}
-                <fieldset className={`mt-5 grid ${course.enrollmentOptions.length > 1 ? "grid-cols-2" : "grid-cols-1"} gap-2 rounded-xl border border-[#dfe5d9] bg-white/70 p-1.5`}>
+                {embedded && course?.title && <p className="mt-2 text-sm text-gray700">{course.title}</p>}
+                <fieldset className={`mt-5 grid ${enrollmentOptions.length > 1 ? "grid-cols-2" : "grid-cols-1"} gap-2 rounded-xl border border-[#dfe5d9] bg-white/70 p-1.5`}>
                     <legend className="sr-only">Choose how you learn</legend>
-                    {course.enrollmentOptions.map((option) => {
+                    {enrollmentOptions.map((option) => {
                         const ModeIcon = option.id === "online" ? FiMonitor : FiMapPin;
 
                         return (
@@ -52,7 +88,6 @@ export default function ApplicationSidebar({ course, sidebarRef, embedded = fals
                                     checked={selectedMode === option.id}
                                     onChange={() => {
                                         setSelectedMode(option.id);
-                                        setShowAvailability(false);
                                     }}
                                     className="peer sr-only"
                                 />
@@ -85,20 +120,30 @@ export default function ApplicationSidebar({ course, sidebarRef, embedded = fals
                 <form id={formId} onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label htmlFor={`${formId}-name`} className="mb-1.5 block text-xs font-semibold">Full name <span aria-hidden="true" className="text-success_deep">*</span></label>
-                        <input id={`${formId}-name`} name="name" autoComplete="name" placeholder="Your full name" required className={inputClass} />
+                        <input id={`${formId}-name`} name="name" value={formData.name} onChange={handleChange} autoComplete="name" placeholder="Your full name" required className={inputClass} />
                     </div>
                     <div>
                         <label htmlFor={`${formId}-email`} className="mb-1.5 block text-xs font-semibold">Email address <span aria-hidden="true" className="text-success_deep">*</span></label>
-                        <input id={`${formId}-email`} name="email" type="email" autoComplete="email" placeholder="you@example.com" required className={inputClass} />
+                        <input id={`${formId}-email`} name="email" value={formData.email} onChange={handleChange} type="email" autoComplete="email" placeholder="you@example.com" required className={inputClass} />
                     </div>
                     <div>
                         <label htmlFor={`${formId}-phone`} className="mb-1.5 block text-xs font-semibold">Phone number <span aria-hidden="true" className="text-success_deep">*</span></label>
-                        <input id={`${formId}-phone`} name="phone" type="tel" autoComplete="tel" placeholder="Your phone number" required className={inputClass} />
+                        <input id={`${formId}-phone`} name="phone" value={formData.phone} onChange={handleChange} type="tel" autoComplete="tel" placeholder="Your phone number" required className={inputClass} />
                     </div>
-                    <button type="submit" className="flex w-full items-center justify-center gap-2 rounded-lg bg-success_deep px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-success_dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success_deep">
-                        Apply {selectedOption.label.toLowerCase()} <FiArrowUpRight aria-hidden="true" size={18} />
+                    {submitError && (
+                        <p role="alert" className="rounded-lg bg-red-50 p-3 text-xs leading-relaxed text-error_main border border-red-200">
+                            {submitError}
+                        </p>
+                    )}
+                    {submitSuccess && (
+                        <div role="status" className="flex items-start gap-2 rounded-lg bg-success_light p-3 text-xs leading-relaxed text-success_deep border border-success_main/20">
+                            <FiCheckCircle className="shrink-0 mt-0.5 text-success_deep" size={15} />
+                            <span>Your application has been submitted successfully! We will contact you soon.</span>
+                        </div>
+                    )}
+                    <button type="submit" disabled={isSubmitting} className="flex w-full items-center justify-center gap-2 rounded-lg bg-success_deep px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-success_dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success_deep disabled:opacity-70 disabled:cursor-not-allowed">
+                        {isSubmitting ? "Submitting..." : `Apply ${selectedOption.label.toLowerCase()}`} {!isSubmitting && <FiArrowUpRight aria-hidden="true" size={18} />}
                     </button>
-                    {showAvailability && <p role="status" className="rounded-lg bg-success_light p-3 text-xs leading-relaxed text-success_deep">Applications are opening soon. Your details have not been submitted.</p>}
                 </form>
                 <p className="mt-4 text-center text-[11px] leading-relaxed text-gray700">Take the first step toward your next skill.</p>
             </div>

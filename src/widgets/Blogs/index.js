@@ -6,7 +6,7 @@ import ScrollAnimatedSection from "@/components/ScrollAnimationSection";
 import staticBlogs from "/public/Json/blogs.json";
 import Button from "@/components/Button";
 import Blog from "../blog";
-import api from "@/config/api";
+import { fetchBlogs as getBlogsApi } from "@/utilities/api";
 
 const Blogs = () => {
     const [blogs, setBlogs] = useState([]);
@@ -15,9 +15,9 @@ const Blogs = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await api.get("/api/get-blogs");
-                if (response.data && response.data.blogs) {
-                    const mappedBlogs = response.data.blogs.map((blog) => ({
+                const response = await getBlogsApi();
+                if (response?.blogs) {
+                    const mappedBlogs = response.blogs.map((blog) => ({
                         id: blog.id,
                         title: blog.title,
                         img: blog.image,

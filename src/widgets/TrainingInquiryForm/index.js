@@ -8,7 +8,7 @@ import { FiCheckCircle, FiFileText, FiSend, FiSettings, FiUploadCloud, FiUsers, 
 
 import PhoneNumberInput from "@/components/PhoneNumber";
 import Select from "@/components/Select";
-import api from "@/config/api";
+import { addContact } from "@/utilities/api";
 
 const trainingAreas = ["Software & Web Development", "Mobile App Development", "Artificial Intelligence & Machine Learning", "Data Analytics & Business Intelligence", "Automation, Embedded Systems & 4IR", "Cloud & Emerging Technologies", "Digital, Creative & Freelancing Skills", "Digital Literacy & Professional Skills"];
 const participantRanges = ["1-20", "21-50", "51-100", "101-300", "301-500", "500+"];
@@ -110,8 +110,9 @@ const TrainingInquiryForm = () => {
             if (values.document) payload.append("document", values.document);
 
             try {
-                const response = await api.post("/api/add-contact", payload);
-                if (response.data.status !== 200 && response.data.status !== 201) throw new Error(response.data.message || "Submission failed");
+                const response = await addContact(payload);
+                const resStatus = response?.status || response?.data?.status;
+                if (resStatus !== 200 && resStatus !== 201) throw new Error(response?.message || "Submission failed");
 
                 resetForm();
                 if (fileInputRef.current) fileInputRef.current.value = "";

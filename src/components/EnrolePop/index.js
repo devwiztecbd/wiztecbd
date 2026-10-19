@@ -6,7 +6,13 @@ import ApplicationSidebar from "@/widgets/CourseDetailsLayout/ApplicationSidebar
 import Modal from "../Modal";
 
 export default function EnrollPop({ modalData, isOpen, onClose }) {
-    const course = { ...previewCourse, title: modalData?.title || previewCourse.title };
+    const course = {
+        ...previewCourse,
+        ...modalData,
+        id: modalData?.id || previewCourse.id || 2,
+        title: modalData?.title || previewCourse.title,
+        enrollmentOptions: modalData?.enrollmentOptions || previewCourse.enrollmentOptions,
+    };
 
     return (
         <Modal width={420} isOpen={isOpen} onClose={onClose} closeBtn={false} modalClass="!max-w-full !rounded-2xl !p-0">

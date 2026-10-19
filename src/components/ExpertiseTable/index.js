@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Select from "../Select";
 import { useContextApi } from "@/app/utilities/contextApi";
-import api from "@/config/api";
+import { fetchExpertises } from "@/utilities/api";
 
 const ExpertiseTable = ({ fieldValue, expartist, timeLine, header }) => {
     const { selectedData, setSelectedData } = useContextApi();
@@ -11,11 +11,11 @@ const ExpertiseTable = ({ fieldValue, expartist, timeLine, header }) => {
 
     // Fetch expertises from API
     useEffect(() => {
-        const fetchExpertises = async () => {
+        const loadExpertises = async () => {
             try {
-                const response = await api.get('/api/get-expertises');
-                if (response.data.status === 200) {
-                    const formattedExpertises = response.data.expertises.map(expertise => {
+                const data = await fetchExpertises();
+                if (data && data.status === 200 && Array.isArray(data.expertises)) {
+                    const formattedExpertises = data.expertises.map(expertise => {
                         // Handle different possible response structures
                         let label, value;
                         if (typeof expertise === 'string') {
@@ -46,7 +46,7 @@ const ExpertiseTable = ({ fieldValue, expartist, timeLine, header }) => {
             }
         };
 
-        fetchExpertises();
+        loadExpertises();
     }, []);
 
     const handleSelectChange = (index, field, value) => {

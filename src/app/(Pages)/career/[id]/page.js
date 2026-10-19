@@ -5,7 +5,7 @@ import RecruitmentNotice from "@/widgets/RecruitmentNotice";
 import { vacanciData } from "@/app/staticData/career";
 import MiniBanner from "@/components/MiniBanner";
 import JobSummary from "@/widgets/JobSummary";
-import api from "@/config/api";
+import { fetchCareers } from "@/utilities/api";
 
 const Vacancies = ({ params }) => {
     const [jobPost, setJobPost] = useState(null);
@@ -14,9 +14,9 @@ const Vacancies = ({ params }) => {
     useEffect(() => {
         const fetchJobDetails = async () => {
             try {
-                const response = await api.get("/api/get-careers");
-                if (response.data && response.data.careers) {
-                    const found = response.data.careers.find((j) => j.id == params.id);
+                const response = await fetchCareers();
+                if (response?.careers) {
+                    const found = response.careers.find((j) => j.id == params.id);
                     if (found) {
                         setJobPost(found);
                     }

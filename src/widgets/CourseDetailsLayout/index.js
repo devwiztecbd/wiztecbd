@@ -1,15 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { FiArrowDownRight } from "react-icons/fi";
 
 import CourseTabs from "./CourseTabs";
 import ApplicationSidebar from "./ApplicationSidebar";
 
-export default function CourseDetailsLayout({ course }) {
+const fallbackImage = "/assets/images/training images/multi_domain_curriculum_lab.png";
+
+export default function CourseDetailsLayout({ course, loading = false }) {
     const applicationRef = useRef(null);
     const highlightRef = useRef(null);
+    const [imgSrc, setImgSrc] = useState(course?.image || fallbackImage);
+
+    useEffect(() => {
+        if (course?.image) {
+            setImgSrc(course.image);
+        }
+    }, [course?.image]);
 
     const handleApplyClick = () => {
         const sidebar = applicationRef.current;
@@ -34,8 +43,8 @@ export default function CourseDetailsLayout({ course }) {
             <section aria-labelledby="course-title" className="border-b border-[#e4e8e2] bg-[#f2f6ed]">
                 <div className="container mx-auto grid max-w-xl items-center gap-6 px-6 py-8 md:grid-cols-[1.15fr_1fr] md:gap-10 md:py-10 lg:px-4">
                     <div>
-                        <h1 id="course-title" className="max-w-[620px] text-[30px] font-bold leading-[1.18] tracking-[-0.035em] md:text-[38px] lg:text-[46px]">
-                            {course.title}
+                        <h1 id="course-title" className="max-w-[620px] text-[30px] font-bold leading-[1.18] tracking-[-0.025em] md:text-[38px] lg:text-[46px]">
+                            {course?.title || "Course Details"}
                         </h1>
                         <button type="button" aria-controls="course-application" onClick={handleApplyClick} className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-success_deep px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-success_dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success_deep">
                             Apply now <FiArrowDownRight aria-hidden="true" size={18} />
@@ -43,10 +52,12 @@ export default function CourseDetailsLayout({ course }) {
                     </div>
                     <div className="relative h-[180px] overflow-hidden rounded-2xl bg-[#e3eadb] md:h-[220px]">
                         <Image
-                            src={course.image}
-                            alt="Students learning together in a technology lab"
+                            src={imgSrc || fallbackImage}
+                            alt={course?.title ? `${course.title} course banner` : "Students learning together in a technology lab"}
                             fill
                             priority
+                            unoptimized
+                            onError={() => setImgSrc(fallbackImage)}
                             sizes="(min-width: 1200px) 480px, (min-width: 768px) 44vw, 100vw"
                             className="object-cover"
                         />

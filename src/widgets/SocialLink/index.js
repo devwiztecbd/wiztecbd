@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FiChevronDown } from "react-icons/fi";
 
 import { socialLinks as staticSocialLinks } from "@/app/staticData/data";
-import api from "@/config/api";
+import { fetchHome } from "@/utilities/api";
 
 const SocialLink = () => {
     const [open, setOpen] = useState(false);
@@ -15,9 +15,9 @@ const SocialLink = () => {
     useEffect(() => {
         const fetchSocialLinks = async () => {
             try {
-                const response = await api.get("/api/get-home");
-                if (response.data && response.data.home) {
-                    const homeData = response.data.home;
+                const response = await fetchHome();
+                if (response?.home) {
+                    const homeData = response.home;
                     const mappedLinks = [
                         { href: homeData.facebook, icon: "facebook.webp", alt: "Facebook" },
                         { href: homeData.whatsapp, icon: "whatsapp.webp", alt: "WhatsApp" },

@@ -11,7 +11,17 @@ const benefits = [
     { id: "next-step", icon: "/assets/icons/writer.svg", text: "Build a foundation for further learning in business intelligence and data analytics." },
 ];
 
-export default function BenefitsList() {
+import { normalizeImageUrl } from "@/utilities/dataTransform";
+
+export default function BenefitsList({ benefits: dynamicBenefits = null }) {
+    const activeBenefits = Array.isArray(dynamicBenefits) && dynamicBenefits.length > 0
+        ? dynamicBenefits.map((b, idx) => ({
+            id: b.id ? String(b.id) : `ben-${idx}`,
+            text: b.name || b.title || b.text || b.description || "Practical career-ready skill.",
+            icon: normalizeImageUrl(b.icon || b.image) || "/assets/icons/traner.svg",
+        }))
+        : benefits;
+
     return (
         <section aria-labelledby="benefits-heading">
             <div className="mb-6">
@@ -20,10 +30,10 @@ export default function BenefitsList() {
             </div>
 
             <ul className="space-y-4">
-                {benefits.map((benefit) => (
+                {activeBenefits.map((benefit) => (
                     <li key={benefit.id} className="flex items-start gap-3 rounded-xl border border-[#e2e7df] bg-[#f9fbf7] px-4 py-4 md:gap-4 md:px-5">
                         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#e2e7df] bg-white">
-                            <Image src={benefit.icon} alt="" width={24} height={24} className="h-6 w-6 object-contain" />
+                            <Image src={benefit.icon || "/assets/icons/traner.svg"} alt="" width={24} height={24} unoptimized className="h-6 w-6 object-contain" />
                         </span>
                         <p className="text-sm leading-7 text-secondary">{benefit.text}</p>
                     </li>

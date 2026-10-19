@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import api from "@/config/api";
+import { fetchServices } from "@/utilities/api";
 
 const useServices = (index) => {
     const [services, setServices] = useState([]);
@@ -9,18 +9,29 @@ const useServices = (index) => {
 
     useEffect(() => {
         if (!index) return;
-        
+
+        let isMounted = true;
         setLoading(true);
-        api.get(`/api/get-services?index=${index}`)
-            .then((res) => {
-                setServices(res.data.services || []);
+        fetchServices(index)
+            .then((data) => {
+                if (isMounted) {
+                    setServices(data?.services || []);
+                }
             })
             .catch((err) => {
-                setError(err);
+                if (isMounted) {
+                    setError(err);
+                }
             })
             .finally(() => {
-                setLoading(false);
+                if (isMounted) {
+                    setLoading(false);
+                }
             });
+
+        return () => {
+            isMounted = false;
+        };
     }, [index]);
 
     return { services, loading, error };

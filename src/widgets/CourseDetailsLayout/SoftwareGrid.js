@@ -13,13 +13,24 @@ const softwares = [
     { id: "analytics", name: "Google Analytics & Data Studio", image: "Google Analytics & Data Studio.webp" },
 ].map((software) => ({ ...software, image: `${imageDirectory}/${software.image}`, alt: `${software.name} logo` }));
 
-export default function SoftwareGrid() {
+import { normalizeImageUrl } from "@/utilities/dataTransform";
+
+export default function SoftwareGrid({ softwares: dynamicSoftwares = null }) {
+    const activeSoftwares = Array.isArray(dynamicSoftwares) && dynamicSoftwares.length > 0
+        ? dynamicSoftwares.map((s, idx) => ({
+            id: s.id ? String(s.id) : `soft-${idx}`,
+            name: s.name || "Tool",
+            image: normalizeImageUrl(s.icon || s.image || s.img) || `${imageDirectory}/Power BI & Tableau.webp`,
+            alt: `${s.name || "Software"} logo`,
+        }))
+        : softwares;
+
     return (
         <ImageCardGrid
             headingId="software-heading"
             title="Software you’ll learn"
             description="Get familiar with the tools that turn data into insights."
-            items={softwares}
+            items={activeSoftwares}
             countLabel="tools"
             icon={FiGrid}
         />

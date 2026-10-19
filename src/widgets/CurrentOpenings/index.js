@@ -7,7 +7,7 @@ import VacanciesTable from "@/components/VacanciesTable";
 import ScrollAnimatedSection from "@/components/ScrollAnimationSection";
 import { options } from "@/app/staticData/career";
 import Select from "@/components/Select";
-import api from "@/config/api";
+import { fetchCareers as getCareersApi } from "@/utilities/api";
 
 const CurrentOpenings = () => {
     const [fieldValue, setFieldValue] = useState("");
@@ -17,9 +17,9 @@ const CurrentOpenings = () => {
     useEffect(() => {
         const fetchCareers = async () => {
             try {
-                const response = await api.get("/api/get-careers");
-                if (response.data && response.data.careers) {
-                    setCareers(response.data.careers);
+                const response = await getCareersApi();
+                if (response?.careers) {
+                    setCareers(response.careers);
                 }
             } catch (error) {
                 console.error("Error fetching careers:", error);

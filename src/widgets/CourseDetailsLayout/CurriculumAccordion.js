@@ -86,8 +86,26 @@ function CurriculumModule({ module, index, isOpen, onToggle }) {
     );
 }
 
-export default function CurriculumAccordion() {
-    const [openModuleId, setOpenModuleId] = useState(modules[0].id);
+export default function CurriculumAccordion({ curriculums = null }) {
+    let rawCurriculums = curriculums;
+    if (typeof rawCurriculums === "string") {
+        try {
+            const parsed = JSON.parse(rawCurriculums);
+            if (Array.isArray(parsed)) rawCurriculums = parsed;
+        } catch {
+            rawCurriculums = [rawCurriculums];
+        }
+    }
+
+    const activeModules = Array.isArray(rawCurriculums) && rawCurriculums.length > 0
+        ? rawCurriculums.map((item, index) => ({
+            id: typeof item === "object" && item?.id ? String(item.id) : `curr-${index}`,
+            title: typeof item === "object" ? (item?.name || item?.title || `Module ${index + 1}`) : String(item),
+            description: typeof item === "object" && item?.description ? item.description : "Comprehensive module covering practical lessons, guided exercises, and hands-on skills.",
+        }))
+        : modules;
+
+    const [openModuleId, setOpenModuleId] = useState(activeModules[0]?.id);
 
     return (
         <section aria-labelledby="curriculum-heading">
@@ -97,12 +115,12 @@ export default function CurriculumAccordion() {
                     <p className="mt-2 max-w-[580px] text-sm leading-relaxed text-gray700">A step-by-step path from the fundamentals to your first business dashboard.</p>
                 </div>
                 <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#f2f6ed] px-3 py-2 text-xs font-semibold text-success_deep">
-                    <FiBookOpen aria-hidden="true" size={14} /> {modules.length} modules
+                    <FiBookOpen aria-hidden="true" size={14} /> {activeModules.length} modules
                 </span>
             </div>
 
             <div className="space-y-3">
-                {modules.map((module, index) => (
+                {activeModules.map((module, index) => (
                     <CurriculumModule
                         key={module.id}
                         module={module}

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ScrollAnimatedSection from "@/components/ScrollAnimationSection";
 import { overViewData as staticOverViewData } from "@/app/staticData/home";
 import OverViewCard from "../OverViewCard";
-import api from "@/config/api";
+import { fetchHome } from "@/utilities/api";
 
 const OverViews = () => {
     const [overViewData, setOverViewData] = useState(staticOverViewData);
@@ -12,9 +12,9 @@ const OverViews = () => {
     useEffect(() => {
         const fetchOverViewData = async () => {
             try {
-                const response = await api.get("/api/get-home");
-                if (response.data && response.data.home) {
-                    const data = response.data.home;
+                const response = await fetchHome();
+                if (response?.home) {
+                    const data = response.home;
 
                     // Update overview data with API values
                     const updatedOverView = staticOverViewData.map(item => {

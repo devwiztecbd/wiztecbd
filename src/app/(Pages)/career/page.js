@@ -10,7 +10,7 @@ import { benifits } from "@/app/staticData/course";
 import MiniBanner from "@/components/MiniBanner";
 import ScrollAnimatedSection from "@/components/ScrollAnimationSection";
 import OurFeatureProjects from "@/widgets/OurFeatureProjects";
-import api from "@/config/api";
+import { fetchCareers } from "@/utilities/api";
 
 const Career = () => {
     const [featuredCareers, setFeaturedCareers] = useState([]);
@@ -24,10 +24,10 @@ const Career = () => {
     useEffect(() => {
         const fetchFeaturedCareers = async () => {
             try {
-                const response = await api.get("/api/get-careers");
-                if (response.data && response.data.careers) {
+                const response = await fetchCareers();
+                if (response?.careers) {
                     // Map the first two careers to the format expected by OurFeatureProjects
-                    const mapped = response.data.careers.slice(0, 2).map((job) => ({
+                    const mapped = response.careers.slice(0, 2).map((job) => ({
                         id: job.id,
                         title: job.title,
                         description: stripHtml(job.details),

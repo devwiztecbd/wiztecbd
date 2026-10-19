@@ -9,8 +9,8 @@ import Modal from "@/components/Modal";
 import DatePicker from "@/components/DatePicker";
 import ImageURL from "@/components/ImageUrl";
 import { clients } from "@/app/staticData/data";
-import api from "@/config/api";
-import axios from "axios";
+import { fetchServices, addContact } from "@/utilities/api";
+
 
 const LetsTalk = ({ isOpen, onClose }) => {
     const [services, setServices] = useState([]);
@@ -24,9 +24,9 @@ const LetsTalk = ({ isOpen, onClose }) => {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const response = await api.get("/api/get-services?index=contact-service");
-                if (response.data.status === 200) {
-                    const dynamicServices = response.data.services.map((service) => ({
+                const response = await fetchServices("contact-service");
+                if (response?.services) {
+                    const dynamicServices = response.services.map((service) => ({
                         id: service.id,
                         label: service.name,
                     }));
@@ -101,14 +101,15 @@ const LetsTalk = ({ isOpen, onClose }) => {
                 payload.append("time", formattedTime);
                 payload.append("serviceIDs", JSON.stringify(tab));
 
-                const response = await axios.post(`${api.defaults.baseURL}/api/add-contact`, payload, {
+                const response = await addContact(payload, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
-                        "x-api-key": api.defaults.headers["x-api-key"],
+
                     },
                 });
 
-                if (response.data.status === 200 || response.data.status === 201) {
+                const resStatus = response?.status || response?.data?.status;
+                if (resStatus === 200 || resStatus === 201) {
                     setIsSubmit(true);
                     successTimerRef.current = setTimeout(() => {
                         setIsSuccess(true);

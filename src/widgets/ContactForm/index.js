@@ -11,8 +11,8 @@ import DatePicker from "@/components/DatePicker";
 import Modal from "@/components/Modal";
 import useModal from "@/hooks/useModal";
 import { useEffect } from "react";
-import api from "@/config/api";
-import axios from "axios";
+import { fetchServices, addContact } from "@/utilities/api";
+
 
 const ContactForm = () => {
     const [services, setServices] = useState([]);
@@ -23,9 +23,9 @@ const ContactForm = () => {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const response = await api.get("/api/get-services?index=contact-service");
-                if (response.data.status === 200) {
-                    const dynamicOptions = response.data.services.map((service) => ({
+                const response = await fetchServices("contact-service");
+                if (response?.services) {
+                    const dynamicOptions = response.services.map((service) => ({
                         label: service.name,
                         value: service.id,
                     }));
@@ -93,14 +93,15 @@ const ContactForm = () => {
                 const validServiceIDs = selectValue.filter(id => id !== "Other");
                 payload.append("serviceIDs", JSON.stringify(validServiceIDs));
 
-                const response = await axios.post(`${api.defaults.baseURL}/api/add-contact`, payload, {
+                const response = await addContact(payload, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
-                        "x-api-key": api.defaults.headers["x-api-key"],
+
                     },
                 });
 
-                if (response.data.status === 200 || response.data.status === 201) {
+                const resStatus = response?.status || response?.data?.status;
+                if (resStatus === 200 || resStatus === 201) {
                     openModal();
                     setTimeout(() => {
                         openSuccess();

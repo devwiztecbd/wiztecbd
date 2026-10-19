@@ -7,7 +7,7 @@ import PhoneNumberInput from "@/components/PhoneNumber";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import useModal from "@/hooks/useModal";
-import api from "@/config/api";
+import { hireEmployee } from "@/utilities/api";
 
 const DevForm = () => {
     const { isOpen: isSuccess, openModal: openSuccess, closeModal: closeSuccess } = useModal();
@@ -65,10 +65,11 @@ const DevForm = () => {
 
             try {
                 openModal();
-                const response = await api.post('/api/hire-employee', payload);
+                const response = await hireEmployee(payload);
                 console.log('API Response:', response);
                 
-                if (response.status === 200 || response.status === 201) {
+                const resStatus = response?.status || response?.data?.status;
+                if (resStatus === 200 || resStatus === 201) {
                     setTimeout(() => {
                         openSuccess();
                     }, 200);

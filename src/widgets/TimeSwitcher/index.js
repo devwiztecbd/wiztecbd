@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import api from "@/config/api";
+import { fetchHome } from "@/utilities/api";
 
 const TimeSwitcher = () => {
     const pathname = usePathname();
@@ -15,9 +15,9 @@ const TimeSwitcher = () => {
     useEffect(() => {
         const fetchImage = async () => {
             try {
-                const response = await api.get("/api/get-home");
-                if (response.data && response.data.home && response.data.home.webTitleText) {
-                    setWebTitleText(response.data.home.webTitleText);
+                const response = await fetchHome();
+                if (response?.home?.webTitleText) {
+                    setWebTitleText(response.home.webTitleText);
                 }
             } catch (error) {
                 console.error("Error fetching popup image:", error);

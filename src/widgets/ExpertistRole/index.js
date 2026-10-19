@@ -5,7 +5,7 @@ import ExpertiseTable from "@/components/ExpertiseTable";
 import RoleSelect from "@/components/RoleSelect";
 import Expertists from "@/components/Expertists";
 import { useContextApi } from "@/app/utilities/contextApi";
-import api from "@/config/api";
+import { fetchServices as getServicesApi } from "@/utilities/api";
 
 const ExpertistRole = () => {
     const [counts, setCounts] = useState({});
@@ -17,9 +17,9 @@ const ExpertistRole = () => {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const response = await api.get('/api/get-services?index=hire-developer-service');
-                if (response.data.status === 200) {
-                    const formattedServices = response.data.services.map(service => ({
+                const response = await getServicesApi('hire-developer-service');
+                if (Array.isArray(response?.services)) {
+                    const formattedServices = response.services.map(service => ({
                         icon: service.icon,
                         active_icon: service.icon, // Use same icon for active state
                         label: service.name,

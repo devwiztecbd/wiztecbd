@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import EmplCard from "@/components/EmpCard";
 import ScrollAnimatedSection from "@/components/ScrollAnimationSection";
-import api from "@/config/api";
+import { fetchEmployees as getEmployeesApi } from "@/utilities/api";
 
 const Employer = () => {
     const [employees, setEmployees] = useState([]);
@@ -12,10 +12,10 @@ const Employer = () => {
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
-                const response = await api.get("/api/get-employees");
+                const response = await getEmployeesApi();
                 console.log(response)
-                if (response.data.status === 200 || response.data.status === 201) {
-                    setEmployees(response.data.employees);
+                if (Array.isArray(response?.employees)) {
+                    setEmployees(response.employees);
                 }
             } catch (error) {
                 console.error("Failed to fetch employees:", error);

@@ -16,7 +16,7 @@ import HyperlinkTable from "@/widgets/HyperlinkTable";
 import BlogBanner from "@/widgets/blogBanner";
 import blogs from "/public/Json/blogs.json";
 import Blog from "@/widgets/blog";
-import api from "@/config/api";
+import { fetchBlogs, fetchCommentsByBlog, addComment } from "@/utilities/api";
 
 const BlogDetails = ({ params }) => {
     const [blogDetails, setBlogDetails] = useState(null);
@@ -25,9 +25,9 @@ const BlogDetails = ({ params }) => {
 
     const fetchComments = async () => {
         try {
-            const response = await api.get(`/api/get-comments-by-blog/${params.id}?isApproved=true`);
-            if (response.data && response.data.comments) {
-                setComments(response.data.comments);
+            const response = await fetchCommentsByBlog(params.id, true);
+            if (response?.comments) {
+                setComments(response.comments);
             }
         } catch (error) {
             console.error("Error fetching comments:", error);
@@ -37,9 +37,9 @@ const BlogDetails = ({ params }) => {
     useEffect(() => {
         const fetchBlogDetails = async () => {
             try {
-                const response = await api.get("/api/get-blogs");
-                if (response.data && response.data.blogs) {
-                    const found = response.data.blogs.find((b) => b.id == params.id);
+                const response = await fetchBlogs();
+                if (response?.blogs) {
+                    const found = response.blogs.find((b) => b.id == params.id);
                     if (found) {
                         // Split content by h1, h2, or h3 tags
                         // Using a more robust regex that keeps the tag in the split parts
@@ -112,7 +112,7 @@ const BlogDetails = ({ params }) => {
             paramsData.append("comment", values.comment);
             paramsData.append("blogID", params.id);
 
-            const response = await api.post("/api/add-comment", paramsData, {
+            const response = await addComment(paramsData, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },

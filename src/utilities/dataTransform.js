@@ -128,3 +128,179 @@ export const transformCaseStudiesToProducts = (caseStudies) => {
 export const transformCaseStudiesToPortfolio = (caseStudies) => {
   return caseStudies.map(transformCaseStudyToPortfolio);
 };
+
+export const normalizeImageUrl = (url) => {
+  if (!url || typeof url !== "string") return "";
+  const trimmed = url.trim();
+  if (!trimmed) return "";
+  const apiBase = (
+    process.env.NEXT_PUBLIC_API_BASE_URL ||
+    process.env.VITE_API_BASE_URL ||
+    "https://pct-pretty-sealed-consultancy.trycloudflare.com"
+  ).replace(/\/+$/, "");
+  let normalized = trimmed.replace(/^https?:\/\/(localhost|127\.0\.0\.1):5000/, apiBase);
+  if (normalized.startsWith("/uploads/")) {
+    normalized = `${apiBase}${normalized}`;
+  }
+  return normalized;
+};
+
+export const transformCourseData = (apiCourse, fallbackCourse = null) => {
+  if (!apiCourse) return fallbackCourse;
+
+  let parsedDays = [];
+  if (Array.isArray(apiCourse.days)) {
+    parsedDays = apiCourse.days;
+  } else if (typeof apiCourse.days === "string") {
+    try {
+      const parsed = JSON.parse(apiCourse.days);
+      parsedDays = Array.isArray(parsed) ? parsed : [apiCourse.days];
+    } catch {
+      parsedDays = apiCourse.days.split(",").map((s) => s.trim()).filter(Boolean);
+    }
+  }
+
+  const courseType = (apiCourse.type || apiCourse.course_type || "offline").toLowerCase();
+  const rawPrice = apiCourse.price ? Number(String(apiCourse.price).replace(/[^0-9.]/g, "")) : null;
+  const durationStr = apiCourse.duration
+    ? (typeof apiCourse.duration === "number" ? `${apiCourse.duration} months` : String(apiCourse.duration))
+    : "3 Months";
+  const classesStr = apiCourse.classes
+    ? `${apiCourse.classes} classes`
+    : apiCourse.lectures
+    ? `${apiCourse.lectures} classes`
+    : "24 classes";
+  const hoursStr = apiCourse.hour ? `${apiCourse.hour} hours` : "40 hours";
+  const classDurationStr = apiCourse.class_duration || "2 hours";
+  const timeStr = apiCourse.time || "7:00 PM - 9:00 PM";
+
+  const rawImage = apiCourse.banner || apiCourse.image || apiCourse.img || fallbackCourse?.image || "";
+  const resolvedImage = normalizeImageUrl(rawImage) || fallbackCourse?.image || "/assets/images/training images/multi_domain_curriculum_lab.png";
+
+  const descriptionText = apiCourse.overview || apiCourse.description || fallbackCourse?.description || "";
+  const overviewDescriptionText = apiCourse.overview_description || apiCourse.overview || descriptionText;
+
+  let enrollmentOptions = [];
+
+  if (Array.isArray(apiCourse.classTypes) && apiCourse.classTypes.length > 0) {
+    enrollmentOptions = apiCourse.classTypes.map((ct) => {
+      const mode = (ct.type || "offline").toLowerCase();
+      const fallbackMode = fallbackCourse?.enrollmentOptions?.find((o) => o.id === mode);
+      const isOnline = mode === "online";
+      const resolvedPrice = ct.discountedPrice ?? ct.price ?? (isOnline ? 8000 : 12000);
+      const formatDuration = ct.duration
+        ? (typeof ct.duration === "number" ? `${ct.duration} months` : String(ct.duration))
+        : (fallbackMode?.duration || "3 Months");
+      const formatClasses = ct.classes
+        ? (typeof ct.classes === "number" ? `${ct.classes} classes` : (String(ct.classes).includes("class") ? ct.classes : `${ct.classes} classes`))
+        : (fallbackMode?.classes || "24 classes");
+      const formatHours = ct.learningHours
+        ? (typeof ct.learningHours === "number" ? `${ct.learningHours} hours` : (String(ct.learningHours).includes("hour") ? ct.learningHours : `${ct.learningHours} hours`))
+        : (fallbackMode?.learningHours || "40 hours");
+      const formatClassDuration = ct.classDuration
+        ? (typeof ct.classDuration === "number" ? `${ct.classDuration} hours` : String(ct.classDuration))
+        : (fallbackMode?.classDuration || "2 hours");
+
+      return {
+        id: mode,
+        classTypeId: ct.id,
+        label: isOnline ? "Online" : "Offline",
+        description: fallbackMode?.description || (isOnline ? "Attend live from anywhere" : "Learn in our classroom"),
+        price: resolvedPrice,
+        originalPrice: ct.price,
+        discountedPrice: ct.discountedPrice,
+        duration: formatDuration,
+        classes: formatClasses,
+        learningHours: formatHours,
+        classDuration: formatClassDuration,
+        days: Array.isArray(ct.days) && ct.days.length > 0 ? ct.days : (fallbackMode?.days || (isOnline ? ["Sunday", "Monday"] : ["Sunday", "Monday", "Saturday"])),
+        time: ct.time || fallbackMode?.time || timeStr,
+      };
+    });
+  } else if (Array.isArray(apiCourse.enrollmentOptions) && apiCourse.enrollmentOptions.length > 0) {
+    enrollmentOptions = apiCourse.enrollmentOptions;
+  } else {
+    const fallbackOnline = fallbackCourse?.enrollmentOptions?.find((o) => o.id === "online");
+    const fallbackOffline = fallbackCourse?.enrollmentOptions?.find((o) => o.id === "offline");
+
+    const defaultOnline = {
+      id: "online",
+      label: "Online",
+      description: fallbackOnline?.description || "Attend live from anywhere",
+      price: rawPrice || fallbackOnline?.price || 8000,
+      duration: durationStr,
+      classes: classesStr,
+      learningHours: hoursStr,
+      classDuration: classDurationStr,
+      days: parsedDays.length > 0 ? parsedDays : (fallbackOnline?.days || ["Sunday", "Monday"]),
+      time: timeStr,
+    };
+
+    const defaultOffline = {
+      id: "offline",
+      label: "Offline",
+      description: fallbackOffline?.description || "Learn in our classroom",
+      price: rawPrice || fallbackOffline?.price || 12000,
+      duration: durationStr,
+      classes: classesStr,
+      learningHours: hoursStr,
+      classDuration: classDurationStr,
+      days: parsedDays.length > 0 ? parsedDays : (fallbackOffline?.days || ["Sunday", "Monday", "Saturday"]),
+      time: timeStr,
+    };
+
+    if (courseType === "both" || courseType === "all") {
+      enrollmentOptions = [defaultOnline, defaultOffline];
+    } else if (courseType === "online") {
+      enrollmentOptions = [defaultOnline, defaultOffline];
+    } else {
+      enrollmentOptions = [defaultOffline, defaultOnline];
+    }
+  }
+
+  const primaryOption = enrollmentOptions.find((o) => o.id === courseType) || enrollmentOptions[0] || {};
+  const resolvedPrice = rawPrice || primaryOption?.price || (courseType === "online" ? 8000 : 12000);
+  const resolvedHours = apiCourse.hour
+    ? String(apiCourse.hour).replace(/[^0-9]/g, "")
+    : primaryOption?.learningHours
+    ? String(primaryOption.learningHours).replace(/[^0-9]/g, "")
+    : "";
+  const resolvedClasses = apiCourse.classes
+    ? String(apiCourse.classes).replace(/[^0-9]/g, "")
+    : primaryOption?.classes
+    ? String(primaryOption.classes).replace(/[^0-9]/g, "")
+    : apiCourse.lectures
+    ? String(apiCourse.lectures).replace(/[^0-9]/g, "")
+    : "";
+
+  return {
+    ...fallbackCourse,
+    ...apiCourse,
+    id: apiCourse.id,
+    title: apiCourse.title || apiCourse.name || fallbackCourse?.title || "",
+    image: resolvedImage,
+    banner: resolvedImage,
+    description: descriptionText,
+    overview: descriptionText,
+    overview_description: overviewDescriptionText,
+    course_type: courseType,
+    type: courseType,
+    price: resolvedPrice,
+    hour: resolvedHours,
+    learningHours: primaryOption?.learningHours || resolvedHours,
+    classes: resolvedClasses,
+    duration: primaryOption?.duration || durationStr,
+    class_duration: primaryOption?.classDuration || classDurationStr,
+    time: primaryOption?.time || timeStr,
+    seats: apiCourse.seats ? String(apiCourse.seats) : null,
+    enrollmentOptions,
+    curriculums: apiCourse.curriculums || [],
+    softwares: apiCourse.softwares || apiCourse.softwares_included || [],
+    forWhoms: apiCourse.forWhoms || apiCourse.designed_for || [],
+    benefits: apiCourse.benefits || [],
+    projects: apiCourse.projects || [],
+    positions: apiCourse.positions || apiCourse.open_job_positions || [],
+  };
+};
+
+

@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-
-import api from "@/config/api";
+import { fetchCareers } from "@/utilities/api";
 
 const useCareers = () => {
     const [careers, setCareers] = useState([]);
@@ -9,16 +8,28 @@ const useCareers = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        api.get("/api/get-careers")
-            .then((res) => {
-                setCareers(res.data.careers || []);
+        let isMounted = true;
+        setLoading(true);
+        fetchCareers()
+            .then((data) => {
+                if (isMounted) {
+                    setCareers(data?.careers || []);
+                }
             })
             .catch((err) => {
-                setError(err);
+                if (isMounted) {
+                    setError(err);
+                }
             })
             .finally(() => {
-                setLoading(false);
+                if (isMounted) {
+                    setLoading(false);
+                }
             });
+
+        return () => {
+            isMounted = false;
+        };
     }, []);
 
     return { careers, loading, error };

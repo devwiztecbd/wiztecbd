@@ -1,0 +1,3876 @@
+{
+  "info": {
+    "_postman_id": "bdc612d5-37a2-41c5-8d30-4d344d289c1c",
+    "name": "ForDailyUse",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "35092114"
+  },
+  "item": [
+    {
+      "name": "Course Copy",
+      "item": [
+        {
+          "name": "Curriculum",
+          "item": [
+            {
+              "name": "Add Curriculum",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Full Stack Web Development\",\n  \"description\": \"Comprehensive modern web development curriculum covering Node.js, Express, React, and MySQL.\",\n  \"status\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/add-curriculum",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "add-curriculum"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "201 Success Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-curriculum",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-curriculum"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 201,\n  \"message\": \"Curriculum created successfully\",\n  \"curriculum\": {\n    \"id\": 1,\n    \"name\": \"Full Stack Web Development\",\n    \"description\": \"Comprehensive modern web development curriculum covering Node.js, Express, React, and MySQL.\",\n    \"status\": true,\n    \"createdAt\": \"2026-10-15T12:00:00.000Z\",\n    \"updatedAt\": \"2026-10-15T12:00:00.000Z\"\n  }\n}"
+                },
+                {
+                  "name": "400 Error Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-curriculum",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-curriculum"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 400,\n  \"message\": \"Name is required\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Curriculums",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-curriculums",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-curriculums"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-curriculums",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-curriculums"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Curriculums fetched successfully\",\n  \"count\": 1,\n  \"curriculums\": [\n    {\n      \"id\": 1,\n      \"name\": \"Full Stack Web Development\",\n      \"description\": \"Comprehensive modern web development curriculum covering Node.js, Express, React, and MySQL.\",\n      \"status\": true,\n      \"createdAt\": \"2026-10-15T12:00:00.000Z\",\n      \"updatedAt\": \"2026-10-15T12:00:00.000Z\"\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Curriculum By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-curriculum/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-curriculum",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-curriculum/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-curriculum",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Curriculum fetched successfully\",\n  \"curriculum\": {\n    \"id\": 1,\n    \"name\": \"Full Stack Web Development\",\n    \"description\": \"Comprehensive modern web development curriculum covering Node.js, Express, React, and MySQL.\",\n    \"status\": true,\n    \"createdAt\": \"2026-10-15T12:00:00.000Z\",\n    \"updatedAt\": \"2026-10-15T12:00:00.000Z\"\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-curriculum/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-curriculum",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Curriculum not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Curriculum",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Advanced Full Stack Web Development\",\n  \"description\": \"Updated description with cloud deployment and microservices.\",\n  \"status\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-curriculum/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-curriculum",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-curriculum/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-curriculum",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Curriculum updated successfully\",\n  \"curriculum\": {\n    \"id\": 1,\n    \"name\": \"Advanced Full Stack Web Development\",\n    \"description\": \"Updated description with cloud deployment and microservices.\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-curriculum/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-curriculum",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Curriculum not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Curriculum Status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-curriculum-status/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-curriculum-status",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-curriculum-status/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-curriculum-status",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Curriculum status updated successfully\",\n  \"curriculum\": {\n    \"id\": 1,\n    \"status\": false\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Curriculum",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/delete-curriculum/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "delete-curriculum",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-curriculum/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-curriculum",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Curriculum deleted successfully\"\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-curriculum/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-curriculum",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Curriculum not found\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Course Software",
+          "item": [
+            {
+              "name": "Add Course Software",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Visual Studio Code",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "key": "icon",
+                      "type": "file",
+                      "description": "Software icon image",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/add-course-software",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "add-course-software"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "201 Success Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-software",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-software"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 201,\n  \"message\": \"Course software added successfully\",\n  \"courseSoftware\": {\n    \"id\": 1,\n    \"name\": \"Visual Studio Code\",\n    \"icon\": \"http://localhost:3004/uploads/vscode.png\",\n    \"status\": true,\n    \"createdAt\": \"2026-10-15T13:00:00.000Z\",\n    \"updatedAt\": \"2026-10-15T13:00:00.000Z\"\n  }\n}"
+                },
+                {
+                  "name": "400 Error Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-software",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-software"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 400,\n  \"message\": \"Name is required\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Course Softwares",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-softwares",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-softwares"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-softwares",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-softwares"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course softwares fetched successfully\",\n  \"count\": 1,\n  \"courseSoftwares\": [\n    {\n      \"id\": 1,\n      \"name\": \"Visual Studio Code\",\n      \"icon\": \"http://localhost:3004/uploads/vscode.png\",\n      \"status\": true\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Course Software By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-software/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-software",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-software/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-software",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course software fetched successfully\",\n  \"courseSoftware\": {\n    \"id\": 1,\n    \"name\": \"Visual Studio Code\",\n    \"icon\": \"http://localhost:3004/uploads/vscode.png\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-software/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-software",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course software not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course Software",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "VS Code (Updated)",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "key": "icon",
+                      "type": "file",
+                      "description": "Optional new icon",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-software/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-software",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-software/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-software",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course software updated successfully\",\n  \"courseSoftware\": {\n    \"id\": 1,\n    \"name\": \"VS Code (Updated)\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-software/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-software",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course software not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course Software Status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-software-status/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-software-status",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-software-status/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-software-status",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course software status updated successfully\",\n  \"courseSoftware\": {\n    \"id\": 1,\n    \"status\": false\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Course Software",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/delete-course-software/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "delete-course-software",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-software/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-software",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course software deleted successfully\"\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-software/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-software",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course software not found\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Course For Whom",
+          "item": [
+            {
+              "name": "Add Course For Whom",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Computer Science Students",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "key": "icon",
+                      "type": "file",
+                      "description": "Target audience icon",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/add-course-for-whom",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "add-course-for-whom"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "201 Success Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-for-whom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-for-whom"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 201,\n  \"message\": \"Course for whom added successfully\",\n  \"courseForWhom\": {\n    \"id\": 1,\n    \"name\": \"Computer Science Students\",\n    \"icon\": \"http://localhost:3004/uploads/students.png\",\n    \"status\": true,\n    \"createdAt\": \"2026-10-15T13:30:00.000Z\",\n    \"updatedAt\": \"2026-10-15T13:30:00.000Z\"\n  }\n}"
+                },
+                {
+                  "name": "400 Error Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-for-whom",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-for-whom"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 400,\n  \"message\": \"Name is required\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Course For Whom records",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-for-whoms",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-for-whoms"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-for-whoms",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-for-whoms"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course for whom records fetched successfully\",\n  \"count\": 1,\n  \"courseForWhoms\": [\n    {\n      \"id\": 1,\n      \"name\": \"Computer Science Students\",\n      \"icon\": \"http://localhost:3004/uploads/students.png\",\n      \"status\": true\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Course For Whom By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-for-whom/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-for-whom",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-for-whom/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-for-whom",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course for whom fetched successfully\",\n  \"courseForWhom\": {\n    \"id\": 1,\n    \"name\": \"Computer Science Students\",\n    \"icon\": \"http://localhost:3004/uploads/students.png\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-for-whom/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-for-whom",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course for whom record not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course For Whom",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "CS Students & Graduates",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "key": "icon",
+                      "type": "file",
+                      "description": "Optional new icon",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-for-whom/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-for-whom",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-for-whom/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-for-whom",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course for whom updated successfully\",\n  \"courseForWhom\": {\n    \"id\": 1,\n    \"name\": \"CS Students & Graduates\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-for-whom/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-for-whom",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course for whom record not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course For Whom Status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-for-whom-status/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-for-whom-status",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-for-whom-status/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-for-whom-status",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course for whom status updated successfully\",\n  \"courseForWhom\": {\n    \"id\": 1,\n    \"status\": false\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Course For Whom",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/delete-course-for-whom/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "delete-course-for-whom",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-for-whom/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-for-whom",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course for whom deleted successfully\"\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-for-whom/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-for-whom",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course for whom record not found\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Course Benefit",
+          "item": [
+            {
+              "name": "Add Course Benefit",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Job Placement Assistance",
+                      "type": "text"
+                    },
+                    {
+                      "key": "icon",
+                      "type": "file",
+                      "description": "Benefit icon (optional)",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/add-course-benefit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "add-course-benefit"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "201 Success Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-benefit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-benefit"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 201,\n  \"message\": \"Course benefit added successfully\",\n  \"courseBenefit\": {\n    \"id\": 1,\n    \"name\": \"Job Placement Assistance\",\n    \"icon\": \"http://localhost:3004/uploads/job.png\",\n    \"createdAt\": \"2026-10-15T13:50:00.000Z\",\n    \"updatedAt\": \"2026-10-15T13:50:00.000Z\"\n  }\n}"
+                },
+                {
+                  "name": "400 Error Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-benefit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-benefit"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 400,\n  \"message\": \"Name is required\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Course Benefits",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-benefits",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-benefits"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-benefits",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-benefits"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course benefits fetched successfully\",\n  \"count\": 1,\n  \"courseBenefits\": [\n    {\n      \"id\": 1,\n      \"name\": \"Job Placement Assistance\",\n      \"icon\": \"http://localhost:3004/uploads/job.png\"\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Course Benefit By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-benefit/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-benefit",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-benefit/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-benefit",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course benefit fetched successfully\",\n  \"courseBenefit\": {\n    \"id\": 1,\n    \"name\": \"Job Placement Assistance\",\n    \"icon\": \"http://localhost:3004/uploads/job.png\"\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-benefit/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-benefit",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course benefit not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course Benefit",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "100% Job Placement Assistance",
+                      "type": "text"
+                    },
+                    {
+                      "key": "icon",
+                      "type": "file",
+                      "description": "Optional new icon",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-benefit/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-benefit",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-benefit/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-benefit",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course benefit updated successfully\",\n  \"courseBenefit\": {\n    \"id\": 1,\n    \"name\": \"100% Job Placement Assistance\"\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-benefit/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-benefit",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course benefit not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Course Benefit",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/delete-course-benefit/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "delete-course-benefit",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-benefit/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-benefit",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course benefit deleted successfully\"\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-benefit/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-benefit",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course benefit not found\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Course Project",
+          "item": [
+            {
+              "name": "Add Course Project",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "title",
+                      "value": "E-Commerce Multi-Vendor Platform",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "Complete enterprise e-commerce platform with payment gateway.",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "description": "Project thumbnail image",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/add-course-project",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "add-course-project"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "201 Success Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-project",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-project"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 201,\n  \"message\": \"Course project added successfully\",\n  \"courseProject\": {\n    \"id\": 1,\n    \"title\": \"E-Commerce Multi-Vendor Platform\",\n    \"description\": \"Complete enterprise e-commerce platform with payment gateway.\",\n    \"image\": \"http://localhost:3004/uploads/project.png\",\n    \"status\": true,\n    \"createdAt\": \"2026-10-15T14:00:00.000Z\",\n    \"updatedAt\": \"2026-10-15T14:00:00.000Z\"\n  }\n}"
+                },
+                {
+                  "name": "400 Error Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-project",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-project"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 400,\n  \"message\": \"Title is required\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Course Projects",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-projects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-projects"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-projects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-projects"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course projects fetched successfully\",\n  \"count\": 1,\n  \"courseProjects\": [\n    {\n      \"id\": 1,\n      \"title\": \"E-Commerce Multi-Vendor Platform\",\n      \"description\": \"Complete enterprise e-commerce platform with payment gateway.\",\n      \"image\": \"http://localhost:3004/uploads/project.png\",\n      \"status\": true\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Course Project By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-project/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-project",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-project/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-project",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course project fetched successfully\",\n  \"courseProject\": {\n    \"id\": 1,\n    \"title\": \"E-Commerce Multi-Vendor Platform\",\n    \"description\": \"Complete enterprise e-commerce platform with payment gateway.\",\n    \"image\": \"http://localhost:3004/uploads/project.png\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-project/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-project",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course project not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course Project",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "title",
+                      "value": "Advanced E-Commerce Multi-Vendor Platform",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "Updated microservices-based e-commerce platform.",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "description": "Optional new thumbnail",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-project/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-project",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-project/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-project",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course project updated successfully\",\n  \"courseProject\": {\n    \"id\": 1,\n    \"title\": \"Advanced E-Commerce Multi-Vendor Platform\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-project/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-project",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course project not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course Project Status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-project-status/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-project-status",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-project-status/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-project-status",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course project status updated successfully\",\n  \"courseProject\": {\n    \"id\": 1,\n    \"status\": false\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Course Project",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/delete-course-project/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "delete-course-project",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-project/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-project",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course project deleted successfully\"\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-project/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-project",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course project not found\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Course Job Position",
+          "item": [
+            {
+              "name": "Add Course Job Position",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Senior Full Stack Engineer",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "Lead development of high scale enterprise web solutions.",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "key": "icon",
+                      "type": "file",
+                      "description": "Job position icon (optional)",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/add-course-job-position",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "add-course-job-position"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "201 Success Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-job-position",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-job-position"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 201,\n  \"message\": \"Course job position added successfully\",\n  \"courseJobPosition\": {\n    \"id\": 1,\n    \"name\": \"Senior Full Stack Engineer\",\n    \"description\": \"Lead development of high scale enterprise web solutions.\",\n    \"icon\": \"http://localhost:3004/uploads/job_pos.png\",\n    \"status\": true,\n    \"createdAt\": \"2026-10-15T14:20:00.000Z\",\n    \"updatedAt\": \"2026-10-15T14:20:00.000Z\"\n  }\n}"
+                },
+                {
+                  "name": "400 Error Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/add-course-job-position",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "add-course-job-position"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 400,\n  \"message\": \"Name is required\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All Course Job Positions",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-job-positions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-job-positions"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-job-positions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-job-positions"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course job positions fetched successfully\",\n  \"count\": 1,\n  \"courseJobPositions\": [\n    {\n      \"id\": 1,\n      \"name\": \"Senior Full Stack Engineer\",\n      \"description\": \"Lead development of high scale enterprise web solutions.\",\n      \"icon\": \"http://localhost:3004/uploads/job_pos.png\",\n      \"status\": true\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Course Job Position By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course-job-position/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course-job-position",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-job-position/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-job-position",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course job position fetched successfully\",\n  \"courseJobPosition\": {\n    \"id\": 1,\n    \"name\": \"Senior Full Stack Engineer\",\n    \"description\": \"Lead development of high scale enterprise web solutions.\",\n    \"icon\": \"http://localhost:3004/uploads/job_pos.png\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/get-course-job-position/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "get-course-job-position",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course job position not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course Job Position",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "name",
+                      "value": "Lead Architect & Full Stack Engineer",
+                      "type": "text"
+                    },
+                    {
+                      "key": "description",
+                      "value": "Architect and lead engineering teams.",
+                      "type": "text"
+                    },
+                    {
+                      "key": "status",
+                      "value": "true",
+                      "type": "text"
+                    },
+                    {
+                      "key": "icon",
+                      "type": "file",
+                      "description": "Optional new icon",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-job-position/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-job-position",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-job-position/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-job-position",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course job position updated successfully\",\n  \"courseJobPosition\": {\n    \"id\": 1,\n    \"name\": \"Lead Architect & Full Stack Engineer\",\n    \"status\": true\n  }\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-job-position/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-job-position",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course job position not found\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Course Job Position Status",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": false\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/update-course-job-position-status/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "update-course-job-position-status",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/update-course-job-position-status/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "update-course-job-position-status",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course job position status updated successfully\",\n  \"courseJobPosition\": {\n    \"id\": 1,\n    \"status\": false\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Delete Course Job Position",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "description": "Required API security key",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{adminToken}}",
+                    "description": "Admin JWT Bearer Token",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/delete-course-job-position/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "delete-course-job-position",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "200 Success Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-job-position/1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-job-position",
+                        "1"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course job position deleted successfully\"\n}"
+                },
+                {
+                  "name": "404 Error Response",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{apiKey}}",
+                        "type": "text"
+                      },
+                      {
+                        "key": "Authorization",
+                        "value": "{{adminToken}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/delete-course-job-position/999",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "delete-course-job-position",
+                        "999"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course job position not found\"\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Course Copy",
+      "item": [
+        {
+          "name": "Course",
+          "item": [
+            {
+              "name": "Get All Courses",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-courses?status=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-courses"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Success (200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": ""
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Courses fetched successfully\",\n  \"count\": 1,\n  \"courses\": [\n    {\n      \"id\": 1,\n      \"title\": \"Full Stack Web Development\"\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Course By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{apiKey}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/get-course/1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "get-course",
+                    "1"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Success (200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": ""
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 200,\n  \"message\": \"Course fetched successfully\",\n  \"course\": {\n    \"id\": 1,\n    \"title\": \"Full Stack Web Development\"\n  }\n}"
+                },
+                {
+                  "name": "Not Found (404)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": ""
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 404,\n  \"message\": \"Course not found\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Course Application",
+          "item": [
+            {
+              "name": "Apply Course",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "x-api-key",
+                    "value": "{{api_key}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"courseID\": 1,\n  \"classID\": 123456,\n  \"type\": \"online\",\n  \"name\": \"Rafi Ahmed\",\n  \"email\": \"rafi@example.com\",\n  \"phone\": \"+8801700000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/apply-course",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "apply-course"
+                  ]
+                },
+                "description": "Public endpoint for students/users to submit an application for a specific course and class type."
+              },
+              "response": [
+                {
+                  "name": "Success - Application Submitted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "x-api-key",
+                        "value": "{{api_key}}"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"courseID\": 1,\n  \"classID\": 123456,\n  \"type\": \"online\",\n  \"name\": \"Rafi Ahmed\",\n  \"email\": \"rafi@example.com\",\n  \"phone\": \"+8801700000000\"\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/api/apply-course",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "api",
+                        "apply-course"
+                      ]
+                    },
+                    "description": "Public endpoint for students/users to submit an application for a specific course and class type."
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": 201,\n  \"message\": \"Application submitted successfully\",\n  \"application\": {\n    \"id\": 1,\n    \"courseID\": 1,\n    \"classID\": 123456,\n    \"type\": \"online\",\n    \"name\": \"Rafi Ahmed\",\n    \"email\": \"rafi@example.com\",\n    \"phone\": \"+8801700000000\",\n    \"status\": \"pending\",\n    \"updatedAt\": \"2026-10-15T11:45:00.000Z\",\n    \"createdAt\": \"2026-10-15T11:45:00.000Z\"\n  }\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

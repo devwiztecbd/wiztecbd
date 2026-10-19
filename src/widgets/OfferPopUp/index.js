@@ -8,7 +8,7 @@ import Modal from "@/components/Modal";
 import useModal from "@/hooks/useModal";
 import LetsTalk from "../LetsTalk";
 
-import api from "@/config/api";
+import { fetchHome } from "@/utilities/api";
 
 const OfferPopup = () => {
     const { isOpen, openModal, closeModal } = useModal();
@@ -27,9 +27,9 @@ const OfferPopup = () => {
     useEffect(() => {
         const fetchImage = async () => {
             try {
-                const response = await api.get("/api/get-home");
-                if (response.data && response.data.home && response.data.home.image) {
-                    setImage(response.data.home.image);
+                const response = await fetchHome();
+                if (response?.home?.image) {
+                    setImage(response.home.image);
                 }
             } catch (error) {
                 console.error("Error fetching popup image:", error);

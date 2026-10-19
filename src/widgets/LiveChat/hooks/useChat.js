@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { io } from "socket.io-client";
-import api from "@/config/api";
+import { fetchChatMessages, fetchChatUnreadCount, markChatUserRead, sendChatMessage } from "@/utilities/api";
 
 const useChat = (email, { onNewMessage } = {}) => {
   const [messages, setMessages] = useState([]);
@@ -93,9 +93,9 @@ const useChat = (email, { onNewMessage } = {}) => {
     if (!email) return;
     setLoading(true);
     try {
-      const response = await api.get(`/api/get-messages?email=${email}&page=${page}&limit=100`);
-      if (response.data.status === 200) {
-        const history = response.data.messages.reverse();
+      const data = await fetchChatMessages(email, page, 100);
+      if (data?.status === 200) {
+        const history = (data.messages || []).reverse();
         if (history.length === 0) {
           triggerGreetings();
         } else {
@@ -112,9 +112,9 @@ const useChat = (email, { onNewMessage } = {}) => {
   const fetchUnreadCount = async () => {
     if (!email) return;
     try {
-      const response = await api.get(`/api/get-unread-count?email=${email}`);
-      if (response.data.status === 200) {
-        setUnreadCount(response.data.unreadCount || 0);
+      const data = await fetchChatUnreadCount(email);
+      if (data?.status === 200) {
+        setUnreadCount(data.unreadCount || 0);
       }
     } catch (error) {
       console.error("Error fetching unread count:", error);
@@ -124,7 +124,7 @@ const useChat = (email, { onNewMessage } = {}) => {
   const markAsRead = async () => {
     if (!email) return;
     try {
-      await api.put("/api/read-user", { email });
+      await markChatUserRead(email);
       setUnreadCount(0);
     } catch (error) {
       console.error("Error marking messages as read:", error);
@@ -156,7 +156,7 @@ const useChat = (email, { onNewMessage } = {}) => {
     setMessages((prev) => [...prev, tempMessage]);
 
     try {
-      await api.post("/api/send-message", formData);
+      await sendChatMessage(formData);
       if (socket) {
         socket.emit("stop_typing", { room: "admin" });
       }

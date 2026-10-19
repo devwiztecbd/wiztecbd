@@ -12,13 +12,24 @@ const audiences = [
     { id: "consultants", name: "Freelancers & Consultants", image: "Freelancers & Consultants.webp" },
 ].map((audience) => ({ ...audience, image: `${imageDirectory}/${audience.image}` }));
 
-export default function AudienceGrid() {
+import { normalizeImageUrl } from "@/utilities/dataTransform";
+
+export default function AudienceGrid({ audiences: dynamicAudiences = null }) {
+    const activeAudiences = Array.isArray(dynamicAudiences) && dynamicAudiences.length > 0
+        ? dynamicAudiences.map((a, idx) => ({
+            id: a.id ? String(a.id) : `aud-${idx}`,
+            name: a.name || a.title || "Learner",
+            image: normalizeImageUrl(a.icon || a.image) || `${imageDirectory}/Students & Job Seekers.webp`,
+            alt: `${a.name || "Audience"} icon`,
+        }))
+        : audiences;
+
     return (
         <ImageCardGrid
             headingId="audience-heading"
             title="Who is this course for?"
             description="Find your starting point and build the skills to work confidently with data."
-            items={audiences}
+            items={activeAudiences}
             countLabel="audiences"
             icon={FiUsers}
         />

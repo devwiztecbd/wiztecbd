@@ -23,7 +23,25 @@ const nextConfig = {
                 protocol: "http",
                 hostname: "localhost",
                 port: "5000",
-                pathname: "/uploads/**",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "**.trycloudflare.com",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "pct-pretty-sealed-consultancy.trycloudflare.com",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "**",
+            },
+            {
+                protocol: "http",
+                hostname: "**",
             },
         ],
     },

@@ -8,12 +8,17 @@ import { isValidURL, Popup } from "../IntroDesign";
 const formatCoursePrice = (price) => {
     if (price === null || price === undefined) return "Contact";
     const normalized = String(price).trim();
-    if (normalized === "") return "Contact";
+    if (normalized === "" || normalized.toLowerCase() === "contact") return "Contact";
     if (normalized.toLowerCase() === "free") return "Free";
-    return `BDT ${normalized}`;
+    const num = Number(normalized.replace(/[^0-9.]/g, ""));
+    if (!isNaN(num)) {
+        return num === 0 ? "Free" : `BDT ${num.toLocaleString()}`;
+    }
+    return normalized.startsWith("BDT") ? normalized : `BDT ${normalized}`;
 };
 
-const Course = ({ id, img, alt, title, classes, houre, seats, status, handlEnrole, time, classTime, link, linkText, price, duration }) => {
+const Course = ({ id, img, alt, title, classes, houre, hour, seats, status, handlEnrole, time, classTime, link, linkText, price, duration, enrollmentOptions }) => {
+    const displayHour = houre || hour;
     const [showPopup, setShowPopup] = useState(false);
     const handleClick = (e) => {
         if (!isValidURL(link)) {
@@ -47,38 +52,40 @@ const Course = ({ id, img, alt, title, classes, houre, seats, status, handlEnrol
                             <span className="mr-2 text-subtitle2 font-semibold uppercase tracking-wide">Course Fee</span>
                             <span className="text-subtitle1 font-bold">{formatCoursePrice(price)}</span>
                         </div>
-                        <div className=" flex">
-                            <div className=" w-1/2 text-black">
-                                <div className="flex items-center flex-wrap gap-2 mb-1">
-                                    {classes && (
-                                        <p className=" flex items-center text-subtitle2 font-medium">
-                                            <span className=" text-success_main mr-1">Classes :</span>
-                                            {classes}
-                                        </p>
-                                    )}
-                                    {classTime && (
-                                        <p className=" flex items-center text-subtitle2 font-medium">
-                                            <span className=" text-success_main mr-1">Class :</span>
-                                            {classTime}
-                                        </p>
-                                    )}
+                        <div className=" flex items-center justify-between">
+                            <div className=" text-black space-y-1">
+                                {classes && (
                                     <p className=" flex items-center text-subtitle2 font-medium">
-                                        <span className="  text-success_main mr-1">Hours :</span>
-                                        {houre}
+                                        <span className=" text-success_main mr-1 font-semibold">Classes :</span>
+                                        {classes}
                                     </p>
-                                </div>
-                                <p className=" flex items-center text-subtitle2 font-medium">
-                                    <span className="  text-success_main mr-1">Seats :</span>
-                                    {seats}
-                                </p>
+                                )}
+                                {classTime && (
+                                    <p className=" flex items-center text-subtitle2 font-medium">
+                                        <span className=" text-success_main mr-1 font-semibold">Class :</span>
+                                        {classTime}
+                                    </p>
+                                )}
+                                {displayHour && (
+                                    <p className=" flex items-center text-subtitle2 font-medium">
+                                        <span className="  text-success_main mr-1 font-semibold">Hours :</span>
+                                        {displayHour}
+                                    </p>
+                                )}
+                                {seats && (
+                                    <p className=" flex items-center text-subtitle2 font-medium">
+                                        <span className="  text-success_main mr-1 font-semibold">Seats :</span>
+                                        {seats}
+                                    </p>
+                                )}
                             </div>
-                            <div className=" w-1/2 flex items-center justify-center">
+                            <div className=" flex items-center justify-center pl-2">
                                 {link ? (
                                     <Link href={isValidURL(link) ? link : "#"} onClick={handleClick} target="_blank" className=" hover-bg-left-to-right capitalize border border-success_dark cursor-pointer px-4 py-[6px] text-primary rounded-full text-subtitle2">
                                         <span>{linkText}</span>
                                     </Link>
                                 ) : (
-                                    <button onClick={(e) => handlEnrole(e, { id, title, houre, seats, status, classes, time, price, duration, classTime })} className=" hover-bg-left-to-right capitalize border border-success_dark cursor-pointer px-4 py-[6px] text-primary rounded-full text-subtitle2">
+                                    <button onClick={(e) => handlEnrole(e, { id, title, houre: displayHour, hour: displayHour, seats, status, classes, time, price, duration, classTime, enrollmentOptions })} className=" hover-bg-left-to-right capitalize border border-success_dark cursor-pointer px-4 py-[6px] text-primary rounded-full text-subtitle2">
                                         <span>enroll now</span>
                                     </button>
                                 )}

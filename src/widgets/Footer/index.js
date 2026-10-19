@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FaFacebookF, FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { FiArrowUpRight, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 
-import api from "@/config/api";
+import { fetchOffices } from "@/utilities/api";
 import { membershipCredentials } from "@/app/staticData/home";
 
 const linkGroups = [
@@ -49,9 +49,9 @@ export default function Footer() {
 
     useEffect(() => {
         const controller = new AbortController();
-        api.get("/api/get-offices", { signal: controller.signal })
-            .then(({ data }) => {
-                if (data.status === 200 && Array.isArray(data.offices)) setOffices(data.offices);
+        fetchOffices({ signal: controller.signal })
+            .then((data) => {
+                if (Array.isArray(data?.offices)) setOffices(data.offices);
             })
             .catch((error) => {
                 if (error.code !== "ERR_CANCELED") console.error("Failed to fetch offices:", error);

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import ScrollAnimatedSection from "@/components/ScrollAnimationSection";
 import staticBlogs from "/public/Json/blogs.json";
-import api from "@/config/api";
+import { fetchBlogs } from "@/utilities/api";
 
 const RecentBlog = () => {
     const [recentBlog, setRecentBlog] = useState(null);
@@ -14,9 +14,9 @@ const RecentBlog = () => {
     useEffect(() => {
         const fetchRecentBlog = async () => {
             try {
-                const response = await api.get("/api/get-blogs");
-                if (response.data && response.data.blogs && response.data.blogs.length > 0) {
-                    const latest = response.data.blogs[0];
+                const response = await fetchBlogs();
+                if (response?.blogs?.length > 0) {
+                    const latest = response.blogs[0];
                     // Strip HTML from content for description
                     const strippedContent = latest.content?.replace(/<[^>]*>?/gm, "").substring(0, 150) + "...";
 

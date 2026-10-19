@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import api from "@/config/api";
+import { fetchOffices as getOfficesApi } from "@/utilities/api";
 
 // Import Leaflet CSS
 import "leaflet/dist/leaflet.css";
@@ -45,9 +45,9 @@ const OfficeMaps = () => {
     useEffect(() => {
         const fetchOffices = async () => {
             try {
-                const response = await api.get("/api/get-offices");
-                if (response.data.status === 200) {
-                    setOffices(response.data.offices);
+                const response = await getOfficesApi();
+                if (Array.isArray(response?.offices)) {
+                    setOffices(response.offices);
                 }
             } catch (error) {
                 console.error("Failed to fetch offices:", error);

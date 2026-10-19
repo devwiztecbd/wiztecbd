@@ -77,6 +77,7 @@ const OurCourses = () => {
                                 handlEnrole={handlEnrole}
                                 classTime={data.class_duration}
                                 duration={data.duration}
+                                enrollmentOptions={data.enrollmentOptions}
                                 link={data.apply_link || null}
                                 linkText={"Register Now"}
                             />

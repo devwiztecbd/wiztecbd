@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import axios from "axios";
-import api from "@/config/api";
+import { trackVisitor } from "@/utilities/api";
 
 export default function AnalyticsTracker() {
   const isTracked = useRef(false);
@@ -11,7 +10,7 @@ export default function AnalyticsTracker() {
     if (isTracked.current) return;
     isTracked.current = true;
 
-    const trackVisitor = async () => {
+    const track = async () => {
       try {
         const existingVisitorId = localStorage.getItem("visitorId");
         let visitorId = existingVisitorId;
@@ -22,8 +21,7 @@ export default function AnalyticsTracker() {
           localStorage.setItem("visitorId", visitorId);
         }
 
-        const response = await api.post(
-          `/api/analytics/track-visitor`,
+        const data = await trackVisitor(
           {},
           {
             headers: {
@@ -31,9 +29,8 @@ export default function AnalyticsTracker() {
             },
           }
         );
-        console.log("Analytics Response",response)
         
-        const returnedId = response.data?.visitor?.visitorId;
+        const returnedId = data?.visitor?.visitorId;
         
         // Only update local storage if the server returned a noticeably different ID
         if (returnedId && returnedId !== visitorId) {
@@ -44,7 +41,7 @@ export default function AnalyticsTracker() {
       }
     };
 
-    trackVisitor();
+    track();
   }, []);
 
   return null;

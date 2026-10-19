@@ -11,7 +11,7 @@ import Button from "@/components/Button";
 import PhoneNumberInput from "@/components/PhoneNumber";
 import Modal from "@/components/Modal";
 import useModal from "@/hooks/useModal";
-import api from "@/config/api";
+import { applyCourse } from "@/utilities/api";
 import { isValidURL, Popup } from "../IntroDesign";
 
 const formatCoursePrice = (price) => {
@@ -60,7 +60,7 @@ const CourseForm = ({ courseID, status = "offline", facilities, link, linkText, 
         onSubmit: async (values, { resetForm }) => {
             setSubmitError("");
             try {
-                await api.post("/api/add-course-application", {
+                await applyCourse({
                     name: values.name,
                     email: values.email,
                     phone: values.number,

@@ -2,7 +2,14 @@ import { FiBookOpen, FiCalendar, FiClock, FiMapPin, FiMonitor, FiWatch } from "r
 
 const priceFormatter = new Intl.NumberFormat("en-BD");
 
-export default function CourseModeDetails({ options }) {
+export default function CourseModeDetails({ options = [] }) {
+    const safeOptions = Array.isArray(options) && options.length > 0
+        ? options
+        : [
+            { id: "online", label: "Online", price: 8000, duration: "3 Months", classes: "24 classes", learningHours: "40 hours", classDuration: "2 hours", description: "Attend live from anywhere", days: ["Sunday", "Monday"], time: "7:00 PM - 9:00 PM" },
+            { id: "offline", label: "Offline", price: 12000, duration: "3 Months", classes: "24 classes", learningHours: "40 hours", classDuration: "2 hours", description: "Learn in our classroom", days: ["Sunday", "Monday", "Saturday"], time: "7:00 PM - 9:00 PM" }
+        ];
+
     return (
         <section aria-labelledby="course-modes-heading">
             <div className="mb-6">
@@ -11,7 +18,7 @@ export default function CourseModeDetails({ options }) {
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
-                {options.map((option) => {
+                {safeOptions.map((option) => {
                     const ModeIcon = option.id === "online" ? FiMonitor : FiMapPin;
                     const details = [
                         { label: "Duration", value: option.duration, icon: FiCalendar },

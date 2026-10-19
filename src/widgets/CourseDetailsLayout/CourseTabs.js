@@ -71,13 +71,21 @@ export default function CourseTabs({ course }) {
                     tabIndex={0}
                     className="min-h-[280px] rounded-b-2xl p-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-success_deep lg:min-h-[480px]"
                 >
-                    {tab.id === "curriculum" && <CurriculumAccordion />}
-                    {tab.id === "software" && <SoftwareGrid />}
-                    {tab.id === "for-whom" && <AudienceGrid />}
-                    {tab.id === "benefits" && <BenefitsList />}
-                    {tab.id === "projects" && <ProjectsList />}
-                    {tab.id === "open-job-position" && <JobPositionsGrid />}
-                    {tab.id === "course-details" && <CourseModeDetails options={course.enrollmentOptions} />}
+                    {tab.id === "overview" && (
+                        <section aria-labelledby="course-overview-heading">
+                            <h2 id="course-overview-heading" className="text-[22px] font-bold tracking-[-0.025em] text-primary md:text-[26px]">Course Overview</h2>
+                            <div className="mt-4 max-w-[760px] whitespace-pre-line text-sm leading-relaxed text-gray700">
+                                {course?.overview || course?.description || course?.overview_description || "AI-Powered Power BI Data Analyst is an intensive, practical data analytics program designed to prepare learners to transform raw business data into meaningful insights using Microsoft Power BI."}
+                            </div>
+                        </section>
+                    )}
+                    {tab.id === "curriculum" && <CurriculumAccordion curriculums={course?.curriculumsData || course?.course_curriculum} />}
+                    {tab.id === "software" && <SoftwareGrid softwares={course?.softwaresData || course?.softwares_included} />}
+                    {tab.id === "for-whom" && <AudienceGrid audiences={course?.forWhomsData || course?.designed_for} />}
+                    {tab.id === "benefits" && <BenefitsList benefits={course?.benefitsData} />}
+                    {tab.id === "projects" && <ProjectsList projects={course?.projectsData} />}
+                    {tab.id === "open-job-position" && <JobPositionsGrid positions={course?.positionsData || course?.career_opportunities || course?.open_job_positions} />}
+                    {tab.id === "course-details" && <CourseModeDetails options={course?.enrollmentOptions} />}
                 </div>
             ))}
         </div>
